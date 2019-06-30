@@ -1,0 +1,55 @@
+#============================== Configuration Apache TomCat
+server:
+  port: 8081
+#============================== Configuration Logging
+logging:
+  path: /home/trl/GitHub/ms_shop_users/src/main/resources/logs
+  level:
+    root: INFO
+    org.springframework: INFO
+    guru.springframework.controllers: INFO
+    org.hibernate: INFO
+    com.trl.ms_shop_users: DEBUG
+
+spring:
+  profiles.active: dev
+  application:
+    name: users
+
+  #============================== Configuration Eureka Client
+  eureka:
+    client:
+      serviceUrl:
+        defaultZone: http://localhost:8761/eureka/
+
+  #============================== Configuration PostgreSQL
+  datasource:
+    username: developer
+    password: 1,5Lht.nt!o0#
+    url: jdbc:postgresql://localhost/ms_shop_users_test
+
+  #  jpa:
+  #    hibernate:
+  #      ddl-auto: update
+
+
+
+  #============================== Configuration JPA
+#  jpa:
+#    database-platform: org.hibernate.dialect.H2Dialect
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#  #============================== Configuration H2
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2-console
+#      settings:
+#        web-allow-others: true
+#
+#  datasource:
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:shop-users-test

@@ -1,0 +1,16 @@
+
+Hacer tests.
+
+ Hacer cambios poner id de user en path parameter.
+
+
+ UserResource_IntegrationTest
+ public void findByFirstNameAndLastName_usersWithFirstNameAndLastNameNotFound()
+ hacer los metodos que comprueban situacion cuando firstName concide y lastName no concide. Y la situacion contraria.
+
+BankDataResource_IntegrationTest
+public void updateAllValues()
+Buscar la informacion como se puede hacer ---> @RequestBody Set<BankDataDTO>
+
+
+pensar en caso cuando bank data no esta correcta.

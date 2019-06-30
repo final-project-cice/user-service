@@ -1,0 +1,68 @@
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+/target/
+.class
+.mvn/
+
+### Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+### Log Files
+*.log
+*.log.gz
+
+### Dependencies ReactJS
+/.pnp
+.pnp.js
+
+### Testing ReactJS
+/coverage
+
+
+### Misc ReactJS
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+
+### VS Code ###
+.vscode/
+
+
+### Others ###
+mvnw
+mvnw.cmd
+HELP.md
+/.mvn/
