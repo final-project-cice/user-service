@@ -1,2 +1,2 @@
-# ms_shop_users
-This microservice is one part of one project "Shop". This microservice performs Users.
+# users
+This micro service is one part of one project "Library". This micro service performs Users.
