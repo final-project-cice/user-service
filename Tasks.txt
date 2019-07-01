@@ -14,3 +14,6 @@ Buscar la informacion como se puede hacer ---> @RequestBody Set<BankDataDTO>
 
 
 pensar en caso cuando bank data no esta correcta.
+
+
+Comprobar de nullos, todos tarametros que entran al methodos.

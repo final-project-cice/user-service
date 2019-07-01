@@ -9,7 +9,7 @@ logging:
     org.springframework: INFO
     guru.springframework.controllers: INFO
     org.hibernate: INFO
-    com.trl.ms_shop_users: DEBUG
+    com.trl.users: DEBUG
 
 spring:
   profiles.active: dev

@@ -43,11 +43,11 @@ public class UserServiceImpl implements UserService {
             throw new ExceptionUserWithEmailExist("User with this email = '" + user.getEmail() + "' exist. It is not allowed to register multiple users with the same e-mail.");
         }
 
-        UserEntity userFromRepositoryById = userRepository.save(ConverterUser.mapDTOToEntity(user));
+        UserEntity savedUser = userRepository.save(ConverterUser.mapDTOToEntity(user));
 
-        log.debug("************ create() ---> userFromRepositoryById = " + userFromRepositoryById);
+        log.debug("************ create() ---> savedUser = " + savedUser);
 
-        userResult = ConverterUser.mapEntityToDTO(userFromRepositoryById);
+        userResult = ConverterUser.mapEntityToDTO(savedUser);
 
         log.debug("************ create() ---> userResult = " + userResult);
 
@@ -256,7 +256,7 @@ public class UserServiceImpl implements UserService {
     public Boolean delete(Long userId) throws ExceptionUserWithIdNotExist {
         boolean isDeletedUser = false;
 
-        log.debug("************ delete() ---> userId = " + userId);
+        log.debug("************ delete() ---> user = " + userId);
 
         Optional<UserEntity> userFromRepositoryById = userRepository.findById(userId);
 

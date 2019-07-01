@@ -211,64 +211,64 @@ public class UserResource_IntegrationTest {
                 .andExpect(status().isNotFound());
     }
 
-    @Sql(value = {"/createUserBefore-deleteById.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createUserBefore-delete.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/createUserAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
-    public void deleteById() throws Exception {
+    public void delete() throws Exception {
         final String userWithIdResult = "true";
 
-        this.mockMvc.perform(delete("http://localhost:8081/user/delete/1"))
+        this.mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete("http://localhost:8081/user/delete/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(userWithIdResult)));
     }
 
-    @Sql(value = {"/createUserBefore-deleteById-userNotHaveBankData.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createUserBefore-delete-userNotHaveBankData.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/createUserAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
-    public void deleteById_UserNotHaveBankData() throws Exception {
+    public void delete_UserNotHaveBankData() throws Exception {
         final String userWithIdResult = "true";
 
-        this.mockMvc.perform(delete("http://localhost:8081/user/delete/1"))
+        this.mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete("http://localhost:8081/user/delete/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(userWithIdResult)));
     }
 
-    @Sql(value = {"/createUserBefore-deleteById-userNotHaveAddress.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createUserBefore-delete-userNotHaveAddress.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/createUserAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
-    public void deleteById_UserNotHaveAddress() throws Exception {
+    public void delete_UserNotHaveAddress() throws Exception {
         final String userWithIdResult = "true";
 
-        this.mockMvc.perform(delete("http://localhost:8081/user/delete/1"))
+        this.mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete("http://localhost:8081/user/delete/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(userWithIdResult)));
     }
 
-    @Sql(value = {"/createUserBefore-deleteById.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createUserBefore-delete.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/createUserAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
-    public void deleteById_verifyIfUserDeleted() throws Exception {
+    public void delete_verifyIfUserDeleted() throws Exception {
         final String userWithIdResult = "true";
 
-        this.mockMvc.perform(delete("http://localhost:8081/user/delete/2"))
+        this.mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete("http://localhost:8081/user/delete/2"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(userWithIdResult)));
 
-        this.mockMvc.perform(delete("http://localhost:8081/user/delete/2"))
+        this.mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete("http://localhost:8081/user/delete/2"))
                 .andDo(print())
                 .andExpect(status().isNotFound());
     }
 
-    @Sql(value = {"/createUserBefore-deleteById.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createUserBefore-delete.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/createUserAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
-    public void deleteById_userWithIdNotFound() throws Exception {
+    public void delete_userWithIdNotFound() throws Exception {
 
-        this.mockMvc.perform(delete("http://localhost:8081/user/delete/4"))
+        this.mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete("http://localhost:8081/user/delete/4"))
                 .andDo(print())
                 .andExpect(status().isNotFound());
     }
@@ -407,10 +407,6 @@ public class UserResource_IntegrationTest {
                 .andExpect(status().isNotFound());
     }
 
-
-    //==================================================================================================================
-    //==================================================================================================================
-    //==================================================================================================================
     @Sql(value = {"/createUserBefore-findByBirthday.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/createUserAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
