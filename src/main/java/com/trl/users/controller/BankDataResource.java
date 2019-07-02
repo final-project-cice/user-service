@@ -9,7 +9,6 @@ import com.trl.users.service.BankDataService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,7 +41,7 @@ public class BankDataResource {
             resultService = bankDataService.create(bankData);
         } catch (ExceptionUserWithIdNotExist exceptionUserWithIdNotExist) {
             log.error("************ create() ---> user with this id = '" + bankData.getUser().getId() + "' not exist.", exceptionUserWithIdNotExist);
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(exceptionUserWithIdNotExist.getMessage());
         } catch (ExceptionUserIdIsNull exceptionUserIdIsNull) {
             log.error("************ create() ---> bankData not have assign value user >>> 'userId'. 'userId' = '" + bankData.getUser().getId() + "'. Variable 'userId' not allowed assign values NULL or ZERO.", exceptionUserIdIsNull);
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(exceptionUserIdIsNull.getMessage());
