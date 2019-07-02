@@ -32,4 +32,13 @@ public class AddressEntity implements Serializable {
     @JoinColumn(name = "usr_id")
     private UserEntity user;
 
+    public AddressEntity(Long id, String country, String city, String street, String houseNumber, int postcode) {
+        this.id = id;
+        this.country = country;
+        this.city = city;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.postcode = postcode;
+    }
+
 }

@@ -2,11 +2,16 @@ package com.trl.users.service.impl;
 
 import com.trl.users.controller.dto.AddressDTO;
 import com.trl.users.controller.dto.UserDTO;
+import com.trl.users.exceptions.ExceptionUserIdIsNull;
+import com.trl.users.exceptions.ExceptionUserIsNull;
 import com.trl.users.exceptions.ExceptionUserNotHaveAddress;
+import com.trl.users.exceptions.ExceptionUserWithIdNotExist;
 import com.trl.users.repository.AddressRepository;
+import com.trl.users.repository.UserRepository;
 import com.trl.users.repository.entity.AddressEntity;
 import com.trl.users.repository.entity.UserEntity;
 import com.trl.users.service.AddressService;
+import com.trl.users.service.converter.ConverterAddress;
 import com.trl.users.service.converter.ConverterUser;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -25,17 +31,48 @@ import java.util.Set;
 public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository addressRepository;
+    private final UserRepository userRepository;
 
     /**
      * @param addressDTO
      * @return
      */
     @Override
-    public AddressDTO create(AddressDTO addressDTO) {
+    public AddressDTO create(AddressDTO addressDTO) throws ExceptionUserWithIdNotExist, ExceptionUserIdIsNull, ExceptionUserIsNull {
 
-        // TODO: Terminar este metodo.
+        AddressDTO addressResult = null;
 
-        return null;
+        log.debug("************ create() ---> idUser = " + addressDTO.getUser() + " ---> addressDTO = " + addressDTO);
+
+        // TODO: Nose si es necesario comprobar de null todos parametros que se van utilizar en meethodo. Es que se compica mucho la lectura ce mtodo.
+
+        if (addressDTO.getUser() != null) {
+
+            if (addressDTO.getUser().getId() != null && addressDTO.getUser().getId() != 0) {
+
+                Optional<UserEntity> userFromRepositoryById = userRepository.findById(addressDTO.getUser().getId());
+
+                if (userFromRepositoryById.isPresent()) {
+
+                    AddressEntity savedAddress = addressRepository.save(ConverterAddress.mapDTOToEntity(addressDTO));
+
+                    log.debug("************ create() ---> savedAddress = " + savedAddress);
+
+                    addressResult = ConverterAddress.mapEntityToDTO(savedAddress);
+
+                } else {
+                    throw new ExceptionUserWithIdNotExist("User with this id = '" + addressDTO.getUser().getId() + "' not exist.");
+                }
+            } else {
+                throw new ExceptionUserIdIsNull("The parameter 'user' that is passed, contains value 'userId'. Value 'userId' equal NULL or ZERO. Not allowed parameters NULL or ZERO.");
+            }
+        } else {
+            throw new ExceptionUserIsNull("The parameter 'user' that is passed, equal NULL. Not allowed parameter NULL.");
+        }
+
+        log.debug("************ create() ---> addressResult = " + addressResult);
+
+        return addressResult ;
     }
 
     /**

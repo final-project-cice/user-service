@@ -2,10 +2,19 @@ package com.trl.users.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static org.hamcrest.core.StringContains.containsString;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -13,49 +22,49 @@ import org.springframework.test.context.junit4.SpringRunner;
 @TestPropertySource("/application-test.yml")
 public class AddressResource_IntegrationTest {
 
+    @Autowired
+    private MockMvc mockMvc;
 
+    @Sql(value = {"/createAddressBefore-create.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createAddressAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
-    public void updateAddress() {
+    public void create() throws Exception {
 
-        // TODO: Terminar este test.
-        // TODO: Pensar como resolver la situacion si hace falta borrar datos de address o cambiar
-        // TODO : Hau que hacer un methodo ....
-        // TDOD: Pensar en estas situaciones que ocurren con varios values
+        final String updateBankDataResult = "{\"id\":1,\"country\":\"Spain\",\"city\":\"Cuenca\",\"street\":\"Calle_1\",\"houseNumber\":\"1B\",\"postcode\":1111,\"user\":{\"id\":1,\"firstName\":null,\"lastName\":null,\"email\":null,\"password\":null,\"bankData\":null,\"address\":null,\"birthday\":null}}";
 
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/address/create")
+                        .content("{\"country\": \"Spain\", \"city\": \"Cuenca\", \"street\": \"Calle_1\", \"houseNumber\": \"1B\", \"postcode\": 1111, \"user\": {\"id\": 1}}")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString(updateBankDataResult)));
     }
 
+    @Sql(value = {"/createAddressBefore-create.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createAddressAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
-    public void updateAddress_userWithIdNotFound() {
+    public void create_userIsNull() throws Exception {
 
-        // TODO: Terminar este test.
-
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/address/create")
+                        .content("{\"country\": \"Spain\", \"city\": \"Cuenca\", \"street\": \"Calle_1\", \"houseNumber\": \"1B\", \"postcode\": 1111, \"user\": null}")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().is(422));
     }
 
+    @Sql(value = {"/createAddressBefore-create.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createAddressAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
-    public void findByAddress() throws Exception {
+    public void create_userIdIsNull() throws Exception {
 
-        String allUsersWithAddressResult = "1";
-
-        // TODO: Resolver esta Exception.
-//        this.mockMvc.perform(
-//                get("http://localhost:8081/user/findByAddress")
-//                        .content("{\"country\": \"Spain\", \"city\": \"Madrid\", \"street\": \"Calle Madrid\", \"houseNumber\": \"1A\", \"postCode\": 111111}")
-//                        .contentType("application/json;charset=UTF-8"))
-//                .andDo(print())
-//                .andExpect(status().isOk())
-//                .andExpect(content().string(containsString(user)));
-    }
-
-    @Test
-    public void findByAddress_usersWithAddressNotFound() throws Exception {
-
-        // TODO: Resolver esta Exception.
-//        this.mockMvc.perform(
-//                get("http://localhost:8081/user/findByAddress")
-//                        .content("{\"country\": \"AAA\", \"city\": \"BBB\", \"street\": \"CCC\", \"houseNumber\": \"1Q1Q\", \"postCode\": 100000000}")
-//                        .contentType("application/json;charset=UTF-8"))
-//                .andDo(print())
-//                .andExpect(status().isNotFound());
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/address/create")
+                        .content("{\"country\": \"Spain\", \"city\": \"Cuenca\", \"street\": \"Calle_1\", \"houseNumber\": \"1B\", \"postcode\": 1111, \"user\": {\"id\": null}}")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().is(422));
     }
 
 }

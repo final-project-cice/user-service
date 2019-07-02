@@ -2,6 +2,8 @@ package com.trl.users.service;
 
 import com.trl.users.controller.dto.AddressDTO;
 import com.trl.users.controller.dto.UserDTO;
+import com.trl.users.exceptions.ExceptionUserIdIsNull;
+import com.trl.users.exceptions.ExceptionUserIsNull;
 import com.trl.users.exceptions.ExceptionUserNotHaveAddress;
 import com.trl.users.exceptions.ExceptionUserWithIdNotExist;
 
@@ -9,7 +11,7 @@ import java.util.Set;
 
 public interface AddressService {
 
-    AddressDTO create(AddressDTO addressDTO);
+    AddressDTO create(AddressDTO addressDTO) throws ExceptionUserWithIdNotExist, ExceptionUserIdIsNull, ExceptionUserIsNull;
 
 
     AddressDTO updateCountry(Long id, String country);

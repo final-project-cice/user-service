@@ -20,4 +20,12 @@ public class AddressDTO {
     private int postcode;
     private UserDTO user;
 
+    public AddressDTO(Long id, String country, String city, String street, String houseNumber, int postcode) {
+        this.id = id;
+        this.country = country;
+        this.city = city;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.postcode = postcode;
+    }
 }
