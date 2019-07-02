@@ -32,7 +32,7 @@ public class ConverterBankData {
                     .setBankAccountNumber(bankDataEntity.getBankAccountNumber())
                     .setDateOfExpiry(bankDataEntity.getDateOfExpiry())
                     .setCvi(bankDataEntity.getCvi())
-                    .setUserId(ConverterUser.mapEntityToDTO(bankDataEntity.getUserId()));
+                    .setUser(ConverterUser.mapEntityToDTO(bankDataEntity.getUser()));
         }
 
         log.debug("************ mapEntityToDTO() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));
@@ -76,7 +76,7 @@ public class ConverterBankData {
                     .setBankAccountNumber(bankDataDTO.getBankAccountNumber())
                     .setDateOfExpiry(bankDataDTO.getDateOfExpiry())
                     .setCvi(bankDataDTO.getCvi())
-                    .setUserId(ConverterUser.mapDTOToEntity(bankDataDTO.getUserId()));
+                    .setUser(ConverterUser.mapDTOToEntity(bankDataDTO.getUser()));
         }
 
         log.debug("************ mapDTOToEntity() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));

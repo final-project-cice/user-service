@@ -2,8 +2,8 @@ package com.trl.users.service.impl;
 
 import com.trl.users.controller.dto.BankDataDTO;
 import com.trl.users.controller.dto.UserDTO;
-import com.trl.users.exceptions.ExceptionSomeParametersPassedToMethodEqualNull;
 import com.trl.users.exceptions.ExceptionUserIdIsNull;
+import com.trl.users.exceptions.ExceptionUserIsNull;
 import com.trl.users.exceptions.ExceptionUserNotHaveBankData;
 import com.trl.users.exceptions.ExceptionUserWithIdNotExist;
 import com.trl.users.repository.BankDataRepository;
@@ -18,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -38,17 +37,19 @@ public class BankDataServiceImpl implements BankDataService {
      * @return
      */
     @Override
-    public BankDataDTO create(BankDataDTO bankDataDTO) throws ExceptionSomeParametersPassedToMethodEqualNull, ExceptionUserWithIdNotExist, ExceptionUserIdIsNull {
+    public BankDataDTO create(BankDataDTO bankDataDTO) throws ExceptionUserWithIdNotExist, ExceptionUserIdIsNull, ExceptionUserIsNull {
 
         BankDataDTO bankDataResult = null;
 
-        log.debug("************ create() ---> idUser = " + bankDataDTO.getUserId() + " ---> bankDataDTO = " + bankDataDTO);
+        log.debug("************ create() ---> idUser = " + bankDataDTO.getUser() + " ---> bankDataDTO = " + bankDataDTO);
 
-        if (bankDataDTO != null) {
+        // TODO: Nose si es necesario comprobar de null todos parametros que se van utilizar en meethodo. Es que se compica mucho la lectura ce mtodo.
 
-            if (bankDataDTO.getUserId().getId() != null && bankDataDTO.getUserId().getId() != 0) {
+        if (bankDataDTO.getUser() != null) {
 
-                Optional<UserEntity> userFromRepositoryById = userRepository.findById(bankDataDTO.getUserId().getId());
+            if (bankDataDTO.getUser().getId() != null && bankDataDTO.getUser().getId() != 0) {
+
+                Optional<UserEntity> userFromRepositoryById = userRepository.findById(bankDataDTO.getUser().getId());
 
                 if (userFromRepositoryById.isPresent()) {
 
@@ -59,14 +60,13 @@ public class BankDataServiceImpl implements BankDataService {
                     bankDataResult = ConverterBankData.mapEntityToDTO(savedBankData);
 
                 } else {
-                    throw new ExceptionUserWithIdNotExist("User with this id = '" + bankDataDTO.getUserId().getId() + "' not exist.");
+                    throw new ExceptionUserWithIdNotExist("User with this id = '" + bankDataDTO.getUser().getId() + "' not exist.");
                 }
             } else {
-                throw new ExceptionUserIdIsNull("The parameter that is passed 'bankDataDTO' to the method is NULL.");
+                throw new ExceptionUserIdIsNull("The parameter 'user' that is passed, contains value 'userId'. Value 'userId' equal NULL or ZERO. Not allowed parameters NULL or ZERO.");
             }
-
         } else {
-            throw new ExceptionSomeParametersPassedToMethodEqualNull("The parameter that is passed to the method is NULL.");
+            throw new ExceptionUserIsNull("The parameter 'user' that is passed, equal NULL. Not allowed parameter NULL.");
         }
 
         log.debug("************ create() ---> bankDataResult = " + bankDataResult);
@@ -74,16 +74,22 @@ public class BankDataServiceImpl implements BankDataService {
         return bankDataResult;
     }
 
-    /**
-     * @param id
-     * @return
-     */
     @Override
-    public Boolean deleteById(Long id) {
+    public Set<BankDataDTO> findByUser(UserDTO userDTO) {
 
-        // TODO: Terminar este metodo.
+        Set<BankDataDTO> bankDataSetResult = null;
 
-        return null;
+        log.debug("************ findByUser() ---> userDTO = " + userDTO);
+
+        Set<BankDataEntity> usersFromRepositoryById = bankDataRepository.findByUser(ConverterUser.mapDTOToEntity(userDTO));
+
+        log.debug("************ findByUser() ---> usersFromRepositoryById = " + usersFromRepositoryById);
+
+        bankDataSetResult = ConverterBankData.mapSetEntityToSetDTO(usersFromRepositoryById);
+
+        log.debug("************ findByUser() ---> bankDataSetResult  = " + bankDataSetResult);
+
+        return bankDataSetResult;
     }
 
     /**
@@ -101,7 +107,7 @@ public class BankDataServiceImpl implements BankDataService {
 
         UserEntity userEntity = ConverterUser.mapDTOToEntity(userDTO);
 
-        List<BankDataEntity> bankDataFromRepositoryByUser = bankDataRepository.findByUser(userEntity);
+        Set<BankDataEntity> bankDataFromRepositoryByUser = bankDataRepository.findByUser(userEntity);
 
         log.debug("************ deleteByUser() ---> bankDataFromRepositoryByUser = " + bankDataFromRepositoryByUser);
 
@@ -116,25 +122,6 @@ public class BankDataServiceImpl implements BankDataService {
         log.debug("************ deleteByUser() ---> isDeletedBankData = " + isDeletedBankData);
 
         return isDeletedBankData;
-    }
-
-    @Override
-    public BankDataDTO findById(Long id) {
-
-        // TODO: Terminar este metodo.
-
-        return null;
-    }
-
-    /**
-     *
-     */
-    @Override
-    public Set<BankDataDTO> findByUser(UserDTO userDTO) {
-
-        // TODO: Terminar este metodo.
-
-        return null;
     }
 
 }

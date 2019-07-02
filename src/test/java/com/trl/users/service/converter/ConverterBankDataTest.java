@@ -30,7 +30,7 @@ public class ConverterBankDataTest {
                 .setBankAccountNumber("1111111111111111111111111111")
                 .setDateOfExpiry(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())
                 .setCvi(111)
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(1L)
                                 .setFirstName("First Name User")
@@ -44,7 +44,7 @@ public class ConverterBankDataTest {
                 .setBankAccountNumber("1111111111111111111111111111")
                 .setDateOfExpiry(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())
                 .setCvi(111)
-                .setUserId(
+                .setUser(
                         new UserEntity()
                                 .setId(1L)
                                 .setFirstName("First Name User")
@@ -59,7 +59,7 @@ public class ConverterBankDataTest {
                 .setBankAccountNumber("1111111111111111111111111111")
                 .setDateOfExpiry(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())
                 .setCvi(111)
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(1L)
                                 .setFirstName("First Name User_1")
@@ -72,7 +72,7 @@ public class ConverterBankDataTest {
                 .setBankAccountNumber("2222222222222222222222222222")
                 .setDateOfExpiry(new GregorianCalendar(1970, Calendar.FEBRUARY, 2).getTime())
                 .setCvi(222)
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(2L)
                                 .setFirstName("First Name User_2")
@@ -87,7 +87,7 @@ public class ConverterBankDataTest {
                 .setBankAccountNumber("1111111111111111111111111111")
                 .setDateOfExpiry(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())
                 .setCvi(111)
-                .setUserId(
+                .setUser(
                         new UserEntity()
                                 .setId(1L)
                                 .setFirstName("First Name User_1")
@@ -100,7 +100,7 @@ public class ConverterBankDataTest {
                 .setBankAccountNumber("2222222222222222222222222222")
                 .setDateOfExpiry(new GregorianCalendar(1970, Calendar.FEBRUARY, 2).getTime())
                 .setCvi(222)
-                .setUserId(
+                .setUser(
                         new UserEntity()
                                 .setId(2L)
                                 .setFirstName("First Name User_2")
@@ -130,7 +130,7 @@ public class ConverterBankDataTest {
     public void mapEntityToDTO_Incorrect_Value_Id() {
         BankDataDTO actual_BankDataDTO = ConverterBankData.mapEntityToDTO(new BankDataEntity()
                 .setId(1000L)
-                .setUserId(
+                .setUser(
                         new UserEntity()
                                 .setId(1L)
                                 .setFirstName("First Name User")
@@ -145,7 +145,7 @@ public class ConverterBankDataTest {
     public void mapEntityToDTO_Incorrect_Value_BankAccountNumber() {
         BankDataDTO actual_BankDataDTO = ConverterBankData.mapEntityToDTO(new BankDataEntity()
                 .setBankAccountNumber("1111111111111111111111111111***")
-                .setUserId(
+                .setUser(
                         new UserEntity()
                                 .setId(1L)
                                 .setFirstName("First Name User")
@@ -160,7 +160,7 @@ public class ConverterBankDataTest {
     public void mapEntityToDTO_Incorrect_Value_DateOfExpiry() {
         BankDataDTO actual_BankDataDTO = ConverterBankData.mapEntityToDTO(new BankDataEntity()
                 .setDateOfExpiry(new GregorianCalendar(1970, Calendar.JANUARY, 2).getTime())
-                .setUserId(
+                .setUser(
                         new UserEntity()
                                 .setId(1L)
                                 .setFirstName("First Name User")
@@ -178,7 +178,7 @@ public class ConverterBankDataTest {
                 .setBankAccountNumber("1111111111111111111111111111")
                 .setDateOfExpiry(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())
                 .setCvi(112)
-                .setUserId(
+                .setUser(
                         new UserEntity()
                                 .setId(1L)
                                 .setFirstName("First Name User")
@@ -224,7 +224,7 @@ public class ConverterBankDataTest {
     public void mapDTOToEntity_Incorrect_Value_Id() {
         BankDataEntity actual_BankDataEntity = ConverterBankData.mapDTOToEntity(new BankDataDTO()
                 .setId(1000L)
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(1L)
                                 .setFirstName("First Name User")
@@ -239,7 +239,7 @@ public class ConverterBankDataTest {
     public void mapDTOToEntity_Incorrect_Value_BankAccountNumber() {
         BankDataEntity actual_BankDataEntity = ConverterBankData.mapDTOToEntity(new BankDataDTO()
                 .setBankAccountNumber("1111111111111111111111111111***")
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(1L)
                                 .setFirstName("First Name User")
@@ -254,7 +254,7 @@ public class ConverterBankDataTest {
     public void mapDTOToEntity_Incorrect_Value_DateOfExpiry() {
         BankDataEntity actual_BankDataEntity = ConverterBankData.mapDTOToEntity(new BankDataDTO()
                 .setDateOfExpiry(new GregorianCalendar(1970, Calendar.JANUARY, 2).getTime())
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(1L)
                                 .setFirstName("First Name User")
@@ -269,7 +269,7 @@ public class ConverterBankDataTest {
     public void mapDTOToEntity_Incorrect_Value_Cvi() {
         BankDataEntity actual_BankDataEntity = ConverterBankData.mapDTOToEntity(new BankDataDTO()
                 .setCvi(112)
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(1L)
                                 .setFirstName("First Name User")

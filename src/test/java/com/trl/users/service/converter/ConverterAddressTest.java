@@ -33,7 +33,7 @@ public class ConverterAddressTest {
                 .setStreet("Calle")
                 .setHouseNumber("12")
                 .setPostcode(1111111)
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(1L)
                                 .setFirstName("First Name User")
@@ -49,7 +49,7 @@ public class ConverterAddressTest {
                 .setStreet("Calle")
                 .setHouseNumber("12")
                 .setPostcode(1111111)
-                .setUserId(
+                .setUser(
                         new UserEntity()
                                 .setId(1L)
                                 .setFirstName("First Name User")
@@ -67,7 +67,7 @@ public class ConverterAddressTest {
                 .setStreet("Calle")
                 .setHouseNumber("12")
                 .setPostcode(1111111)
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(1L)
                                 .setFirstName("First Name User_1")
@@ -83,7 +83,7 @@ public class ConverterAddressTest {
                 .setStreet("Calle")
                 .setHouseNumber("1")
                 .setPostcode(22222222)
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(2L)
                                 .setFirstName("First Name User_2")
@@ -101,7 +101,7 @@ public class ConverterAddressTest {
                 .setStreet("Calle")
                 .setHouseNumber("12")
                 .setPostcode(1111111)
-                .setUserId(
+                .setUser(
                         new UserEntity()
                                 .setId(1L)
                                 .setFirstName("First Name User_1")
@@ -117,7 +117,7 @@ public class ConverterAddressTest {
                 .setStreet("Calle")
                 .setHouseNumber("1")
                 .setPostcode(22222222)
-                .setUserId(
+                .setUser(
                         new UserEntity()
                                 .setId(2L)
                                 .setFirstName("First Name User_2")
@@ -219,7 +219,7 @@ public class ConverterAddressTest {
 
         AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(new AddressDTO()
                 .setId(1000L)
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(1L)
                                 .setFirstName("First Name User_1")
@@ -235,7 +235,7 @@ public class ConverterAddressTest {
 
         AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(new AddressDTO()
                 .setCountry("Spain***")
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(1L)
                                 .setFirstName("First Name User_1")
@@ -252,7 +252,7 @@ public class ConverterAddressTest {
         AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(new AddressDTO()
                 .setId(1L)
                 .setCity("Madrid***")
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(1L)
                                 .setFirstName("First Name User_1")
@@ -269,7 +269,7 @@ public class ConverterAddressTest {
         AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(new AddressDTO()
                 .setId(1L)
                 .setStreet("Calle***")
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(1L)
                                 .setFirstName("First Name User_1")
@@ -286,7 +286,7 @@ public class ConverterAddressTest {
         AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(new AddressDTO()
                 .setId(1L)
                 .setHouseNumber("12***")
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(1L)
                                 .setFirstName("First Name User_1")
@@ -303,7 +303,7 @@ public class ConverterAddressTest {
         AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(new AddressDTO()
                 .setId(1L)
                 .setPostcode(1111111000)
-                .setUserId(
+                .setUser(
                         new UserDTO()
                                 .setId(1L)
                                 .setFirstName("First Name User_1")

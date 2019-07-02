@@ -18,6 +18,6 @@ public class AddressDTO {
     private String street;
     private String houseNumber;
     private int postcode;
-    private UserDTO userId;
+    private UserDTO user;
 
 }

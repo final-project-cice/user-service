@@ -26,6 +26,12 @@ public class BankDataDTO {
     private Date dateOfExpiry;
 
     private Integer cvi;
-    private UserDTO userId;
+    private UserDTO user;
 
+    public BankDataDTO(Long id, String bankAccountNumber, Date dateOfExpiry, Integer cvi) {
+        this.id = id;
+        this.bankAccountNumber = bankAccountNumber;
+        this.dateOfExpiry = dateOfExpiry;
+        this.cvi = cvi;
+    }
 }

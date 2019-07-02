@@ -125,23 +125,23 @@ public class AddressServiceImpl implements AddressService {
 
         boolean isDeletedAddress = false;
 
-        log.debug("************ deleteByUserId() ---> userDTO = " + userDTO);
+        log.debug("************ deleteByUser() ---> userDTO = " + userDTO);
 
         UserEntity userEntity = ConverterUser.mapDTOToEntity(userDTO);
 
         List<AddressEntity> addressFromRepositoryByUser = addressRepository.findByUser(userEntity);
 
-        log.debug("************ deleteByUserId() ---> addressFromRepositoryById = " + addressFromRepositoryByUser);
+        log.debug("************ deleteByUser() ---> addressFromRepositoryById = " + addressFromRepositoryByUser);
 
         if (!addressFromRepositoryByUser.isEmpty()) {
             addressRepository.deleteByUser(userEntity);
             isDeletedAddress = true;
         } else {
-            log.debug("************ deleteByUserId() ---> user with this id = '" + userDTO + "' not exist.");
+            log.debug("************ deleteByUser() ---> user with this id = '" + userDTO + "' not exist.");
             throw new ExceptionUserNotHaveAddress("This user = '" + userDTO + "' not have address.");
         }
 
-        log.debug("************ deleteByUserId() ---> isDeletedAddress = " + isDeletedAddress);
+        log.debug("************ deleteByUser() ---> isDeletedAddress = " + isDeletedAddress);
 
         return isDeletedAddress;
     }

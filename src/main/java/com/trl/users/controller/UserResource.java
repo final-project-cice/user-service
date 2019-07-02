@@ -198,7 +198,7 @@ public class UserResource {
     public ResponseEntity<Boolean> delete(@PathVariable Long userId) {
         ResponseEntity<Boolean> response = null;
 
-        log.debug("************ delete() ---> userId = " + userId);
+        log.debug("************ delete() ---> user = " + userId);
 
         Boolean isDeleteUser = false;
 

@@ -33,6 +33,13 @@ public class BankDataEntity implements Serializable {
     @NonNull
     @ManyToOne
     @JoinColumn(name = "usr_id")
-    private UserEntity userId;
+    private UserEntity user;
+
+    public BankDataEntity(Long id, String bankAccountNumber, Date dateOfExpiry, Integer cvi) {
+        this.id = id;
+        this.bankAccountNumber = bankAccountNumber;
+        this.dateOfExpiry = dateOfExpiry;
+        this.cvi = cvi;
+    }
 
 }

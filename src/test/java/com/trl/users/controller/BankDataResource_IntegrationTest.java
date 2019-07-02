@@ -30,28 +30,71 @@ public class BankDataResource_IntegrationTest {
     @Test
     public void create() throws Exception {
 
-        final String updateBankDataResult = "{\"id\":1,\"bankAccountNumber\":\"999999999999999999999999\",\"dateOfExpiry\":\"09.09.2019\",\"cvi\":999,\"userId\":{\"id\":1,\"firstName\":null,\"lastName\":null,\"email\":null,\"password\":null,\"bankData\":null,\"address\":null,\"birthday\":null}}";
+        final String updateBankDataResult = "{\"id\":1,\"bankAccountNumber\":\"999999999999999999999999\",\"dateOfExpiry\":\"09.09.2019\",\"cvi\":999,\"user\":{\"id\":1,\"firstName\":null,\"lastName\":null,\"email\":null,\"password\":null,\"bankData\":null,\"address\":null,\"birthday\":null}}";
 
         this.mockMvc.perform(
                 post("http://localhost:8081/user/bankData/create")
-                        .content("{\"bankAccountNumber\": \"999999999999999999999999\", \"dateOfExpiry\": \"09.09.2019\", \"cvi\": 999, \"userId\": {\"id\": 1}}")
+                        .content("{\"bankAccountNumber\": \"999999999999999999999999\", \"dateOfExpiry\": \"09.09.2019\", \"cvi\": 999, \"user\": {\"id\": 1}}")
                         .contentType("application/json;charset=UTF-8"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(updateBankDataResult)));
     }
 
+    @Sql(value = {"/createBankDataBefore-create.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createBankDataAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void create_userIsNull() throws Exception {
 
-    /*
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/bankData/create")
+                        .content("{\"bankAccountNumber\": \"999999999999999999999999\", \"dateOfExpiry\": \"09.09.2019\", \"cvi\": 999, \"user\": null}")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().is(422));
+    }
 
-    .content("{\"bankAccountNumber\": \"999999999999999999999999\", \"dateOfExpiry\": \"09.09.2019\", \"cvi\": 999, \"userId\": {\"id\": 0}}")
-//                        .content("{\"bankAccountNumber\": \"999999999999999999999999\", \"dateOfExpiry\": \"09.09.2019\", \"cvi\": 999, \"userId\": {\"id\": null}}")
-//                        .content("{\"bankAccountNumber\": \"999999999999999999999999\", \"dateOfExpiry\": \"09.09.2019\", \"cvi\": 999, \"userId\": null}")
+    @Sql(value = {"/createBankDataBefore-create.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createBankDataAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void create_userIdIsNull() throws Exception {
 
-comprobar metodo create
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/bankData/create")
+                        .content("{\"bankAccountNumber\": \"999999999999999999999999\", \"dateOfExpiry\": \"09.09.2019\", \"cvi\": 999, \"user\": {\"id\": null}}")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().is(422));
+    }
 
-    */
+    @Sql(value = {"/createBankDataBefore-findByUser.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createBankDataAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void findByUser() throws Exception {
 
+        final String updateBankDataResult = "[{\"id\":1,\"bankAccountNumber\":\"1111111111111111111\",\"dateOfExpiry\":\"01.01.1970\",\"cvi\":111,\"user\":null},{\"id\":2,\"bankAccountNumber\":\"2222222222222222222\",\"dateOfExpiry\":\"01.01.1970\",\"cvi\":222,\"user\":null}]";
+
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/bankData/findByUser")
+                        .content("{\"id\": 1}")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString(updateBankDataResult)));
+    }
+
+    @Sql(value = {"/createBankDataBefore-findByUser.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createBankDataAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void findByUser_bankDataNotFound() throws Exception {
+
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/bankData/findByUser")
+                        .content("{\"id\": 2}")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
 
 
 

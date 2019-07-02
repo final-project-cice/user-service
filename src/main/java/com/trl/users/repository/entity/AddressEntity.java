@@ -30,6 +30,6 @@ public class AddressEntity implements Serializable {
     @NonNull
     @ManyToOne
     @JoinColumn(name = "usr_id")
-    private UserEntity userId;
+    private UserEntity user;
 
 }

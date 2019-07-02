@@ -34,7 +34,7 @@ public class ConverterAddress {
                     .setStreet(addressEntity.getStreet())
                     .setHouseNumber(addressEntity.getHouseNumber())
                     .setPostcode(addressEntity.getPostcode())
-                    .setUserId(ConverterUser.mapEntityToDTO(addressEntity.getUserId()));
+                    .setUser(ConverterUser.mapEntityToDTO(addressEntity.getUser()));
         }
 
         log.debug("************ mapEntityToDTO() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));
@@ -80,7 +80,7 @@ public class ConverterAddress {
                     .setStreet(addressDTO.getStreet())
                     .setHouseNumber(addressDTO.getHouseNumber())
                     .setPostcode(addressDTO.getPostcode())
-                    .setUserId(ConverterUser.mapDTOToEntity(addressDTO.getUserId()));
+                    .setUser(ConverterUser.mapDTOToEntity(addressDTO.getUser()));
         }
 
         log.debug("************ mapDTOToEntity() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));
