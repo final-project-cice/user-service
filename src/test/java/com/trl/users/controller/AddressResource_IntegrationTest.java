@@ -67,4 +67,195 @@ public class AddressResource_IntegrationTest {
                 .andExpect(status().is(422));
     }
 
+    @Sql(value = {"/createAddressBefore-update.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createAddressAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void updateCountry() throws Exception {
+
+        final String updateBankDataResult = "{\"id\":1,\"country\":\"Updated Country\",\"city\":\"Madrid\",\"street\":\"Calle Madrid\",\"houseNumber\":\"1A\",\"postcode\":111111,\"user\":null}";
+
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/address/update/country/1")
+                        .content("Updated Country")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString(updateBankDataResult)));
+    }
+
+    @Sql(value = {"/createAddressBefore-update.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createAddressAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void updateCountry_addressIdNotFound() throws Exception {
+
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/address/update/country/3")
+                        .content("Updated Country")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
+    @Sql(value = {"/createAddressBefore-update.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createAddressAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void updateCity() throws Exception {
+
+        final String updateBankDataResult = "{\"id\":1,\"country\":\"Spain\",\"city\":\"Updated City\",\"street\":\"Calle Madrid\",\"houseNumber\":\"1A\",\"postcode\":111111,\"user\":null}";
+
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/address/update/city/1")
+                        .content("Updated City")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString(updateBankDataResult)));
+    }
+
+    @Sql(value = {"/createAddressBefore-update.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createAddressAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void updateCity_addressIdNotFound() throws Exception {
+
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/address/update/city/3")
+                        .content("Updated City")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
+    @Sql(value = {"/createAddressBefore-update.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createAddressAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void updateStreet() throws Exception {
+
+        final String updateBankDataResult = "{\"id\":1,\"country\":\"Spain\",\"city\":\"Madrid\",\"street\":\"Updated Street\",\"houseNumber\":\"1A\",\"postcode\":111111,\"user\":null}";
+
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/address/update/street/1")
+                        .content("Updated Street")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString(updateBankDataResult)));
+    }
+
+    @Sql(value = {"/createAddressBefore-update.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createAddressAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void updateStreet_addressIdNotFound() throws Exception {
+
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/address/update/street/3")
+                        .content("Updated Street")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
+    @Sql(value = {"/createAddressBefore-update.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createAddressAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void updateHouseNumber() throws Exception {
+
+        final String updateBankDataResult = "{\"id\":1,\"country\":\"Spain\",\"city\":\"Madrid\",\"street\":\"Calle Madrid\",\"houseNumber\":\"Updated House Number\",\"postcode\":111111,\"user\":null}";
+
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/address/update/houseNumber/1")
+                        .content("Updated House Number")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString(updateBankDataResult)));
+    }
+
+    @Sql(value = {"/createAddressBefore-update.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createAddressAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void updateHouseNumber_addressIdNotFound() throws Exception {
+
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/address/update/houseNumber/3")
+                        .content("Updated House Number")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
+    @Sql(value = {"/createAddressBefore-update.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createAddressAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void updatePostcode() throws Exception {
+
+        final String updateBankDataResult = "{\"id\":1,\"country\":\"Spain\",\"city\":\"Madrid\",\"street\":\"Calle Madrid\",\"houseNumber\":\"1A\",\"postcode\":0,\"user\":null}";
+
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/address/update/postcode/1")
+                        .content("{\"value\": 0}")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString(updateBankDataResult)));
+    }
+
+    @Sql(value = {"/createAddressBefore-update.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createAddressAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void updatePostcode_addressIdNotFound() throws Exception {
+
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/address/update/houseNumber/3")
+                        .content("{\"value\": 0}")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

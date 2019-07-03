@@ -2,10 +2,7 @@ package com.trl.users.service;
 
 import com.trl.users.controller.dto.AddressDTO;
 import com.trl.users.controller.dto.UserDTO;
-import com.trl.users.exceptions.ExceptionUserIdIsNull;
-import com.trl.users.exceptions.ExceptionUserIsNull;
-import com.trl.users.exceptions.ExceptionUserNotHaveAddress;
-import com.trl.users.exceptions.ExceptionUserWithIdNotExist;
+import com.trl.users.exceptions.*;
 
 import java.util.Set;
 
@@ -14,15 +11,15 @@ public interface AddressService {
     AddressDTO create(AddressDTO addressDTO) throws ExceptionUserWithIdNotExist, ExceptionUserIdIsNull, ExceptionUserIsNull;
 
 
-    AddressDTO updateCountry(Long id, String country);
+    AddressDTO updateCountry(Long id, String country) throws ExceptionAddressWithIdNotExist;
 
-    AddressDTO updateCity(Long id, String city);
+    AddressDTO updateCity(Long id, String city) throws ExceptionAddressWithIdNotExist;
 
-    AddressDTO updateStreet(Long id, String street);
+    AddressDTO updateStreet(Long id, String street) throws ExceptionAddressWithIdNotExist;
 
-    AddressDTO updateHouseNumber(Long id, String houseNumber);
+    AddressDTO updateHouseNumber(Long id, String houseNumber) throws ExceptionAddressWithIdNotExist;
 
-    AddressDTO updatePostCode(Long id, String postCode);
+    AddressDTO updatePostCode(Long id, Long postCode) throws ExceptionAddressWithIdNotExist;
 
 
     Boolean deleteById(Long id);

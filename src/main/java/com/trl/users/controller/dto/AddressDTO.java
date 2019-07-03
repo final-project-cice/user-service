@@ -17,10 +17,10 @@ public class AddressDTO {
     private String city;
     private String street;
     private String houseNumber;
-    private int postcode;
+    private Long postcode;
     private UserDTO user;
 
-    public AddressDTO(Long id, String country, String city, String street, String houseNumber, int postcode) {
+    public AddressDTO(Long id, String country, String city, String street, String houseNumber, Long postcode) {
         this.id = id;
         this.country = country;
         this.city = city;

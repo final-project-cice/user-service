@@ -32,7 +32,7 @@ public class ConverterAddressTest {
                 .setCity("Madrid")
                 .setStreet("Calle")
                 .setHouseNumber("12")
-                .setPostcode(1111111)
+                .setPostcode(1111111L)
                 .setUser(
                         new UserDTO()
                                 .setId(1L)
@@ -48,7 +48,7 @@ public class ConverterAddressTest {
                 .setCity("Madrid")
                 .setStreet("Calle")
                 .setHouseNumber("12")
-                .setPostcode(1111111)
+                .setPostcode(1111111L)
                 .setUser(
                         new UserEntity()
                                 .setId(1L)
@@ -66,7 +66,7 @@ public class ConverterAddressTest {
                 .setCity("Madrid")
                 .setStreet("Calle")
                 .setHouseNumber("12")
-                .setPostcode(1111111)
+                .setPostcode(1111111L)
                 .setUser(
                         new UserDTO()
                                 .setId(1L)
@@ -82,7 +82,7 @@ public class ConverterAddressTest {
                 .setCity("Barcelona")
                 .setStreet("Calle")
                 .setHouseNumber("1")
-                .setPostcode(22222222)
+                .setPostcode(22222222L)
                 .setUser(
                         new UserDTO()
                                 .setId(2L)
@@ -100,7 +100,7 @@ public class ConverterAddressTest {
                 .setCity("Madrid")
                 .setStreet("Calle")
                 .setHouseNumber("12")
-                .setPostcode(1111111)
+                .setPostcode(1111111L)
                 .setUser(
                         new UserEntity()
                                 .setId(1L)
@@ -116,7 +116,7 @@ public class ConverterAddressTest {
                 .setCity("Barcelona")
                 .setStreet("Calle")
                 .setHouseNumber("1")
-                .setPostcode(22222222)
+                .setPostcode(22222222L)
                 .setUser(
                         new UserEntity()
                                 .setId(2L)
@@ -185,7 +185,7 @@ public class ConverterAddressTest {
     public void mapEntityToDTO_Incorrect_Value_PostCode() {
 
         AddressDTO actual_AddressDTO = ConverterAddress.mapEntityToDTO(new AddressEntity()
-                .setPostcode(1111111000));
+                .setPostcode(1111111000L));
         assertNotEquals(expected_AddressDTO.getPostcode(), actual_AddressDTO.getPostcode());
     }
 
@@ -302,7 +302,7 @@ public class ConverterAddressTest {
 
         AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(new AddressDTO()
                 .setId(1L)
-                .setPostcode(1111111000)
+                .setPostcode(1111111000L)
                 .setUser(
                         new UserDTO()
                                 .setId(1L)

@@ -25,14 +25,14 @@ public class AddressEntity implements Serializable {
     private String city;
     private String street;
     private String houseNumber;
-    private int postcode;
+    private Long postcode;
 
     @NonNull
     @ManyToOne
     @JoinColumn(name = "usr_id")
     private UserEntity user;
 
-    public AddressEntity(Long id, String country, String city, String street, String houseNumber, int postcode) {
+    public AddressEntity(Long id, String country, String city, String street, String houseNumber, Long postcode) {
         this.id = id;
         this.country = country;
         this.city = city;

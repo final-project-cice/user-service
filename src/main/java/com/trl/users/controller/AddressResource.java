@@ -1,6 +1,9 @@
 package com.trl.users.controller;
 
 import com.trl.users.controller.dto.AddressDTO;
+import com.trl.users.controller.dto.UserDTO;
+import com.trl.users.controller.model.OneGenericValueDetailsRequestModel;
+import com.trl.users.exceptions.ExceptionAddressWithIdNotExist;
 import com.trl.users.exceptions.ExceptionUserIdIsNull;
 import com.trl.users.exceptions.ExceptionUserIsNull;
 import com.trl.users.exceptions.ExceptionUserWithIdNotExist;
@@ -8,11 +11,9 @@ import com.trl.users.service.impl.AddressServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @Slf4j
@@ -53,6 +54,137 @@ public class AddressResource {
         return response;
     }
 
+    /**
+     *
+     */
+    @PostMapping(path = "/update/country/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AddressDTO> updateCountry(@PathVariable Long id, @RequestBody String country) {
+        ResponseEntity<AddressDTO> response = null;
+
+        log.debug("************ updateCountry() ---> id = " + id + " ---> country = " + country);
+
+        AddressDTO resultService = null;
+
+        try {
+            resultService = addressService.updateCountry(id, country);
+        } catch (ExceptionAddressWithIdNotExist exceptionAddressWithIdNotExist) {
+            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressWithIdNotExist);
+            return ResponseEntity.notFound().build();
+        }
+
+        log.debug("************ updateCountry() ---> resultService = " + resultService);
+
+        response = ResponseEntity.ok(resultService);
+
+        log.debug("************ updateCountry() ---> response = " + response);
+
+        return response;
+    }
+
+    /**
+     *
+     */
+    @PostMapping(path = "/update/city/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AddressDTO> updateCity(@PathVariable Long id, @RequestBody String city) {
+        ResponseEntity<AddressDTO> response = null;
+
+        log.debug("************ updateCity() ---> id = " + id + " ---> city = " + city);
+
+        AddressDTO resultService = null;
+
+        try {
+            resultService = addressService.updateCity(id, city);
+        } catch (ExceptionAddressWithIdNotExist exceptionAddressWithIdNotExist) {
+            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressWithIdNotExist);
+            return ResponseEntity.notFound().build();
+        }
+
+        log.debug("************ updateCity() ---> resultService = " + resultService);
+
+        response = ResponseEntity.ok(resultService);
+
+        log.debug("************ updateCity() ---> response = " + response);
+
+        return response;
+    }
+
+    /**
+     *
+     */
+    @PostMapping(path = "/update/street/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AddressDTO> updateStreet(@PathVariable Long id, @RequestBody String street) {
+        ResponseEntity<AddressDTO> response = null;
+
+        log.debug("************ updateStreet() ---> id = " + id + " ---> street = " + street);
+
+        AddressDTO resultService = null;
+
+        try {
+            resultService = addressService.updateStreet(id, street);
+        } catch (ExceptionAddressWithIdNotExist exceptionAddressWithIdNotExist) {
+            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressWithIdNotExist);
+            return ResponseEntity.notFound().build();
+        }
+
+        log.debug("************ updateStreet() ---> resultService = " + resultService);
+
+        response = ResponseEntity.ok(resultService);
+
+        log.debug("************ updateStreet() ---> response = " + response);
+
+        return response;
+    }
+
+    /**
+     *
+     */
+    @PostMapping(path = "/update/houseNumber/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AddressDTO> updateHouseNumber(@PathVariable Long id, @RequestBody String houseNumber) {
+        ResponseEntity<AddressDTO> response = null;
+
+        log.debug("************ updateHouseNumber() ---> id = " + id + " ---> houseNumber = " + houseNumber);
+
+        AddressDTO resultService = null;
+
+        try {
+            resultService = addressService.updateHouseNumber(id, houseNumber);
+        } catch (ExceptionAddressWithIdNotExist exceptionAddressWithIdNotExist) {
+            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressWithIdNotExist);
+            return ResponseEntity.notFound().build();
+        }
+
+        log.debug("************ updateHouseNumber() ---> resultService = " + resultService);
+
+        response = ResponseEntity.ok(resultService);
+
+        log.debug("************ updateHouseNumber() ---> response = " + response);
+
+        return response;
+    }
+
+    @PostMapping(path = "/update/postcode/{id}")
+    public ResponseEntity<AddressDTO> updatePostcode(@PathVariable Long id, @RequestBody OneGenericValueDetailsRequestModel<Long> postcode) {
+        ResponseEntity<AddressDTO> response = null;
+
+        log.debug("************ updatePostcode() ---> id = " + id + " ---> postcode = " + postcode.getValue());
+
+        AddressDTO resultService = null;
+
+        try {
+            resultService = addressService.updatePostCode(id, postcode.getValue());
+        } catch (ExceptionAddressWithIdNotExist exceptionAddressWithIdNotExist) {
+            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressWithIdNotExist);
+            return ResponseEntity.notFound().build();
+        }
+
+        log.debug("************ updatePostcode() ---> resultService = " + resultService);
+
+        response = ResponseEntity.ok(resultService);
+
+        log.debug("************ updatePostcode() ---> response = " + response);
+
+        return response;
+    }
 
 //    AddressDTO updateCountry(Long id, String country);
 //
