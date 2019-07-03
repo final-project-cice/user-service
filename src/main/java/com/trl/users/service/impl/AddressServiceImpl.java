@@ -36,7 +36,6 @@ public class AddressServiceImpl implements AddressService {
      */
     @Override
     public AddressDTO create(AddressDTO addressDTO) throws ExceptionUserWithIdNotExist, ExceptionUserIdIsNull, ExceptionUserIsNull {
-
         AddressDTO addressResult = null;
 
         log.debug("************ create() ---> idUser = " + addressDTO.getUser() + " ---> addressDTO = " + addressDTO);
@@ -290,7 +289,6 @@ public class AddressServiceImpl implements AddressService {
     @Transactional
     @Override
     public Boolean deleteByUser(UserDTO userDTO) throws ExceptionUserNotHaveAddress {
-
         boolean isDeletedAddress = false;
 
         log.debug("************ deleteByUser() ---> userDTO = " + userDTO);
@@ -320,17 +318,16 @@ public class AddressServiceImpl implements AddressService {
      */
     @Override
     public AddressDTO findById(Long id) throws ExceptionAddressNotExist {
-
         AddressDTO addressResult = null;
 
         log.debug("************ findById() ---> id = " + id);
 
-        Optional<AddressEntity> addressFromRepositoryByFirstName = addressRepository.findById(id);
+        Optional<AddressEntity> addressFromRepositoryById = addressRepository.findById(id);
 
-        log.debug("************ findById() ---> addressFromRepositoryByFirstName = " + addressFromRepositoryByFirstName);
+        log.debug("************ findById() ---> addressFromRepositoryById = " + addressFromRepositoryById);
 
-        if (!addressFromRepositoryByFirstName.isPresent()) {
-            addressResult = ConverterAddress.mapEntityToDTO(addressFromRepositoryByFirstName.get());
+        if (addressFromRepositoryById.isPresent()) {
+            addressResult = ConverterAddress.mapEntityToDTO(addressFromRepositoryById.get());
         } else {
             log.debug("************ findById() ---> address with this id = '" + id + "' not exist.");
             throw new ExceptionAddressNotExist("Address with this id = '" + id + "' not exist.");
@@ -346,11 +343,25 @@ public class AddressServiceImpl implements AddressService {
      * @return
      */
     @Override
-    public Set<AddressDTO> findByCountry(String country) {
+    public Set<AddressDTO> findByCountry(String country) throws ExceptionAddressNotExist {
+        Set<AddressDTO> addressSetResult = null;
 
-        // TODO: Terminar este metodo.
+        log.debug("************ findByCountry() ---> country = " + country);
 
-        return null;
+        Set<AddressEntity> addressSetFromRepositoryByCountry = addressRepository.findByCountry(country);
+
+        log.debug("************ findByCountry() ---> addressSetFromRepositoryByCountry = " + addressSetFromRepositoryByCountry);
+
+        if (!addressSetFromRepositoryByCountry.isEmpty()) {
+            addressSetResult = ConverterAddress.mapSetEntityToSetDTO(addressSetFromRepositoryByCountry);
+        } else {
+            log.debug("************ findByCountry() ---> address with this name country = '" + country + "' not exist.");
+            throw new ExceptionAddressNotExist("Address with this name country = '" + country + "' not exist.");
+        }
+
+        log.debug("************ findByCountry() ---> addressSetResult = " + addressSetResult);
+
+        return addressSetResult;
     }
 
     /**
@@ -358,11 +369,25 @@ public class AddressServiceImpl implements AddressService {
      * @return
      */
     @Override
-    public Set<AddressDTO> findByCity(String city) {
+    public Set<AddressDTO> findByCity(String city) throws ExceptionAddressNotExist {
+        Set<AddressDTO> addressSetResult = null;
 
-        // TODO: Terminar este metodo.
+        log.debug("************ findByCity() ---> city = " + city);
 
-        return null;
+        Set<AddressEntity> addressSetFromRepositoryByCity = addressRepository.findByCity(city);
+
+        log.debug("************ findByCity() ---> addressSetFromRepositoryByCity = " + addressSetFromRepositoryByCity);
+
+        if (!addressSetFromRepositoryByCity.isEmpty()) {
+            addressSetResult = ConverterAddress.mapSetEntityToSetDTO(addressSetFromRepositoryByCity);
+        } else {
+            log.debug("************ findByCity() ---> address with this name city = '" + city + "' not exist.");
+            throw new ExceptionAddressNotExist("Address with this name city = '" + city + "' not exist.");
+        }
+
+        log.debug("************ findByCity() ---> addressSetResult = " + addressSetResult);
+
+        return addressSetResult;
     }
 
     /**
@@ -370,11 +395,25 @@ public class AddressServiceImpl implements AddressService {
      * @return
      */
     @Override
-    public Set<AddressDTO> findByStreet(String street) {
+    public Set<AddressDTO> findByStreet(String street) throws ExceptionAddressNotExist {
+        Set<AddressDTO> addressSetResult = null;
 
-        // TODO: Terminar este metodo.
+        log.debug("************ findByStreet() ---> street = " + street);
 
-        return null;
+        Set<AddressEntity> addressSetFromRepositoryByStreet = addressRepository.findByStreet(street);
+
+        log.debug("************ findByStreet() ---> addressSetFromRepositoryByStreet = " + addressSetFromRepositoryByStreet);
+
+        if (!addressSetFromRepositoryByStreet.isEmpty()) {
+            addressSetResult = ConverterAddress.mapSetEntityToSetDTO(addressSetFromRepositoryByStreet);
+        } else {
+            log.debug("************ findByStreet() ---> address with this name street = '" + street + "' not exist.");
+            throw new ExceptionAddressNotExist("Address with this name street = '" + street + "' not exist.");
+        }
+
+        log.debug("************ findByStreet() ---> addressSetResult = " + addressSetResult);
+
+        return addressSetResult;
     }
 
     /**
@@ -382,35 +421,77 @@ public class AddressServiceImpl implements AddressService {
      * @return
      */
     @Override
-    public Set<AddressDTO> findByHouseNumber(String houseNumber) {
+    public Set<AddressDTO> findByHouseNumber(String houseNumber) throws ExceptionAddressNotExist {
+        Set<AddressDTO> addressSetResult = null;
 
-        // TODO: Terminar este metodo.
+        log.debug("************ findByHouseNumber() ---> houseNumber = " + houseNumber);
 
-        return null;
+        Set<AddressEntity> addressSetFromRepositoryByHouseNumber = addressRepository.findByHouseNumber(houseNumber);
+
+        log.debug("************ findByHouseNumber() ---> addressSetFromRepositoryByHouseNumber = " + addressSetFromRepositoryByHouseNumber);
+
+        if (!addressSetFromRepositoryByHouseNumber.isEmpty()) {
+            addressSetResult = ConverterAddress.mapSetEntityToSetDTO(addressSetFromRepositoryByHouseNumber);
+        } else {
+            log.debug("************ findByHouseNumber() ---> address with this house number = '" + houseNumber + "' not exist.");
+            throw new ExceptionAddressNotExist("Address with this house number = '" + houseNumber + "' not exist.");
+        }
+
+        log.debug("************ findByHouseNumber() ---> addressSetResult = " + addressSetResult);
+
+        return addressSetResult;
     }
 
     /**
-     * @param postCode
+     * @param postcode
      * @return
      */
     @Override
-    public Set<AddressDTO> findByPostCode(String postCode) {
+    public Set<AddressDTO> findByPostcode(Long postcode) throws ExceptionAddressNotExist {
+        Set<AddressDTO> addressSetResult = null;
 
-        // TODO: Terminar este metodo.
+        log.debug("************ findByPostcode() ---> postcode = " + postcode);
 
-        return null;
+        Set<AddressEntity> addressSetFromRepositoryByPostcode = addressRepository.findByPostcode(postcode);
+
+        log.debug("************ findByPostcode() ---> addressSetFromRepositoryByPostcode = " + addressSetFromRepositoryByPostcode);
+
+        if (!addressSetFromRepositoryByPostcode.isEmpty()) {
+            addressSetResult = ConverterAddress.mapSetEntityToSetDTO(addressSetFromRepositoryByPostcode);
+        } else {
+            log.debug("************ findByPostcode() ---> address with this postcode = '" + postcode + "' not exist.");
+            throw new ExceptionAddressNotExist("Address with this postcode = '" + postcode + "' not exist.");
+        }
+
+        log.debug("************ findByPostcode() ---> addressSetResult = " + addressSetResult);
+
+        return addressSetResult;
     }
 
     /**
-     * @param userDTO
+     * @param user
      * @return
      */
     @Override
-    public Set<AddressDTO> findByUser(UserDTO userDTO) {
+    public Set<AddressDTO> findByUser(UserDTO user) throws ExceptionAddressNotExist {
+        Set<AddressDTO> addressSetResult = null;
 
-        // TODO: Terminar este metodo.
+        log.debug("************ findByUser() ---> user = " + user);
 
-        return null;
+        Set<AddressEntity> addressSetFromRepositoryByUser = addressRepository.findByUser(ConverterUser.mapDTOToEntity(user));
+
+        log.debug("************ findByUser() ---> addressSetFromRepositoryByUser = " + addressSetFromRepositoryByUser);
+
+        if (!addressSetFromRepositoryByUser.isEmpty()) {
+            addressSetResult = ConverterAddress.mapSetEntityToSetDTO(addressSetFromRepositoryByUser);
+        } else {
+            log.debug("************ findByUser() ---> address with this user id = '" + user.getId() + "' not exist.");
+            throw new ExceptionAddressNotExist("Address with this user id = '" + user.getId() + "' not exist.");
+        }
+
+        log.debug("************ findByUser() ---> addressSetResult = " + addressSetResult);
+
+        return addressSetResult;
     }
 
 }

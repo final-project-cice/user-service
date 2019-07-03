@@ -29,16 +29,16 @@ public interface AddressService {
 
     AddressDTO findById(Long id) throws ExceptionAddressNotExist;
 
-    Set<AddressDTO> findByCountry(String country);
+    Set<AddressDTO> findByCountry(String country) throws ExceptionAddressNotExist;
 
-    Set<AddressDTO> findByCity(String city);
+    Set<AddressDTO> findByCity(String city) throws ExceptionAddressNotExist;
 
-    Set<AddressDTO> findByStreet(String street);
+    Set<AddressDTO> findByStreet(String street) throws ExceptionAddressNotExist;
 
-    Set<AddressDTO> findByHouseNumber(String houseNumber);
+    Set<AddressDTO> findByHouseNumber(String houseNumber) throws ExceptionAddressNotExist;
 
-    Set<AddressDTO> findByPostCode(String postCode);
+    Set<AddressDTO> findByPostcode(Long postCode) throws ExceptionAddressNotExist;
 
-    Set<AddressDTO> findByUser(UserDTO userDTO);
+    Set<AddressDTO> findByUser(UserDTO userDTO) throws ExceptionAddressNotExist;
 
 }

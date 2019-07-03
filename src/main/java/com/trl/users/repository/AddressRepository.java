@@ -111,7 +111,7 @@ public interface AddressRepository extends JpaRepository<AddressEntity, Long> {
      * @param user
      * @return
      */
-    @Query("SELECT new AddressEntity(e.id, e.country, e.city, e.street, e.houseNumber, e.postcode) FROM AddressEntity e WHERE e.user=:user")
+    @Query("SELECT new AddressEntity(e.id, e.country, e.city, e.street, e.houseNumber, e.postcode, e.user) FROM AddressEntity e WHERE e.user=:user")
     Set<AddressEntity> findByUser(@Param(value = "user") UserEntity user);
 
 }

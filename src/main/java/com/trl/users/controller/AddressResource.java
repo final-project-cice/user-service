@@ -1,6 +1,7 @@
 package com.trl.users.controller;
 
 import com.trl.users.controller.dto.AddressDTO;
+import com.trl.users.controller.dto.UserDTO;
 import com.trl.users.controller.model.OneGenericValueDetailsRequestModel;
 import com.trl.users.exceptions.ExceptionAddressNotExist;
 import com.trl.users.exceptions.ExceptionUserIdIsNull;
@@ -13,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @AllArgsConstructor
 @Slf4j
@@ -185,34 +188,172 @@ public class AddressResource {
         return response;
     }
 
-//    AddressDTO updateCountry(Long id, String country);
-//
-//    AddressDTO updateCity(Long id, String city);
-//
-//    AddressDTO updateStreet(Long id, String street);
-//
-//    AddressDTO updateHouseNumber(Long id, String houseNumber);
-//
-//    AddressDTO updatePostCode(Long id, String postCode);
-//
-//
-//    Boolean deleteById(Long id);
-//
-//    Boolean deleteByUser(UserDTO userDTO) throws ExceptionUserWithIdNotExist, ExceptionUserNotHaveAddress;
-//
-//
-//    AddressDTO findById(Long id);
-//
-//    Set<AddressDTO> findByCountry(String country);
-//
-//    Set<AddressDTO> findByCity(String city);
-//
-//    Set<AddressDTO> findByStreet(String street);
-//
-//    Set<AddressDTO> findByHouseNumber(String houseNumber);
-//
-//    Set<AddressDTO> findByPostCode(String postCode);
-//
-//    Set<AddressDTO> findByUser(UserDTO userDTO);
+    @PostMapping(path = "/findById/{id}")
+    public ResponseEntity<AddressDTO> findById(@PathVariable Long id) {
+        ResponseEntity<AddressDTO> response = null;
+
+        log.debug("************ findById() ---> id = " + id);
+
+        AddressDTO resultService = null;
+
+        try {
+            resultService = addressService.findById(id);
+        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
+            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressNotExist);
+            return ResponseEntity.notFound().build();
+        }
+
+        log.debug("************ findById() ---> resultService = " + resultService);
+
+        response = ResponseEntity.ok(resultService);
+
+        log.debug("************ findById() ---> response = " + response);
+
+        return response;
+    }
+
+    @PostMapping(path = "/findByCountry", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<AddressDTO>> findByCountry(@RequestBody String country) {
+        ResponseEntity<Set<AddressDTO>> response = null;
+
+        log.debug("************ findByCountry() ---> country = " + country);
+
+        Set<AddressDTO> resultService = null;
+
+        try {
+            resultService = addressService.findByCountry(country);
+        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
+            log.error("Address with this name country = '" + country + "' not exist.", exceptionAddressNotExist);
+            return ResponseEntity.notFound().build();
+        }
+
+        log.debug("************ findByCountry() ---> resultService = " + resultService);
+
+        response = ResponseEntity.ok(resultService);
+
+        log.debug("************ findByCountry() ---> response = " + response);
+
+        return response;
+    }
+
+    @PostMapping(path = "/findByCity", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<AddressDTO>> findByCity(@RequestBody String city) {
+        ResponseEntity<Set<AddressDTO>> response = null;
+
+        log.debug("************ findByCity() ---> city = " + city);
+
+        Set<AddressDTO> resultService = null;
+
+        try {
+            resultService = addressService.findByCity(city);
+        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
+            log.error("Address with this name city = '" + city + "' not exist.", exceptionAddressNotExist);
+            return ResponseEntity.notFound().build();
+        }
+
+        log.debug("************ findByCity() ---> resultService = " + resultService);
+
+        response = ResponseEntity.ok(resultService);
+
+        log.debug("************ findByCity() ---> response = " + response);
+
+        return response;
+    }
+
+    @PostMapping(path = "/findByStreet", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<AddressDTO>> findByStreet(@RequestBody String street) {
+        ResponseEntity<Set<AddressDTO>> response = null;
+
+        log.debug("************ findByStreet() ---> street = " + street);
+
+        Set<AddressDTO> resultService = null;
+
+        try {
+            resultService = addressService.findByStreet(street);
+        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
+            log.error("Address with this name street = '" + street + "' not exist.", exceptionAddressNotExist);
+            return ResponseEntity.notFound().build();
+        }
+
+        log.debug("************ findByStreet() ---> resultService = " + resultService);
+
+        response = ResponseEntity.ok(resultService);
+
+        log.debug("************ findByStreet() ---> response = " + response);
+
+        return response;
+    }
+
+    @PostMapping(path = "/findByHouseNumber", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<AddressDTO>> findByHouseNumber(@RequestBody String houseNumber) {
+        ResponseEntity<Set<AddressDTO>> response = null;
+
+        log.debug("************ findByHouseNumber() ---> houseNumber = " + houseNumber);
+
+        Set<AddressDTO> resultService = null;
+
+        try {
+            resultService = addressService.findByHouseNumber(houseNumber);
+        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
+            log.error("Address with this house number = '" + houseNumber + "' not exist.", exceptionAddressNotExist);
+            return ResponseEntity.notFound().build();
+        }
+
+        log.debug("************ findByHouseNumber() ---> resultService = " + resultService);
+
+        response = ResponseEntity.ok(resultService);
+
+        log.debug("************ findByHouseNumber() ---> response = " + response);
+
+        return response;
+    }
+
+    @PostMapping(path = "/findByPostcode")
+    public ResponseEntity<Set<AddressDTO>> findByPostcode(@RequestBody OneGenericValueDetailsRequestModel<Long> postcode) {
+        ResponseEntity<Set<AddressDTO>> response = null;
+
+        log.debug("************ findByPostcode() ---> postcode = " + postcode);
+
+        Set<AddressDTO> resultService = null;
+
+        try {
+            resultService = addressService.findByPostcode(postcode.getValue());
+        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
+            log.error("Address with this postcode = '" + postcode.getValue() + "' not exist.", exceptionAddressNotExist);
+            return ResponseEntity.notFound().build();
+        }
+
+        log.debug("************ findByPostcode() ---> resultService = " + resultService);
+
+        response = ResponseEntity.ok(resultService);
+
+        log.debug("************ findByPostcode() ---> response = " + response);
+
+        return response;
+    }
+
+    @PostMapping(path = "/findByUser")
+    public ResponseEntity<Set<AddressDTO>> findByUser(@RequestBody UserDTO user) {
+        ResponseEntity<Set<AddressDTO>> response = null;
+
+        log.debug("************ findByUser() ---> user = " + user);
+
+        Set<AddressDTO> resultService = null;
+
+        try {
+            resultService = addressService.findByUser(user);
+        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
+            log.error("Address with this user id = '" + user.getId() + "' not exist.", exceptionAddressNotExist);
+            return ResponseEntity.notFound().build();
+        }
+
+        log.debug("************ findByUser() ---> resultService = " + resultService);
+
+        response = ResponseEntity.ok(resultService);
+
+        log.debug("************ findByUser() ---> response = " + response);
+
+        return response;
+    }
 
 }
