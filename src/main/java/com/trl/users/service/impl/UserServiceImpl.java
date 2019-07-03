@@ -322,6 +322,7 @@ public class UserServiceImpl implements UserService {
     public Set<UserDTO> findByFirstName(String firstName) {
         Set<UserDTO> userResultSet = null;
 
+
         log.debug("************ findByFirstName() ---> firstName = " + firstName);
 
         Set<UserEntity> usersFromRepositoryByFirstName = userRepository.findByFirstName(firstName);

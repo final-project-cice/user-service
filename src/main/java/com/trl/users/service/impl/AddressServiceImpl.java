@@ -79,7 +79,7 @@ public class AddressServiceImpl implements AddressService {
      */
     @Transactional
     @Override
-    public AddressDTO updateCountry(Long id, String country) throws ExceptionAddressWithIdNotExist {
+    public AddressDTO updateCountry(Long id, String country) throws ExceptionAddressNotExist {
         AddressDTO addressResult = null;
 
         log.debug("************ updateCountry() ---> id = " + id + " ---> country = " + country);
@@ -104,7 +104,7 @@ public class AddressServiceImpl implements AddressService {
             }
         } else {
             log.debug("************ updateCountry() ---> address with this id = '" + id + "' not exist.");
-            throw new ExceptionAddressWithIdNotExist("Address with this id = '" + id + "' not exist.");
+            throw new ExceptionAddressNotExist("Address with this id = '" + id + "' not exist.");
         }
 
         log.debug("************ updateCountry() ---> addressResult = " + addressResult);
@@ -119,7 +119,7 @@ public class AddressServiceImpl implements AddressService {
      */
     @Transactional
     @Override
-    public AddressDTO updateCity(Long id, String city) throws ExceptionAddressWithIdNotExist {
+    public AddressDTO updateCity(Long id, String city) throws ExceptionAddressNotExist {
         AddressDTO addressResult = null;
 
         log.debug("************ updateCity() ---> id = " + id + " ---> city = " + city);
@@ -144,7 +144,7 @@ public class AddressServiceImpl implements AddressService {
             }
         } else {
             log.debug("************ updateCity() ---> address with this id = '" + id + "' not exist.");
-            throw new ExceptionAddressWithIdNotExist("Address with this id = '" + id + "' not exist.");
+            throw new ExceptionAddressNotExist("Address with this id = '" + id + "' not exist.");
         }
 
         log.debug("************ updateCity() ---> addressResult = " + addressResult);
@@ -159,7 +159,7 @@ public class AddressServiceImpl implements AddressService {
      */
     @Transactional
     @Override
-    public AddressDTO updateStreet(Long id, String street) throws ExceptionAddressWithIdNotExist {
+    public AddressDTO updateStreet(Long id, String street) throws ExceptionAddressNotExist {
         AddressDTO addressResult = null;
 
         log.debug("************ updateStreet() ---> id = " + id + " ---> street = " + street);
@@ -184,7 +184,7 @@ public class AddressServiceImpl implements AddressService {
             }
         } else {
             log.debug("************ updateStreet() ---> address with this id = '" + id + "' not exist.");
-            throw new ExceptionAddressWithIdNotExist("Address with this id = '" + id + "' not exist.");
+            throw new ExceptionAddressNotExist("Address with this id = '" + id + "' not exist.");
         }
 
         log.debug("************ updateStreet() ---> addressResult = " + addressResult);
@@ -199,7 +199,7 @@ public class AddressServiceImpl implements AddressService {
      */
     @Transactional
     @Override
-    public AddressDTO updateHouseNumber(Long id, String houseNumber) throws ExceptionAddressWithIdNotExist {
+    public AddressDTO updateHouseNumber(Long id, String houseNumber) throws ExceptionAddressNotExist {
         AddressDTO addressResult = null;
 
         log.debug("************ updateHouseNumber() ---> id = " + id + " ---> houseNumber = " + houseNumber);
@@ -224,7 +224,7 @@ public class AddressServiceImpl implements AddressService {
             }
         } else {
             log.debug("************ updateHouseNumber() ---> address with this id = '" + id + "' not exist.");
-            throw new ExceptionAddressWithIdNotExist("Address with this id = '" + id + "' not exist.");
+            throw new ExceptionAddressNotExist("Address with this id = '" + id + "' not exist.");
         }
 
         log.debug("************ updateHouseNumber() ---> addressResult = " + addressResult);
@@ -239,7 +239,7 @@ public class AddressServiceImpl implements AddressService {
      */
     @Transactional
     @Override
-    public AddressDTO updatePostCode(Long id, Long postCode) throws ExceptionAddressWithIdNotExist {
+    public AddressDTO updatePostCode(Long id, Long postCode) throws ExceptionAddressNotExist {
         AddressDTO addressResult = null;
 
         log.debug("************ updatePostCode() ---> id = " + id + " ---> postCode = " + postCode);
@@ -263,7 +263,7 @@ public class AddressServiceImpl implements AddressService {
             }
         } else {
             log.debug("************ updatePostCode() ---> address with this id = '" + id + "' not exist.");
-            throw new ExceptionAddressWithIdNotExist("Address with this id = '" + id + "' not exist.");
+            throw new ExceptionAddressNotExist("Address with this id = '" + id + "' not exist.");
         }
 
         log.debug("************ updatePostCode() ---> addressResult = " + addressResult);
@@ -297,7 +297,7 @@ public class AddressServiceImpl implements AddressService {
 
         UserEntity userEntity = ConverterUser.mapDTOToEntity(userDTO);
 
-        List<AddressEntity> addressFromRepositoryByUser = addressRepository.findByUser(userEntity);
+        Set<AddressEntity> addressFromRepositoryByUser = addressRepository.findByUser(userEntity);
 
         log.debug("************ deleteByUser() ---> addressFromRepositoryById = " + addressFromRepositoryByUser);
 
@@ -319,11 +319,26 @@ public class AddressServiceImpl implements AddressService {
      * @return
      */
     @Override
-    public AddressDTO findById(Long id) {
+    public AddressDTO findById(Long id) throws ExceptionAddressNotExist {
 
-        // TODO: Terminar este metodo.
+        AddressDTO addressResult = null;
 
-        return null;
+        log.debug("************ findById() ---> id = " + id);
+
+        Optional<AddressEntity> addressFromRepositoryByFirstName = addressRepository.findById(id);
+
+        log.debug("************ findById() ---> addressFromRepositoryByFirstName = " + addressFromRepositoryByFirstName);
+
+        if (!addressFromRepositoryByFirstName.isPresent()) {
+            addressResult = ConverterAddress.mapEntityToDTO(addressFromRepositoryByFirstName.get());
+        } else {
+            log.debug("************ findById() ---> address with this id = '" + id + "' not exist.");
+            throw new ExceptionAddressNotExist("Address with this id = '" + id + "' not exist.");
+        }
+
+        log.debug("************ findById() ---> addressResult = " + addressResult);
+
+        return addressResult;
     }
 
     /**

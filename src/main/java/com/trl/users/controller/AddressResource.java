@@ -1,9 +1,8 @@
 package com.trl.users.controller;
 
 import com.trl.users.controller.dto.AddressDTO;
-import com.trl.users.controller.dto.UserDTO;
 import com.trl.users.controller.model.OneGenericValueDetailsRequestModel;
-import com.trl.users.exceptions.ExceptionAddressWithIdNotExist;
+import com.trl.users.exceptions.ExceptionAddressNotExist;
 import com.trl.users.exceptions.ExceptionUserIdIsNull;
 import com.trl.users.exceptions.ExceptionUserIsNull;
 import com.trl.users.exceptions.ExceptionUserWithIdNotExist;
@@ -67,8 +66,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.updateCountry(id, country);
-        } catch (ExceptionAddressWithIdNotExist exceptionAddressWithIdNotExist) {
-            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressWithIdNotExist);
+        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
+            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressNotExist);
             return ResponseEntity.notFound().build();
         }
 
@@ -94,8 +93,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.updateCity(id, city);
-        } catch (ExceptionAddressWithIdNotExist exceptionAddressWithIdNotExist) {
-            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressWithIdNotExist);
+        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
+            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressNotExist);
             return ResponseEntity.notFound().build();
         }
 
@@ -121,8 +120,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.updateStreet(id, street);
-        } catch (ExceptionAddressWithIdNotExist exceptionAddressWithIdNotExist) {
-            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressWithIdNotExist);
+        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
+            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressNotExist);
             return ResponseEntity.notFound().build();
         }
 
@@ -148,8 +147,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.updateHouseNumber(id, houseNumber);
-        } catch (ExceptionAddressWithIdNotExist exceptionAddressWithIdNotExist) {
-            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressWithIdNotExist);
+        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
+            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressNotExist);
             return ResponseEntity.notFound().build();
         }
 
@@ -172,8 +171,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.updatePostCode(id, postcode.getValue());
-        } catch (ExceptionAddressWithIdNotExist exceptionAddressWithIdNotExist) {
-            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressWithIdNotExist);
+        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
+            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressNotExist);
             return ResponseEntity.notFound().build();
         }
 

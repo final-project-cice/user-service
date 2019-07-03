@@ -55,6 +55,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query("update UserEntity u set u.birthday=:birthday where u.id =:id")
     void updateBirthday(@Param("id") Long id, @Param("birthday") Date birthday);
 
+
+
     /**
      * @param firstName
      * @return

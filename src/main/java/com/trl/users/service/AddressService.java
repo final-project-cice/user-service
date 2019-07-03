@@ -11,15 +11,15 @@ public interface AddressService {
     AddressDTO create(AddressDTO addressDTO) throws ExceptionUserWithIdNotExist, ExceptionUserIdIsNull, ExceptionUserIsNull;
 
 
-    AddressDTO updateCountry(Long id, String country) throws ExceptionAddressWithIdNotExist;
+    AddressDTO updateCountry(Long id, String country) throws ExceptionAddressNotExist;
 
-    AddressDTO updateCity(Long id, String city) throws ExceptionAddressWithIdNotExist;
+    AddressDTO updateCity(Long id, String city) throws ExceptionAddressNotExist;
 
-    AddressDTO updateStreet(Long id, String street) throws ExceptionAddressWithIdNotExist;
+    AddressDTO updateStreet(Long id, String street) throws ExceptionAddressNotExist;
 
-    AddressDTO updateHouseNumber(Long id, String houseNumber) throws ExceptionAddressWithIdNotExist;
+    AddressDTO updateHouseNumber(Long id, String houseNumber) throws ExceptionAddressNotExist;
 
-    AddressDTO updatePostCode(Long id, Long postCode) throws ExceptionAddressWithIdNotExist;
+    AddressDTO updatePostCode(Long id, Long postCode) throws ExceptionAddressNotExist;
 
 
     Boolean deleteById(Long id);
@@ -27,7 +27,7 @@ public interface AddressService {
     Boolean deleteByUser(UserDTO userDTO) throws ExceptionUserWithIdNotExist, ExceptionUserNotHaveAddress;
 
 
-    AddressDTO findById(Long id);
+    AddressDTO findById(Long id) throws ExceptionAddressNotExist;
 
     Set<AddressDTO> findByCountry(String country);
 
