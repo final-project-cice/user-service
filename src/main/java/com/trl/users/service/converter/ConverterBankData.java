@@ -4,15 +4,15 @@ import com.trl.users.controller.dto.BankDataDTO;
 import com.trl.users.repository.entity.BankDataEntity;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  *
  */
 @Slf4j
-public class ConverterBankData {
+public final class ConverterBankData {
 
     private ConverterBankData() {
     }
@@ -50,10 +50,9 @@ public class ConverterBankData {
         log.debug("************ mapSetEntityToSetDTO() ---> bankDataEntitySet = " + bankDataEntitySet);
 
         if (bankDataEntitySet != null) {
-            resultSet = new TreeSet<>(Comparator.comparing(BankDataDTO::getId));
-            for (BankDataEntity entity : bankDataEntitySet) {
-                resultSet.add(mapEntityToDTO(entity));
-            }
+            resultSet = bankDataEntitySet.stream()
+                    .map(ConverterBankData::mapEntityToDTO)
+                    .collect(Collectors.toCollection(TreeSet::new));
         }
 
         log.debug("************ mapSetEntityToSetDTO() ---> resultSet = " + resultSet);
@@ -94,10 +93,9 @@ public class ConverterBankData {
         log.debug("************ mapSetDTOToSetEntity() ---> bankDataDTOSet = " + bankDataDTOSet);
 
         if (bankDataDTOSet != null) {
-            resultSet = new TreeSet<>(Comparator.comparing(BankDataEntity::getId));
-            for (BankDataDTO dto : bankDataDTOSet) {
-                resultSet.add(mapDTOToEntity(dto));
-            }
+            resultSet = bankDataDTOSet.stream()
+                    .map(ConverterBankData::mapDTOToEntity)
+                    .collect(Collectors.toCollection(TreeSet::new));
         }
 
         log.debug("************ mapSetDTOToSetEntity() ---> resultSet = " + resultSet);

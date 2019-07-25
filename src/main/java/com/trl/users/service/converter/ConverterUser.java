@@ -4,15 +4,15 @@ import com.trl.users.controller.dto.UserDTO;
 import com.trl.users.repository.entity.UserEntity;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  *
  */
 @Slf4j
-public class ConverterUser {
+public final class ConverterUser {
 
     private ConverterUser() {
     }
@@ -53,10 +53,9 @@ public class ConverterUser {
         log.debug("************ mapSetEntityToSetDTO() ---> userEntitySet = " + userEntitySet);
 
         if (userEntitySet != null) {
-            resultSet = new TreeSet<>(Comparator.comparing(UserDTO::getId));
-            for (UserEntity entity : userEntitySet) {
-                resultSet.add(ConverterUser.mapEntityToDTO(entity));
-            }
+            resultSet = userEntitySet.parallelStream()
+                    .map(ConverterUser::mapEntityToDTO)
+                    .collect(Collectors.toCollection(TreeSet::new));
         }
 
         log.debug("************ mapSetEntityToSetDTO() ---> resultSet = " + resultSet);
@@ -100,10 +99,9 @@ public class ConverterUser {
         log.debug("************ mapSetDTOToSetEntity() ---> userDTOSet = " + userDTOSet);
 
         if (userDTOSet != null) {
-            resultSet = new TreeSet<>(Comparator.comparing(UserEntity::getId));
-            for (UserDTO dto : userDTOSet) {
-                resultSet.add(ConverterUser.mapDTOToEntity(dto));
-            }
+            resultSet = userDTOSet.stream()
+                    .map(ConverterUser::mapDTOToEntity)
+                    .collect(Collectors.toCollection(TreeSet::new));
         }
 
         log.debug("************ mapSetDTOToSetEntity() ---> resultSet = " + resultSet);

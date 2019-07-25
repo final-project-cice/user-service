@@ -4,15 +4,15 @@ import com.trl.users.controller.dto.AddressDTO;
 import com.trl.users.repository.entity.AddressEntity;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  *
  */
 @Slf4j
-public class ConverterAddress {
+public final class ConverterAddress {
 
     private ConverterAddress() {
     }
@@ -52,10 +52,9 @@ public class ConverterAddress {
         log.debug("************ mapSetEntityToSetDTO() ---> addressEntitySet = " + addressEntitySet);
 
         if (addressEntitySet != null) {
-            resultSet = new TreeSet<>(Comparator.comparing(AddressDTO::getId));
-            for (AddressEntity entity : addressEntitySet) {
-                resultSet.add(mapEntityToDTO(entity));
-            }
+            resultSet = addressEntitySet.stream()
+                    .map(ConverterAddress::mapEntityToDTO)
+                    .collect(Collectors.toCollection(TreeSet::new));
         }
 
         log.debug("************ mapSetEntityToSetDTO() ---> resultSet = " + resultSet);
@@ -98,12 +97,10 @@ public class ConverterAddress {
         log.debug("************ mapSetDTOToSetEntity() ---> addressDTOSet = " + addressDTOSet);
 
         if (addressDTOSet != null) {
-            resultSet = new TreeSet<>(Comparator.comparing(AddressEntity::getId));
-            for (AddressDTO dto : addressDTOSet) {
-                resultSet.add(mapDTOToEntity(dto));
-            }
+            resultSet = addressDTOSet.stream()
+                    .map(ConverterAddress::mapDTOToEntity)
+                    .collect(Collectors.toCollection(TreeSet::new));
         }
-
 
         log.debug("************ mapSetDTOToSetEntity() ---> resultSet = " + resultSet);
 
