@@ -16,7 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class UserDTO implements Comparable<UserDTO>{
+public class UserDTO {
 
     private Long id;
     private String firstName;
@@ -29,10 +29,5 @@ public class UserDTO implements Comparable<UserDTO>{
     @JsonSerialize(using = CustomerDateSerializer.class)
     @JsonDeserialize(using = CustomerDateDeserializer.class)
     private Date birthday;
-
-    @Override
-    public int compareTo(UserDTO o) {
-        return Long.compare(this.id, o.id);
-    }
 
 }

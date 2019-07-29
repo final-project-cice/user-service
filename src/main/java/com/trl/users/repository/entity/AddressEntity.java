@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @Entity
 @Table(name = "address")
-public class AddressEntity implements Serializable, Comparable<AddressEntity> {
+public class AddressEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,11 +39,6 @@ public class AddressEntity implements Serializable, Comparable<AddressEntity> {
         this.street = street;
         this.houseNumber = houseNumber;
         this.postcode = postcode;
-    }
-
-    @Override
-    public int compareTo(AddressEntity o) {
-        return Long.compare(this.id, o.id);
     }
 
 }

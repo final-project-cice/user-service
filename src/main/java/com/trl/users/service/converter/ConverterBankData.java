@@ -4,6 +4,7 @@ import com.trl.users.controller.dto.BankDataDTO;
 import com.trl.users.repository.entity.BankDataEntity;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -52,7 +53,8 @@ public final class ConverterBankData {
         if (bankDataEntitySet != null) {
             resultSet = bankDataEntitySet.stream()
                     .map(ConverterBankData::mapEntityToDTO)
-                    .collect(Collectors.toCollection(TreeSet::new));
+                    .collect(Collectors.toCollection(
+                            () -> new TreeSet<>(Comparator.comparingLong(BankDataDTO::getId))));
         }
 
         log.debug("************ mapSetEntityToSetDTO() ---> resultSet = " + resultSet);
@@ -95,7 +97,8 @@ public final class ConverterBankData {
         if (bankDataDTOSet != null) {
             resultSet = bankDataDTOSet.stream()
                     .map(ConverterBankData::mapDTOToEntity)
-                    .collect(Collectors.toCollection(TreeSet::new));
+                    .collect(Collectors.toCollection(
+                            () -> new TreeSet<>(Comparator.comparingLong(BankDataEntity::getId))));
         }
 
         log.debug("************ mapSetDTOToSetEntity() ---> resultSet = " + resultSet);

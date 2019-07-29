@@ -17,7 +17,7 @@ import java.util.Set;
 @Accessors(chain = true)
 @Entity
 @Table(name = "usr")
-public class UserEntity implements Serializable, Comparable<UserEntity> {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,10 +40,5 @@ public class UserEntity implements Serializable, Comparable<UserEntity> {
     @Basic
     @Temporal(TemporalType.DATE)
     private Date birthday;
-
-    @Override
-    public int compareTo(UserEntity o) {
-        return Long.compare(this.id, o.id);
-    }
 
 }

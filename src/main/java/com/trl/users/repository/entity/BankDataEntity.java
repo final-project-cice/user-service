@@ -16,7 +16,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @Entity
 @Table(name = "bank_data")
-public class BankDataEntity implements Serializable, Comparable<BankDataEntity> {
+public class BankDataEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,11 +40,6 @@ public class BankDataEntity implements Serializable, Comparable<BankDataEntity> 
         this.bankAccountNumber = bankAccountNumber;
         this.dateOfExpiry = dateOfExpiry;
         this.cvi = cvi;
-    }
-
-    @Override
-    public int compareTo(BankDataEntity o) {
-        return Long.compare(this.id, o.id);
     }
 
 }

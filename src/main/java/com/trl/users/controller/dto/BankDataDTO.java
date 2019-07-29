@@ -16,7 +16,7 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode(of = "id")
 @Accessors(chain = true)
-public class BankDataDTO implements Comparable<BankDataDTO>{
+public class BankDataDTO {
 
     private Long id;
     private String bankAccountNumber;
@@ -33,11 +33,6 @@ public class BankDataDTO implements Comparable<BankDataDTO>{
         this.bankAccountNumber = bankAccountNumber;
         this.dateOfExpiry = dateOfExpiry;
         this.cvi = cvi;
-    }
-
-    @Override
-    public int compareTo(BankDataDTO o) {
-        return Long.compare(this.id, o.id);
     }
 
 }

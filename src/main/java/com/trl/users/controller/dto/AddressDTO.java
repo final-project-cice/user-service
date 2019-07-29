@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(of = "id")
 @ToString
 @Accessors(chain = true)
-public class AddressDTO implements Comparable<AddressDTO>{
+public class AddressDTO {
 
     private Long id;
     private String country;
@@ -27,11 +27,6 @@ public class AddressDTO implements Comparable<AddressDTO>{
         this.street = street;
         this.houseNumber = houseNumber;
         this.postcode = postcode;
-    }
-
-    @Override
-    public int compareTo(AddressDTO o) {
-        return Long.compare(this.id, o.id);
     }
 
 }

@@ -4,6 +4,7 @@ import com.trl.users.controller.dto.UserDTO;
 import com.trl.users.repository.entity.UserEntity;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -55,7 +56,8 @@ public final class ConverterUser {
         if (userEntitySet != null) {
             resultSet = userEntitySet.parallelStream()
                     .map(ConverterUser::mapEntityToDTO)
-                    .collect(Collectors.toCollection(TreeSet::new));
+                    .collect(Collectors.toCollection(
+                            () -> new TreeSet<>(Comparator.comparingLong(UserDTO::getId))));
         }
 
         log.debug("************ mapSetEntityToSetDTO() ---> resultSet = " + resultSet);
@@ -101,7 +103,8 @@ public final class ConverterUser {
         if (userDTOSet != null) {
             resultSet = userDTOSet.stream()
                     .map(ConverterUser::mapDTOToEntity)
-                    .collect(Collectors.toCollection(TreeSet::new));
+                    .collect(Collectors.toCollection(
+                            () -> new TreeSet<>(Comparator.comparingLong(UserEntity::getId))));
         }
 
         log.debug("************ mapSetDTOToSetEntity() ---> resultSet = " + resultSet);
