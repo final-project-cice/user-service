@@ -2,7 +2,8 @@ package com.trl.users.exceptions;
 
 public class AddressNotExistException extends Exception {
 
-    public AddressNotExistException() { }
+    public AddressNotExistException() {
+    }
 
     /**
      * Constructs a new exception with the specified detail message.  The

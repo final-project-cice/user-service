@@ -4,8 +4,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,11 +22,7 @@ public class BankDataEntity {
     private Long id;
 
     private String bankAccountNumber;
-
-    @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dateOfExpiry;
-
+    private LocalDate dateOfExpiry;
     private Integer cvi;
 
     @NonNull
@@ -35,7 +30,7 @@ public class BankDataEntity {
     @JoinColumn(name = "usr_id")
     private UserEntity user;
 
-    public BankDataEntity(Long id, String bankAccountNumber, Date dateOfExpiry, Integer cvi) {
+    public BankDataEntity(Long id, String bankAccountNumber, LocalDate dateOfExpiry, Integer cvi) {
         this.id = id;
         this.bankAccountNumber = bankAccountNumber;
         this.dateOfExpiry = dateOfExpiry;

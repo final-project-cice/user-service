@@ -2,7 +2,10 @@ package com.trl.users.service;
 
 import com.trl.users.controller.dto.BankDataDTO;
 import com.trl.users.controller.dto.UserDTO;
-import com.trl.users.exceptions.*;
+import com.trl.users.exceptions.UserIdIsNullException;
+import com.trl.users.exceptions.UserIsNullException;
+import com.trl.users.exceptions.UserNotHaveBankDataException;
+import com.trl.users.exceptions.UserWithIdNotExistException;
 
 import java.util.Set;
 

@@ -15,8 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.time.Month;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -42,21 +42,21 @@ public class UserServiceImplTest {
                 .setLastName("User_LastName_1")
                 .setEmail("user_1@email.com")
                 .setPassword("strong_password")
-                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime());
+                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1));
 
         userDTO = new UserDTO()
                 .setFirstName("User_FirstName_1")
                 .setLastName("User_LastName_1")
                 .setEmail("user_1@email.com")
                 .setPassword("strong_password")
-                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime());
+                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1));
 
         userDTOExpected = new UserDTO()
                 .setFirstName("User_FirstName_144444444444444444444")
                 .setLastName("User_LastName_1")
                 .setEmail("user_1@email.com")
                 .setPassword("strong_password")
-                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime());
+                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1));
     }
 
     @After

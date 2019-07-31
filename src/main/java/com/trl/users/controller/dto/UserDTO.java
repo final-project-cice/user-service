@@ -1,15 +1,12 @@
 package com.trl.users.controller.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.trl.users.service.deserializer.CustomerDateDeserializer;
-import com.trl.users.service.serializer.CustomerDateSerializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Data
@@ -26,8 +23,7 @@ public class UserDTO {
     private Set<BankDataDTO> bankData;
     private Set<AddressDTO> address;
 
-    @JsonSerialize(using = CustomerDateSerializer.class)
-    @JsonDeserialize(using = CustomerDateDeserializer.class)
-    private Date birthday;
+    @JsonFormat(pattern = "dd.MM.yyyy")
+    private LocalDate birthday;
 
 }

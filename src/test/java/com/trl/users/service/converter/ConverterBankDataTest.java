@@ -7,8 +7,8 @@ import com.trl.users.repository.entity.UserEntity;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,7 +28,7 @@ public class ConverterBankDataTest {
         expected_BankDataDTO = new BankDataDTO()
                 .setId(1L)
                 .setBankAccountNumber("1111111111111111111111111111")
-                .setDateOfExpiry(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())
+                .setDateOfExpiry(LocalDate.of(1970, Month.JANUARY, 1))
                 .setCvi(111)
                 .setUser(
                         new UserDTO()
@@ -37,12 +37,12 @@ public class ConverterBankDataTest {
                                 .setLastName("Last Name User")
                                 .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime()));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1)));
 
         expected_BankDataEntity = new BankDataEntity()
                 .setId(1L)
                 .setBankAccountNumber("1111111111111111111111111111")
-                .setDateOfExpiry(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())
+                .setDateOfExpiry(LocalDate.of(1970, Month.JANUARY, 1))
                 .setCvi(111)
                 .setUser(
                         new UserEntity()
@@ -51,13 +51,13 @@ public class ConverterBankDataTest {
                                 .setLastName("Last Name User")
                                 .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime()));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1)));
 
         expected_BankDataDTOSet = new HashSet<>();
         expected_BankDataDTOSet.add(new BankDataDTO()
                 .setId(1L)
                 .setBankAccountNumber("1111111111111111111111111111")
-                .setDateOfExpiry(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())
+                .setDateOfExpiry(LocalDate.of(1970, Month.JANUARY, 1))
                 .setCvi(111)
                 .setUser(
                         new UserDTO()
@@ -66,11 +66,11 @@ public class ConverterBankDataTest {
                                 .setLastName("Last Name User_1")
                                 .setEmail("user_1@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         expected_BankDataDTOSet.add(new BankDataDTO()
                 .setId(2L)
                 .setBankAccountNumber("2222222222222222222222222222")
-                .setDateOfExpiry(new GregorianCalendar(1970, Calendar.FEBRUARY, 2).getTime())
+                .setDateOfExpiry(LocalDate.of(1970, Month.FEBRUARY, 2))
                 .setCvi(222)
                 .setUser(
                         new UserDTO()
@@ -79,13 +79,13 @@ public class ConverterBankDataTest {
                                 .setLastName("Last Name User_2")
                                 .setEmail("user_2@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
 
         expected_BankDataEntitySet = new HashSet<>();
         expected_BankDataEntitySet.add(new BankDataEntity()
                 .setId(1L)
                 .setBankAccountNumber("1111111111111111111111111111")
-                .setDateOfExpiry(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())
+                .setDateOfExpiry(LocalDate.of(1970, Month.JANUARY, 1))
                 .setCvi(111)
                 .setUser(
                         new UserEntity()
@@ -94,11 +94,11 @@ public class ConverterBankDataTest {
                                 .setLastName("Last Name User_1")
                                 .setEmail("user_1@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         expected_BankDataEntitySet.add(new BankDataEntity()
                 .setId(2L)
                 .setBankAccountNumber("2222222222222222222222222222")
-                .setDateOfExpiry(new GregorianCalendar(1970, Calendar.FEBRUARY, 2).getTime())
+                .setDateOfExpiry(LocalDate.of(1970, Month.FEBRUARY, 2))
                 .setCvi(222)
                 .setUser(
                         new UserEntity()
@@ -107,7 +107,7 @@ public class ConverterBankDataTest {
                                 .setLastName("Last Name User_2")
                                 .setEmail("user_2@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
 
     }
 
@@ -137,7 +137,7 @@ public class ConverterBankDataTest {
                                 .setLastName("Last Name User")
                                 .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         assertNotEquals(expected_BankDataDTO.getId(), actual_BankDataDTO.getId());
     }
 
@@ -152,14 +152,14 @@ public class ConverterBankDataTest {
                                 .setLastName("Last Name User")
                                 .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         assertNotEquals(expected_BankDataDTO.getBankAccountNumber(), actual_BankDataDTO.getBankAccountNumber());
     }
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_DateOfExpiry() {
         BankDataDTO actual_BankDataDTO = ConverterBankData.mapEntityToDTO(new BankDataEntity()
-                .setDateOfExpiry(new GregorianCalendar(1970, Calendar.JANUARY, 2).getTime())
+                .setDateOfExpiry(LocalDate.of(1970, Month.JANUARY, 2))
                 .setUser(
                         new UserEntity()
                                 .setId(1L)
@@ -167,7 +167,7 @@ public class ConverterBankDataTest {
                                 .setLastName("Last Name User")
                                 .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         assertNotEquals(expected_BankDataDTO.getDateOfExpiry(), actual_BankDataDTO.getDateOfExpiry());
     }
 
@@ -176,7 +176,7 @@ public class ConverterBankDataTest {
         BankDataDTO actual_BankDataDTO = ConverterBankData.mapEntityToDTO(new BankDataEntity()
                 .setId(1L)
                 .setBankAccountNumber("1111111111111111111111111111")
-                .setDateOfExpiry(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())
+                .setDateOfExpiry(LocalDate.of(1970, Month.JANUARY, 1))
                 .setCvi(112)
                 .setUser(
                         new UserEntity()
@@ -185,7 +185,7 @@ public class ConverterBankDataTest {
                                 .setLastName("Last Name User")
                                 .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         assertNotEquals(expected_BankDataDTO.getCvi(), actual_BankDataDTO.getCvi());
     }
 
@@ -231,7 +231,7 @@ public class ConverterBankDataTest {
                                 .setLastName("Last Name User")
                                 .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         assertNotEquals(expected_BankDataEntity.getId(), actual_BankDataEntity.getId());
     }
 
@@ -246,14 +246,14 @@ public class ConverterBankDataTest {
                                 .setLastName("Last Name User")
                                 .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         assertNotEquals(expected_BankDataEntity.getBankAccountNumber(), actual_BankDataEntity.getBankAccountNumber());
     }
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_DateOfExpiry() {
         BankDataEntity actual_BankDataEntity = ConverterBankData.mapDTOToEntity(new BankDataDTO()
-                .setDateOfExpiry(new GregorianCalendar(1970, Calendar.JANUARY, 2).getTime())
+                .setDateOfExpiry(LocalDate.of(1970, Month.JANUARY, 2))
                 .setUser(
                         new UserDTO()
                                 .setId(1L)
@@ -261,7 +261,7 @@ public class ConverterBankDataTest {
                                 .setLastName("Last Name User")
                                 .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         assertNotEquals(expected_BankDataEntity.getDateOfExpiry(), actual_BankDataEntity.getDateOfExpiry());
     }
 
@@ -276,7 +276,7 @@ public class ConverterBankDataTest {
                                 .setLastName("Last Name User")
                                 .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         assertNotEquals(expected_BankDataEntity.getCvi(), actual_BankDataEntity.getCvi());
     }
 

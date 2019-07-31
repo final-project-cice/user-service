@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Set;
 
@@ -53,8 +53,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
      */
     @Modifying(clearAutomatically = true)
     @Query("update UserEntity u set u.birthday=:birthday where u.id =:id")
-    void updateBirthday(@Param("id") Long id, @Param("birthday") Date birthday);
-
+    void updateBirthday(@Param("id") Long id, @Param("birthday") LocalDate birthday);
 
 
     /**
@@ -86,6 +85,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
      * @param birthDay
      * @return
      */
-    Set<UserEntity> findByBirthday(Date birthDay);
+    Set<UserEntity> findByBirthday(LocalDate birthDay);
 
 }

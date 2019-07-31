@@ -1,13 +1,10 @@
 package com.trl.users.controller.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.trl.users.service.deserializer.CustomerDateDeserializer;
-import com.trl.users.service.serializer.CustomerDateSerializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import lombok.experimental.Accessors;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,14 +18,13 @@ public class BankDataDTO {
     private Long id;
     private String bankAccountNumber;
 
-    @JsonSerialize(using = CustomerDateSerializer.class)
-    @JsonDeserialize(using = CustomerDateDeserializer.class)
-    private Date dateOfExpiry;
+    @JsonFormat(pattern = "dd.MM.yyyy")
+    private LocalDate dateOfExpiry;
 
     private Integer cvi;
     private UserDTO user;
 
-    public BankDataDTO(Long id, String bankAccountNumber, Date dateOfExpiry, Integer cvi) {
+    public BankDataDTO(Long id, String bankAccountNumber, LocalDate dateOfExpiry, Integer cvi) {
         this.id = id;
         this.bankAccountNumber = bankAccountNumber;
         this.dateOfExpiry = dateOfExpiry;

@@ -4,8 +4,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -37,8 +36,6 @@ public class UserEntity {
     @OneToMany(fetch = FetchType.EAGER, targetEntity = AddressEntity.class)
     private Set<AddressEntity> address;
 
-    @Basic
-    @Temporal(TemporalType.DATE)
-    private Date birthday;
+    private LocalDate birthday;
 
 }

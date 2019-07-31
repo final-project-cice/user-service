@@ -4,7 +4,7 @@ import com.trl.users.controller.dto.UserDTO;
 import com.trl.users.exceptions.UserWithEmailExistException;
 import com.trl.users.exceptions.UserWithIdNotExistException;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 public interface UserService {
@@ -20,7 +20,7 @@ public interface UserService {
 
     UserDTO updatePassword(Long id, String password) throws UserWithIdNotExistException;
 
-    UserDTO updateBirthday(Long id, Date birthday) throws UserWithIdNotExistException;
+    UserDTO updateBirthday(Long id, LocalDate birthday) throws UserWithIdNotExistException;
 
 
     Boolean delete(Long id) throws UserWithIdNotExistException;
@@ -36,7 +36,7 @@ public interface UserService {
 
     Set<UserDTO> findByFirstNameAndLastName(String firstName, String lastName);
 
-    Set<UserDTO> findByBirthday(Date birthday);
+    Set<UserDTO> findByBirthday(LocalDate birthday);
 
     Set<UserDTO> findAll();
 

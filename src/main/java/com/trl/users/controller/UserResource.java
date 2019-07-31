@@ -13,7 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -168,7 +168,7 @@ public class UserResource {
      *
      */
     @PostMapping(path = "/update/birthday/{id}")
-    public ResponseEntity<UserDTO> updateBirthday(@PathVariable Long id, @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") Date birthday) {
+    public ResponseEntity<UserDTO> updateBirthday(@PathVariable Long id, @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate birthday) {
         ResponseEntity<UserDTO> response = null;
 
         log.debug("************ updateBirthday() ---> id = " + id + " ---> birthday = " + birthday);
@@ -322,7 +322,7 @@ public class UserResource {
      *
      */
     @GetMapping(path = "/findByBirthday")
-    public ResponseEntity<Set<UserDTO>> findByBirthday(@RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") Date birthday) {
+    public ResponseEntity<Set<UserDTO>> findByBirthday(@RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate birthday) {
         ResponseEntity<Set<UserDTO>> response = null;
 
         log.debug("************ findByBirthday() ---> birthday = " + birthday);

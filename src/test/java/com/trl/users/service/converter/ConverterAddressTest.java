@@ -7,8 +7,8 @@ import com.trl.users.repository.entity.UserEntity;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,7 +40,7 @@ public class ConverterAddressTest {
                                 .setLastName("Last Name User")
                                 .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime()));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1)));
 
         expected_AddressEntity = new AddressEntity()
                 .setId(1L)
@@ -56,7 +56,7 @@ public class ConverterAddressTest {
                                 .setLastName("Last Name User")
                                 .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime()));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1)));
 
         // =================== Set
         expected_AddressDTOSet = new HashSet<>();
@@ -74,7 +74,7 @@ public class ConverterAddressTest {
                                 .setLastName("Last Name User_1")
                                 .setEmail("user_1@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
 
         expected_AddressDTOSet.add(new AddressDTO()
                 .setId(2L)
@@ -90,7 +90,7 @@ public class ConverterAddressTest {
                                 .setLastName("Last Name User_2")
                                 .setEmail("user_2@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
 
 
         expected_AddressEntitySet = new HashSet<>();
@@ -108,7 +108,7 @@ public class ConverterAddressTest {
                                 .setLastName("Last Name User_1")
                                 .setEmail("user_1@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
 
         expected_AddressEntitySet.add(new AddressEntity()
                 .setId(2L)
@@ -124,7 +124,7 @@ public class ConverterAddressTest {
                                 .setLastName("Last Name User_2")
                                 .setEmail("user_2@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
 
     }
 
@@ -226,7 +226,7 @@ public class ConverterAddressTest {
                                 .setLastName("Last Name User_1")
                                 .setEmail("user_1@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         assertNotEquals(expected_AddressEntity.getId(), actual_AddressEntity.getId());
     }
 
@@ -242,7 +242,7 @@ public class ConverterAddressTest {
                                 .setLastName("Last Name User_1")
                                 .setEmail("user_1@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         assertNotEquals(expected_AddressEntity.getCountry(), actual_AddressEntity.getCountry());
     }
 
@@ -259,7 +259,7 @@ public class ConverterAddressTest {
                                 .setLastName("Last Name User_1")
                                 .setEmail("user_1@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         assertNotEquals(expected_AddressEntity.getCity(), actual_AddressEntity.getCity());
     }
 
@@ -276,7 +276,7 @@ public class ConverterAddressTest {
                                 .setLastName("Last Name User_1")
                                 .setEmail("user_1@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         assertNotEquals(expected_AddressEntity.getStreet(), actual_AddressEntity.getStreet());
     }
 
@@ -293,7 +293,7 @@ public class ConverterAddressTest {
                                 .setLastName("Last Name User_1")
                                 .setEmail("user_1@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         assertNotEquals(expected_AddressEntity.getHouseNumber(), actual_AddressEntity.getHouseNumber());
     }
 
@@ -310,7 +310,7 @@ public class ConverterAddressTest {
                                 .setLastName("Last Name User_1")
                                 .setEmail("user_1@gmail.com")
                                 .setPassword("strong_password")
-                                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime())));
+                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
         assertNotEquals(expected_AddressEntity.getPostcode(), actual_AddressEntity.getPostcode());
     }
 

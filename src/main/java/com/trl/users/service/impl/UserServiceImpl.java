@@ -14,7 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  *
@@ -217,7 +221,7 @@ public class UserServiceImpl implements UserService {
      */
     @Transactional
     @Override
-    public UserDTO updateBirthday(Long id, Date birthday) throws UserWithIdNotExistException {
+    public UserDTO updateBirthday(Long id, LocalDate birthday) throws UserWithIdNotExistException {
         UserDTO userResult = null;
 
         log.debug("************ updateBirthday() ---> id = " + id + " ---> birthday = " + birthday);
@@ -404,7 +408,7 @@ public class UserServiceImpl implements UserService {
      *
      */
     @Override
-    public Set<UserDTO> findByBirthday(Date birthday) {
+    public Set<UserDTO> findByBirthday(LocalDate birthday) {
         Set<UserDTO> userResultSet = null;
 
         log.debug("************ findByBirthday() ---> birthday = " + birthday);

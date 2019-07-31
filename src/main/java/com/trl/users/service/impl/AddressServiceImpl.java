@@ -67,7 +67,7 @@ public class AddressServiceImpl implements AddressService {
 
         log.debug("************ create() ---> addressResult = " + addressResult);
 
-        return addressResult ;
+        return addressResult;
     }
 
     /**
@@ -92,7 +92,7 @@ public class AddressServiceImpl implements AddressService {
                     && (!country.equals(""))
                     && (!country.equals(addressEntityUpdate.getCountry()))) {
 
-                addressRepository.updateCountry(id,country);
+                addressRepository.updateCountry(id, country);
 
                 Optional<AddressEntity> savedAddressFromRepository = addressRepository.findById(id);
 
@@ -132,7 +132,7 @@ public class AddressServiceImpl implements AddressService {
                     && (!city.equals(""))
                     && (!city.equals(addressEntityUpdate.getCity()))) {
 
-                addressRepository.updateCity(id,city);
+                addressRepository.updateCity(id, city);
 
                 Optional<AddressEntity> savedAddressFromRepository = addressRepository.findById(id);
 

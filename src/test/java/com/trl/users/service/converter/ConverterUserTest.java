@@ -6,8 +6,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,7 +30,7 @@ public class ConverterUserTest {
                 .setLastName("Last Name User_1")
                 .setEmail("user_1@email.com")
                 .setPassword("strong_password")
-                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime());
+                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1));
 
         expected_UserDTO = new UserDTO()
                 .setId(1L)
@@ -38,7 +38,7 @@ public class ConverterUserTest {
                 .setLastName("Last Name User_1")
                 .setEmail("user_1@email.com")
                 .setPassword("strong_password")
-                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime());
+                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1));
 
         expected_UserDTOSet = new HashSet<>();
         expected_UserDTOSet.add(new UserDTO()
@@ -47,14 +47,14 @@ public class ConverterUserTest {
                 .setLastName("Last Name User_1")
                 .setEmail("user_1@email.com")
                 .setPassword("strong_password")
-                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime()));
+                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1)));
         expected_UserDTOSet.add(new UserDTO()
                 .setId(2L)
                 .setFirstName("First Name User_2")
                 .setLastName("Last Name User_2")
                 .setEmail("user_2@email.com")
                 .setPassword("strong_password")
-                .setBirthday(new GregorianCalendar(1970, Calendar.FEBRUARY, 2).getTime()));
+                .setBirthday(LocalDate.of(1970, Month.FEBRUARY, 2)));
 
         expected_UserEntitySet = new HashSet<>();
         expected_UserEntitySet.add(new UserEntity()
@@ -63,14 +63,14 @@ public class ConverterUserTest {
                 .setLastName("Last Name User_1")
                 .setEmail("user_1@email.com")
                 .setPassword("strong_password")
-                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime()));
+                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1)));
         expected_UserEntitySet.add(new UserEntity()
                 .setId(2L)
                 .setFirstName("First Name User_2")
                 .setLastName("Last Name User_2")
                 .setEmail("user_2@email.com")
                 .setPassword("strong_password")
-                .setBirthday(new GregorianCalendar(1970, Calendar.FEBRUARY, 2).getTime()));
+                .setBirthday(LocalDate.of(1970, Month.FEBRUARY, 2)));
 
     }
 
@@ -127,7 +127,7 @@ public class ConverterUserTest {
     @Test
     public void mapEntityToDTO_Incorrect_Value_Birthday() {
         UserDTO actual_UserDTO = ConverterUser.mapEntityToDTO(new UserEntity()
-                .setBirthday(new GregorianCalendar(197, Calendar.JANUARY, 2).getTime()));
+                .setBirthday(LocalDate.of(1970, Month.JANUARY, 2)));
         assertNotEquals(expected_UserDTO.getBirthday(), actual_UserDTO.getBirthday());
     }
 
@@ -199,7 +199,7 @@ public class ConverterUserTest {
     @Test
     public void mapDTOToEntity_Incorrect_Value_Birthday() {
         UserEntity actual_UserEntity = ConverterUser.mapDTOToEntity(new UserDTO()
-                .setBirthday(new GregorianCalendar(1970, Calendar.JANUARY, 2).getTime()));
+                .setBirthday(LocalDate.of(1970, Month.JANUARY, 2)));
         assertNotEquals(expected_UserEntity.getBirthday(), actual_UserEntity.getBirthday());
     }
 
