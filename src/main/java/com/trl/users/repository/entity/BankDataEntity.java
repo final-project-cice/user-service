@@ -19,15 +19,20 @@ public class BankDataEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
+    @Column(name = " bankAccountNumber", updatable = false, nullable = false)
     private String bankAccountNumber;
+
+    @Column(name = " dateOfExpiry", updatable = false, nullable = false)
     private LocalDate dateOfExpiry;
+
+    @Column(name = "cvi", updatable = false, nullable = false)
     private Integer cvi;
 
-    @NonNull
     @ManyToOne
-    @JoinColumn(name = "usr_id")
+    @JoinColumn(name = "usr_id", updatable = false, nullable = false)
     private UserEntity user;
 
     public BankDataEntity(Long id, String bankAccountNumber, LocalDate dateOfExpiry, Integer cvi) {

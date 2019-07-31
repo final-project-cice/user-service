@@ -18,17 +18,26 @@ public class AddressEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
+    @Column(name = "country", nullable = false)
     private String country;
+
+    @Column(name = "city", nullable = false)
     private String city;
+
+    @Column(name = "street", nullable = false)
     private String street;
+
+    @Column(name = "houseNumber", nullable = false)
     private String houseNumber;
+
+    @Column(name = "postcode", nullable = false)
     private Long postcode;
 
-    @NonNull
     @ManyToOne
-    @JoinColumn(name = "usr_id")
+    @JoinColumn(name = "usr_id", updatable = false, nullable = false)
     private UserEntity user;
 
     public AddressEntity(Long id, String country, String city, String street, String houseNumber, Long postcode) {
