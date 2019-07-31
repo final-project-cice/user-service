@@ -2,8 +2,8 @@ package com.trl.users.controller;
 
 import com.trl.users.controller.dto.UserDTO;
 import com.trl.users.controller.model.TwoGenericValuesDetailsRequestModel;
-import com.trl.users.exceptions.ExceptionUserWithEmailExist;
-import com.trl.users.exceptions.ExceptionUserWithIdNotExist;
+import com.trl.users.exceptions.UserWithEmailExistException;
+import com.trl.users.exceptions.UserWithIdNotExistException;
 import com.trl.users.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,8 +38,8 @@ public class UserResource {
         try {
             resultService = userService.create(user);
             log.debug("************ create() ---> resultService = " + resultService);
-        } catch (ExceptionUserWithEmailExist exceptionUserWithEmailExist) {
-            log.error("************ create() ---> user with this email = '" + user.getEmail() + "' exist.", exceptionUserWithEmailExist);
+        } catch (UserWithEmailExistException userWithEmailExistException) {
+            log.error("************ create() ---> user with this email = '" + user.getEmail() + "' exist.", userWithEmailExistException);
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
             // TODO: No lo se como puedo pasar el mensage que indica que email ya existe. Y tambien no lo se si esta exception es correcta para este caso.
         }
@@ -65,8 +65,8 @@ public class UserResource {
 
         try {
             resultService = userService.updateFirstName(id, firstName);
-        } catch (ExceptionUserWithIdNotExist exceptionUserWithIdNotExist) {
-            log.error("User with this id = '" + id + "' not exist.", exceptionUserWithIdNotExist);
+        } catch (UserWithIdNotExistException userWithIdNotExistException) {
+            log.error("User with this id = '" + id + "' not exist.", userWithIdNotExistException);
             return ResponseEntity.notFound().build();
         }
 
@@ -92,8 +92,8 @@ public class UserResource {
 
         try {
             resultService = userService.updateLastName(id, lastName);
-        } catch (ExceptionUserWithIdNotExist exceptionUserWithIdNotExist) {
-            log.error("User with this id = '" + id + "' not exist.", exceptionUserWithIdNotExist);
+        } catch (UserWithIdNotExistException userWithIdNotExistException) {
+            log.error("User with this id = '" + id + "' not exist.", userWithIdNotExistException);
             return ResponseEntity.notFound().build();
         }
 
@@ -119,11 +119,11 @@ public class UserResource {
 
         try {
             resultService = userService.updateEmail(id, email);
-        } catch (ExceptionUserWithIdNotExist exceptionUserWithIdNotExist) {
-            log.error("User with this id = '" + id + "' not exist.", exceptionUserWithIdNotExist);
+        } catch (UserWithIdNotExistException userWithIdNotExistException) {
+            log.error("User with this id = '" + id + "' not exist.", userWithIdNotExistException);
             return ResponseEntity.notFound().build();
-        } catch (ExceptionUserWithEmailExist exceptionUserWithEmailExist) {
-            log.error("************ create() ---> user with this email = '" + email + "' exist.", exceptionUserWithEmailExist);
+        } catch (UserWithEmailExistException userWithEmailExistException) {
+            log.error("************ create() ---> user with this email = '" + email + "' exist.", userWithEmailExistException);
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
             // TODO: No lo se como puedo pasar el mensage que indica que email ya existe. Y tambien no lo se si esta exception es correcta para este caso.
         }
@@ -150,8 +150,8 @@ public class UserResource {
 
         try {
             resultService = userService.updatePassword(id, password);
-        } catch (ExceptionUserWithIdNotExist exceptionUserWithIdNotExist) {
-            log.error("User with this id = '" + id + "' not exist.", exceptionUserWithIdNotExist);
+        } catch (UserWithIdNotExistException userWithIdNotExistException) {
+            log.error("User with this id = '" + id + "' not exist.", userWithIdNotExistException);
             return ResponseEntity.notFound().build();
         }
 
@@ -177,8 +177,8 @@ public class UserResource {
 
         try {
             resultService = userService.updateBirthday(id, birthday);
-        } catch (ExceptionUserWithIdNotExist exceptionUserWithIdNotExist) {
-            log.error("User with this id = '" + id + "' not exist.", exceptionUserWithIdNotExist);
+        } catch (UserWithIdNotExistException userWithIdNotExistException) {
+            log.error("User with this id = '" + id + "' not exist.", userWithIdNotExistException);
             return ResponseEntity.notFound().build();
         }
 
@@ -204,8 +204,8 @@ public class UserResource {
 
         try {
             isDeleteUser = userService.delete(userId);
-        } catch (ExceptionUserWithIdNotExist exceptionUserWithIdNotExist) {
-            log.error("User with this id = '" + userId + "' not exist.", exceptionUserWithIdNotExist);
+        } catch (UserWithIdNotExistException userWithIdNotExistException) {
+            log.error("User with this id = '" + userId + "' not exist.", userWithIdNotExistException);
             return ResponseEntity.notFound().build();
         }
 

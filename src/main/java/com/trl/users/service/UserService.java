@@ -1,29 +1,29 @@
 package com.trl.users.service;
 
 import com.trl.users.controller.dto.UserDTO;
-import com.trl.users.exceptions.ExceptionUserWithEmailExist;
-import com.trl.users.exceptions.ExceptionUserWithIdNotExist;
+import com.trl.users.exceptions.UserWithEmailExistException;
+import com.trl.users.exceptions.UserWithIdNotExistException;
 
 import java.util.Date;
 import java.util.Set;
 
 public interface UserService {
 
-    UserDTO create(UserDTO userDTO) throws ExceptionUserWithEmailExist;
+    UserDTO create(UserDTO userDTO) throws UserWithEmailExistException;
 
 
-    UserDTO updateFirstName(Long id, String firstName) throws ExceptionUserWithIdNotExist;
+    UserDTO updateFirstName(Long id, String firstName) throws UserWithIdNotExistException;
 
-    UserDTO updateLastName(Long id, String lastName) throws ExceptionUserWithIdNotExist;
+    UserDTO updateLastName(Long id, String lastName) throws UserWithIdNotExistException;
 
-    UserDTO updateEmail(Long id, String email) throws ExceptionUserWithIdNotExist, ExceptionUserWithEmailExist;
+    UserDTO updateEmail(Long id, String email) throws UserWithIdNotExistException, UserWithEmailExistException;
 
-    UserDTO updatePassword(Long id, String password) throws ExceptionUserWithIdNotExist;
+    UserDTO updatePassword(Long id, String password) throws UserWithIdNotExistException;
 
-    UserDTO updateBirthday(Long id, Date birthday) throws ExceptionUserWithIdNotExist;
+    UserDTO updateBirthday(Long id, Date birthday) throws UserWithIdNotExistException;
 
 
-    Boolean delete(Long id) throws ExceptionUserWithIdNotExist;
+    Boolean delete(Long id) throws UserWithIdNotExistException;
 
 
     UserDTO findById(Long id);

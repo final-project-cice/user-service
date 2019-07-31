@@ -2,10 +2,10 @@ package com.trl.users.service.impl;
 
 import com.trl.users.controller.dto.BankDataDTO;
 import com.trl.users.controller.dto.UserDTO;
-import com.trl.users.exceptions.ExceptionUserIdIsNull;
-import com.trl.users.exceptions.ExceptionUserIsNull;
-import com.trl.users.exceptions.ExceptionUserNotHaveBankData;
-import com.trl.users.exceptions.ExceptionUserWithIdNotExist;
+import com.trl.users.exceptions.UserIdIsNullException;
+import com.trl.users.exceptions.UserIsNullException;
+import com.trl.users.exceptions.UserNotHaveBankDataException;
+import com.trl.users.exceptions.UserWithIdNotExistException;
 import com.trl.users.repository.BankDataRepository;
 import com.trl.users.repository.UserRepository;
 import com.trl.users.repository.entity.BankDataEntity;
@@ -37,7 +37,7 @@ public class BankDataServiceImpl implements BankDataService {
      * @return
      */
     @Override
-    public BankDataDTO create(BankDataDTO bankDataDTO) throws ExceptionUserWithIdNotExist, ExceptionUserIdIsNull, ExceptionUserIsNull {
+    public BankDataDTO create(BankDataDTO bankDataDTO) throws UserWithIdNotExistException, UserIdIsNullException, UserIsNullException {
 
         BankDataDTO bankDataResult = null;
 
@@ -60,13 +60,13 @@ public class BankDataServiceImpl implements BankDataService {
                     bankDataResult = ConverterBankData.mapEntityToDTO(savedBankData);
 
                 } else {
-                    throw new ExceptionUserWithIdNotExist("User with this id = '" + bankDataDTO.getUser().getId() + "' not exist.");
+                    throw new UserWithIdNotExistException("User with this id = '" + bankDataDTO.getUser().getId() + "' not exist.");
                 }
             } else {
-                throw new ExceptionUserIdIsNull("The parameter 'user' that is passed, contains value 'userId'. Value 'userId' equal NULL or ZERO. Not allowed parameters NULL or ZERO.");
+                throw new UserIdIsNullException("The parameter 'user' that is passed, contains value 'userId'. Value 'userId' equal NULL or ZERO. Not allowed parameters NULL or ZERO.");
             }
         } else {
-            throw new ExceptionUserIsNull("The parameter 'user' that is passed, equal NULL. Not allowed parameter NULL.");
+            throw new UserIsNullException("The parameter 'user' that is passed, equal NULL. Not allowed parameter NULL.");
         }
 
         log.debug("************ create() ---> bankDataResult = " + bankDataResult);
@@ -95,11 +95,11 @@ public class BankDataServiceImpl implements BankDataService {
     /**
      * @param userDTO
      * @return
-     * @throws ExceptionUserNotHaveBankData
+     * @throws UserNotHaveBankDataException
      */
     @Transactional
     @Override
-    public Boolean deleteByUser(UserDTO userDTO) throws ExceptionUserNotHaveBankData {
+    public Boolean deleteByUser(UserDTO userDTO) throws UserNotHaveBankDataException {
 
         boolean isDeletedBankData = false;
 
@@ -116,7 +116,7 @@ public class BankDataServiceImpl implements BankDataService {
             isDeletedBankData = true;
         } else {
             log.debug("************ deleteByUser() ---> this user = '" + userDTO + "' not have bankData");
-            throw new ExceptionUserNotHaveBankData("This user = '" + userDTO + "' not have bankData");
+            throw new UserNotHaveBankDataException("This user = '" + userDTO + "' not have bankData");
         }
 
         log.debug("************ deleteByUser() ---> isDeletedBankData = " + isDeletedBankData);

@@ -8,9 +8,9 @@ import java.util.Set;
 
 public interface BankDataService {
 
-    BankDataDTO create(BankDataDTO bankDataDTO) throws ExceptionUserWithIdNotExist, ExceptionUserIdIsNull, ExceptionUserIsNull;
+    BankDataDTO create(BankDataDTO bankDataDTO) throws UserWithIdNotExistException, UserIdIsNullException, UserIsNullException;
 
-    Boolean deleteByUser(UserDTO userDTO) throws ExceptionUserWithIdNotExist, ExceptionUserNotHaveBankData;
+    Boolean deleteByUser(UserDTO userDTO) throws UserWithIdNotExistException, UserNotHaveBankDataException;
 
     Set<BankDataDTO> findByUser(UserDTO userDTO);
 

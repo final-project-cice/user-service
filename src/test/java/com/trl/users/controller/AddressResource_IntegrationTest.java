@@ -44,6 +44,19 @@ public class AddressResource_IntegrationTest {
     @Sql(value = {"/createAddressBefore-create.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/createAddressAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
+    public void create_userWithIdNotExist() throws Exception {
+
+        this.mockMvc.perform(
+                post("http://localhost:8081/user/address/create")
+                        .content("{\"country\": \"Spain\", \"city\": \"Cuenca\", \"street\": \"Calle_1\", \"houseNumber\": \"1B\", \"postcode\": 1111, \"user\": {\"id\": 2}}")
+                        .contentType("application/json;charset=UTF-8"))
+                .andDo(print())
+                .andExpect(status().is(422));
+    }
+
+    @Sql(value = {"/createAddressBefore-create.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/createAddressAfter.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
     public void create_userIsNull() throws Exception {
 
         this.mockMvc.perform(

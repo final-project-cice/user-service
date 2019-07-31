@@ -1,10 +1,10 @@
 package com.trl.users.service.impl;
 
 import com.trl.users.controller.dto.UserDTO;
-import com.trl.users.exceptions.ExceptionUserNotHaveAddress;
-import com.trl.users.exceptions.ExceptionUserNotHaveBankData;
-import com.trl.users.exceptions.ExceptionUserWithEmailExist;
-import com.trl.users.exceptions.ExceptionUserWithIdNotExist;
+import com.trl.users.exceptions.UserNotHaveAddressException;
+import com.trl.users.exceptions.UserNotHaveBankDataException;
+import com.trl.users.exceptions.UserWithEmailExistException;
+import com.trl.users.exceptions.UserWithIdNotExistException;
 import com.trl.users.repository.UserRepository;
 import com.trl.users.repository.entity.UserEntity;
 import com.trl.users.service.UserService;
@@ -33,14 +33,14 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public UserDTO create(UserDTO user) throws ExceptionUserWithEmailExist {
+    public UserDTO create(UserDTO user) throws UserWithEmailExistException {
         UserDTO userResult = null;
 
         log.debug("************ create() ---> user = " + user);
 
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             log.debug("************ updateEmail() ---> user with this email = '" + user.getEmail() + "' exist.");
-            throw new ExceptionUserWithEmailExist("User with this email = '" + user.getEmail() + "' exist. It is not allowed to register multiple users with the same e-mail.");
+            throw new UserWithEmailExistException("User with this email = '" + user.getEmail() + "' exist. It is not allowed to register multiple users with the same e-mail.");
         }
 
         UserEntity savedUser = userRepository.save(ConverterUser.mapDTOToEntity(user));
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
      */
     @Transactional
     @Override
-    public UserDTO updateFirstName(Long id, String firstName) throws ExceptionUserWithIdNotExist {
+    public UserDTO updateFirstName(Long id, String firstName) throws UserWithIdNotExistException {
         UserDTO userResult = null;
 
         log.debug("************ updateFirstName() ---> id = " + id + " ---> firstName = " + firstName);
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
             }
         } else {
             log.debug("************ updateFirstName() ---> user with this id = '" + id + "' not exist.");
-            throw new ExceptionUserWithIdNotExist("User with this id = '" + id + "' not exist.");
+            throw new UserWithIdNotExistException("User with this id = '" + id + "' not exist.");
         }
 
         log.debug("************ updateFirstName() ---> userResult = " + userResult);
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
      */
     @Transactional
     @Override
-    public UserDTO updateLastName(Long id, String lastName) throws ExceptionUserWithIdNotExist {
+    public UserDTO updateLastName(Long id, String lastName) throws UserWithIdNotExistException {
         UserDTO userResult = null;
 
         log.debug("************ updateLastName() ---> id = " + id + " ---> lastName = " + lastName);
@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
             }
         } else {
             log.debug("************ updateLastName() ---> user with this id = '" + id + "' not exist.");
-            throw new ExceptionUserWithIdNotExist("User with this id = '" + id + "' not exist.");
+            throw new UserWithIdNotExistException("User with this id = '" + id + "' not exist.");
         }
 
         log.debug("************ updateLastName() ---> userResult = " + userResult);
@@ -136,14 +136,14 @@ public class UserServiceImpl implements UserService {
      */
     @Transactional
     @Override
-    public UserDTO updateEmail(Long id, String email) throws ExceptionUserWithIdNotExist, ExceptionUserWithEmailExist {
+    public UserDTO updateEmail(Long id, String email) throws UserWithIdNotExistException, UserWithEmailExistException {
         UserDTO userResult = null;
 
         log.debug("************ updateEmail() ---> id = " + id + " ---> email = " + email);
 
         if (userRepository.findByEmail(email).isPresent()) {
             log.debug("************ updateEmail() ---> user with this email = '" + email + "' exist.");
-            throw new ExceptionUserWithEmailExist("User with this email = '" + email + "' exist. It is not allowed to register multiple users with the same e-mail.");
+            throw new UserWithEmailExistException("User with this email = '" + email + "' exist. It is not allowed to register multiple users with the same e-mail.");
         }
 
         Optional<UserEntity> userFromRepositoryById = userRepository.findById(id);
@@ -166,7 +166,7 @@ public class UserServiceImpl implements UserService {
             }
         } else {
             log.debug("************ updateEmail() ---> user with this id = '" + id + "' not exist.");
-            throw new ExceptionUserWithIdNotExist("User with this id = '" + id + "' not exist.");
+            throw new UserWithIdNotExistException("User with this id = '" + id + "' not exist.");
         }
 
         log.debug("************ updateEmail() ---> userResult = " + userResult);
@@ -179,7 +179,7 @@ public class UserServiceImpl implements UserService {
      */
     @Transactional
     @Override
-    public UserDTO updatePassword(Long id, String password) throws ExceptionUserWithIdNotExist {
+    public UserDTO updatePassword(Long id, String password) throws UserWithIdNotExistException {
         UserDTO userResult = null;
 
         log.debug("************ updatePassword() ---> id = " + id + " ---> password = " + password);
@@ -204,7 +204,7 @@ public class UserServiceImpl implements UserService {
             }
         } else {
             log.debug("************ updatePassword() ---> user with this id = '" + id + "' not exist.");
-            throw new ExceptionUserWithIdNotExist("User with this id = '" + id + "' not exist.");
+            throw new UserWithIdNotExistException("User with this id = '" + id + "' not exist.");
         }
 
         log.debug("************ updatePassword() ---> userResult = " + userResult);
@@ -217,7 +217,7 @@ public class UserServiceImpl implements UserService {
      */
     @Transactional
     @Override
-    public UserDTO updateBirthday(Long id, Date birthday) throws ExceptionUserWithIdNotExist {
+    public UserDTO updateBirthday(Long id, Date birthday) throws UserWithIdNotExistException {
         UserDTO userResult = null;
 
         log.debug("************ updateBirthday() ---> id = " + id + " ---> birthday = " + birthday);
@@ -240,7 +240,7 @@ public class UserServiceImpl implements UserService {
             }
         } else {
             log.debug("************ updateBirthday() ---> user with this id = '" + id + "' not exist.");
-            throw new ExceptionUserWithIdNotExist("User with this id = '" + id + "' not exist.");
+            throw new UserWithIdNotExistException("User with this id = '" + id + "' not exist.");
         }
 
         log.debug("************ updateBirthday() ---> userResult = " + userResult);
@@ -253,7 +253,7 @@ public class UserServiceImpl implements UserService {
      */
     @Transactional
     @Override
-    public Boolean delete(Long userId) throws ExceptionUserWithIdNotExist {
+    public Boolean delete(Long userId) throws UserWithIdNotExistException {
         boolean isDeletedUser = false;
 
         log.debug("************ delete() ---> user = " + userId);
@@ -270,16 +270,16 @@ public class UserServiceImpl implements UserService {
             try {
                 isDeletedBankData = bankDataService.deleteByUser(userDTO);
                 log.debug("************ delete() ---> isDeletedBankData = " + isDeletedBankData);
-            } catch (ExceptionUserNotHaveBankData exceptionUserNotHaveBankData) {
-                log.error("User with this id = '" + userId + "' not have bank data.", exceptionUserNotHaveBankData);
+            } catch (UserNotHaveBankDataException userNotHaveBankDataException) {
+                log.error("User with this id = '" + userId + "' not have bank data.", userNotHaveBankDataException);
             }
 
             Boolean isDeletedAddress = null;
             try {
                 isDeletedAddress = addressService.deleteByUser(userDTO);
                 log.debug("************ delete() ---> isDeletedAddress = " + isDeletedAddress);
-            } catch (ExceptionUserNotHaveAddress exceptionUserNotHaveAddress) {
-                log.error("User with this id = '" + userId + "' not have address.", exceptionUserNotHaveAddress);
+            } catch (UserNotHaveAddressException userNotHaveAddressException) {
+                log.error("User with this id = '" + userId + "' not have address.", userNotHaveAddressException);
             }
 
             userRepository.deleteById(userId);
@@ -287,7 +287,7 @@ public class UserServiceImpl implements UserService {
 
         } else {
             log.debug("************ delete() ---> user with this id = '" + userId + "' not exist.");
-            throw new ExceptionUserWithIdNotExist("User with this id = '" + userId + "' not exist.");
+            throw new UserWithIdNotExistException("User with this id = '" + userId + "' not exist.");
         }
 
         log.debug("************ delete() ---> isDeletedUser = " + isDeletedUser);

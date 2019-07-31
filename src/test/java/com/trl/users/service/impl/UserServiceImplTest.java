@@ -1,12 +1,11 @@
 package com.trl.users.service.impl;
 
 import com.trl.users.controller.dto.UserDTO;
-import com.trl.users.exceptions.ExceptionUserWithEmailExist;
+import com.trl.users.exceptions.UserWithEmailExistException;
 import com.trl.users.repository.UserRepository;
 import com.trl.users.repository.entity.UserEntity;
 import com.trl.users.service.UserService;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,7 +65,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void create() throws ExceptionUserWithEmailExist {
+    public void create() throws UserWithEmailExistException {
         // TODO: Terminar este test.
 //        System.out.println(userRepository.findById(1L));
 

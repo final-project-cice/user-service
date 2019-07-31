@@ -3,10 +3,10 @@ package com.trl.users.controller;
 import com.trl.users.controller.dto.AddressDTO;
 import com.trl.users.controller.dto.UserDTO;
 import com.trl.users.controller.model.OneGenericValueDetailsRequestModel;
-import com.trl.users.exceptions.ExceptionAddressNotExist;
-import com.trl.users.exceptions.ExceptionUserIdIsNull;
-import com.trl.users.exceptions.ExceptionUserIsNull;
-import com.trl.users.exceptions.ExceptionUserWithIdNotExist;
+import com.trl.users.exceptions.AddressNotExistException;
+import com.trl.users.exceptions.UserIdIsNullException;
+import com.trl.users.exceptions.UserIsNullException;
+import com.trl.users.exceptions.UserWithIdNotExistException;
 import com.trl.users.service.impl.AddressServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,15 +36,15 @@ public class AddressResource {
         // TODO: Anotacion para todo catch. No estoy seguro que HttpStaus es mejor usarlo.
         try {
             resultService = addressService.create(address);
-        } catch (ExceptionUserWithIdNotExist exceptionUserWithIdNotExist) {
-            log.error("************ create() ---> user with this id = '" + address.getUser().getId() + "' not exist.", exceptionUserWithIdNotExist);
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(exceptionUserWithIdNotExist.getMessage());
-        } catch (ExceptionUserIdIsNull exceptionUserIdIsNull) {
-            log.error("************ create() ---> address not have assign value user >>> 'userId'. 'userId' = '" + address.getUser().getId() + "'. Variable 'userId' not allowed assign values NULL or ZERO.", exceptionUserIdIsNull);
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(exceptionUserIdIsNull.getMessage());
-        } catch (ExceptionUserIsNull exceptionUserIsNull) {
-            log.error("************ create() ---> address not have assign value to the user. User = '" + address.getUser() + "'.", exceptionUserIsNull);
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(exceptionUserIsNull.getMessage());
+        } catch (UserWithIdNotExistException userWithIdNotExistException) {
+            log.error("************ create() ---> user with this id = '" + address.getUser().getId() + "' not exist.", userWithIdNotExistException);
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(userWithIdNotExistException.getMessage());
+        } catch (UserIdIsNullException userIdIsNullException) {
+            log.error("************ create() ---> address not have assign value user >>> 'userId'. 'userId' = '" + address.getUser().getId() + "'. Variable 'userId' not allowed assign values NULL or ZERO.", userIdIsNullException);
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(userIdIsNullException.getMessage());
+        } catch (UserIsNullException userIsNullException) {
+            log.error("************ create() ---> address not have assign value to the user. User = '" + address.getUser() + "'.", userIsNullException);
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(userIsNullException.getMessage());
         }
 
         log.debug("************ create() ---> resultService = " + resultService);
@@ -69,8 +69,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.updateCountry(id, country);
-        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
-            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressNotExist);
+        } catch (AddressNotExistException addressNotExistException) {
+            log.error("Address with this id = '" + id + "' not exist.", addressNotExistException);
             return ResponseEntity.notFound().build();
         }
 
@@ -96,8 +96,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.updateCity(id, city);
-        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
-            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressNotExist);
+        } catch (AddressNotExistException addressNotExistException) {
+            log.error("Address with this id = '" + id + "' not exist.", addressNotExistException);
             return ResponseEntity.notFound().build();
         }
 
@@ -123,8 +123,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.updateStreet(id, street);
-        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
-            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressNotExist);
+        } catch (AddressNotExistException addressNotExistException) {
+            log.error("Address with this id = '" + id + "' not exist.", addressNotExistException);
             return ResponseEntity.notFound().build();
         }
 
@@ -150,8 +150,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.updateHouseNumber(id, houseNumber);
-        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
-            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressNotExist);
+        } catch (AddressNotExistException addressNotExistException) {
+            log.error("Address with this id = '" + id + "' not exist.", addressNotExistException);
             return ResponseEntity.notFound().build();
         }
 
@@ -174,8 +174,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.updatePostCode(id, postcode.getValue());
-        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
-            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressNotExist);
+        } catch (AddressNotExistException addressNotExistException) {
+            log.error("Address with this id = '" + id + "' not exist.", addressNotExistException);
             return ResponseEntity.notFound().build();
         }
 
@@ -198,8 +198,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.findById(id);
-        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
-            log.error("Address with this id = '" + id + "' not exist.", exceptionAddressNotExist);
+        } catch (AddressNotExistException addressNotExistException) {
+            log.error("Address with this id = '" + id + "' not exist.", addressNotExistException);
             return ResponseEntity.notFound().build();
         }
 
@@ -222,8 +222,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.findByCountry(country);
-        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
-            log.error("Address with this name country = '" + country + "' not exist.", exceptionAddressNotExist);
+        } catch (AddressNotExistException addressNotExistException) {
+            log.error("Address with this name country = '" + country + "' not exist.", addressNotExistException);
             return ResponseEntity.notFound().build();
         }
 
@@ -246,8 +246,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.findByCity(city);
-        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
-            log.error("Address with this name city = '" + city + "' not exist.", exceptionAddressNotExist);
+        } catch (AddressNotExistException addressNotExistException) {
+            log.error("Address with this name city = '" + city + "' not exist.", addressNotExistException);
             return ResponseEntity.notFound().build();
         }
 
@@ -270,8 +270,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.findByStreet(street);
-        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
-            log.error("Address with this name street = '" + street + "' not exist.", exceptionAddressNotExist);
+        } catch (AddressNotExistException addressNotExistException) {
+            log.error("Address with this name street = '" + street + "' not exist.", addressNotExistException);
             return ResponseEntity.notFound().build();
         }
 
@@ -294,8 +294,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.findByHouseNumber(houseNumber);
-        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
-            log.error("Address with this house number = '" + houseNumber + "' not exist.", exceptionAddressNotExist);
+        } catch (AddressNotExistException addressNotExistException) {
+            log.error("Address with this house number = '" + houseNumber + "' not exist.", addressNotExistException);
             return ResponseEntity.notFound().build();
         }
 
@@ -318,8 +318,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.findByPostcode(postcode.getValue());
-        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
-            log.error("Address with this postcode = '" + postcode.getValue() + "' not exist.", exceptionAddressNotExist);
+        } catch (AddressNotExistException addressNotExistException) {
+            log.error("Address with this postcode = '" + postcode.getValue() + "' not exist.", addressNotExistException);
             return ResponseEntity.notFound().build();
         }
 
@@ -342,8 +342,8 @@ public class AddressResource {
 
         try {
             resultService = addressService.findByUser(user);
-        } catch (ExceptionAddressNotExist exceptionAddressNotExist) {
-            log.error("Address with this user id = '" + user.getId() + "' not exist.", exceptionAddressNotExist);
+        } catch (AddressNotExistException addressNotExistException) {
+            log.error("Address with this user id = '" + user.getId() + "' not exist.", addressNotExistException);
             return ResponseEntity.notFound().build();
         }
 

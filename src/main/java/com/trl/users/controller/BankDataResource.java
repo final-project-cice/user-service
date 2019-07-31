@@ -2,9 +2,9 @@ package com.trl.users.controller;
 
 import com.trl.users.controller.dto.BankDataDTO;
 import com.trl.users.controller.dto.UserDTO;
-import com.trl.users.exceptions.ExceptionUserIdIsNull;
-import com.trl.users.exceptions.ExceptionUserIsNull;
-import com.trl.users.exceptions.ExceptionUserWithIdNotExist;
+import com.trl.users.exceptions.UserIdIsNullException;
+import com.trl.users.exceptions.UserIsNullException;
+import com.trl.users.exceptions.UserWithIdNotExistException;
 import com.trl.users.service.BankDataService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,15 +39,15 @@ public class BankDataResource {
         // TODO: Anotacion para todo catch. No estoy seguro que HttpStaus es mejor usarlo.
         try {
             resultService = bankDataService.create(bankData);
-        } catch (ExceptionUserWithIdNotExist exceptionUserWithIdNotExist) {
-            log.error("************ create() ---> user with this id = '" + bankData.getUser().getId() + "' not exist.", exceptionUserWithIdNotExist);
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(exceptionUserWithIdNotExist.getMessage());
-        } catch (ExceptionUserIdIsNull exceptionUserIdIsNull) {
-            log.error("************ create() ---> bankData not have assign value user >>> 'userId'. 'userId' = '" + bankData.getUser().getId() + "'. Variable 'userId' not allowed assign values NULL or ZERO.", exceptionUserIdIsNull);
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(exceptionUserIdIsNull.getMessage());
-        } catch (ExceptionUserIsNull exceptionUserIsNull) {
-            log.error("************ create() ---> bankData not have assign value to the user. User = '" + bankData.getUser() + "'.", exceptionUserIsNull);
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(exceptionUserIsNull.getMessage());
+        } catch (UserWithIdNotExistException userWithIdNotExistException) {
+            log.error("************ create() ---> user with this id = '" + bankData.getUser().getId() + "' not exist.", userWithIdNotExistException);
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(userWithIdNotExistException.getMessage());
+        } catch (UserIdIsNullException userIdIsNullException) {
+            log.error("************ create() ---> bankData not have assign value user >>> 'userId'. 'userId' = '" + bankData.getUser().getId() + "'. Variable 'userId' not allowed assign values NULL or ZERO.", userIdIsNullException);
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(userIdIsNullException.getMessage());
+        } catch (UserIsNullException userIsNullException) {
+            log.error("************ create() ---> bankData not have assign value to the user. User = '" + bankData.getUser() + "'.", userIsNullException);
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(userIsNullException.getMessage());
         }
 
         log.debug("************ create() ---> resultService = " + resultService);

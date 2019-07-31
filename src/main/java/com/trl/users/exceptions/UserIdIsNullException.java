@@ -1,6 +1,6 @@
 package com.trl.users.exceptions;
 
-public class ExceptionUserNotHaveAddress extends Exception {
+public class UserIdIsNullException extends Exception {
 
     /**
      * Constructs a new exception with the specified detail message.  The
@@ -10,7 +10,7 @@ public class ExceptionUserNotHaveAddress extends Exception {
      * @param message the detail message. The detail message is saved for
      *                later retrieval by the {@link #getMessage()} method.
      */
-    public ExceptionUserNotHaveAddress(String message) {
+    public UserIdIsNullException(String message) {
         super(message);
     }
 
