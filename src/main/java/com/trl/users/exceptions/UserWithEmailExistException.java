@@ -2,6 +2,9 @@ package com.trl.users.exceptions;
 
 public class UserWithEmailExistException extends Exception {
 
+    public UserWithEmailExistException() {
+    }
+
     /**
      * Constructs a new exception with the specified detail message.  The
      * cause is not initialized, and may subsequently be initialized by
