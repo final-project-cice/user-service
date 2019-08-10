@@ -1,17 +1,18 @@
 package com.trl.user.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
 import java.util.Set;
 
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode(of = "id")
+@ToString
 @Accessors(chain = true)
 public class UserDTO {
 
