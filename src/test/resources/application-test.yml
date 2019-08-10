@@ -3,7 +3,7 @@ server:
   port: 8081
 #============================== Configuration Logging
 logging:
-  file: /tmp/log/user.log
+  file: /tmp/log/user_test.log
   level:
     root: INFO
     org.springframework: INFO
