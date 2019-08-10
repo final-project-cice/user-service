@@ -3,18 +3,18 @@ server:
   port: 8081
 #============================== Configuration Logging
 logging:
-  path: /home/trl/GitHub/ms_shop_users/src/main/resources/logs
+  file: /tmp/log/user.log
   level:
     root: INFO
     org.springframework: INFO
     guru.springframework.controllers: INFO
     org.hibernate: INFO
-    com.trl.ms_shop_users: DEBUG
+    com.trl.user: DEBUG
 
 spring:
-  profiles.active: dev
+  profiles.active: test
   application:
-    name: users
+    name: user
 
   #============================== Configuration Eureka Client
   eureka:
