@@ -12,10 +12,10 @@
     </parent>
 
     <groupId>com.trl</groupId>
-    <artifactId>users</artifactId>
+    <artifactId>user</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>users</name>
+    <name>user</name>
     <description>This micro service is one part of one project library. This micro service performs users</description>
 
 
