@@ -26,7 +26,7 @@ spring:
   datasource:
     username: developer
     password: 1,5Lht.nt!o0#
-    url: jdbc:postgresql://localhost/ms_shop_users_test
+    url: jdbc:postgresql://localhost/user_test
 
   #  jpa:
   #    hibernate:
