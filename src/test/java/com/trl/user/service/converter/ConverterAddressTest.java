@@ -26,105 +26,45 @@ public class ConverterAddressTest {
     @Before
     public void setUp() throws Exception {
 
-        expected_AddressDTO = new AddressDTO()
-                .setId(1L)
-                .setCountry("Spain")
-                .setCity("Madrid")
-                .setStreet("Calle")
-                .setHouseNumber("12")
-                .setPostcode(1111111L)
-                .setUser(
-                        new UserDTO()
-                                .setId(1L)
-                                .setFirstName("First Name User")
-                                .setLastName("Last Name User")
-                                .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1)));
+        expected_AddressDTO = new AddressDTO(1L, "Spain", "Madrid", "Calle", "12", 1111111L,
+                new UserDTO(1L, "First Name User", "Last Name User",
+                        "tsyupryk.roman.lyubomyrovych@gmail.com", "strong_password",
+                        LocalDate.of(1970, Month.JANUARY, 1))
+        );
 
-        expected_AddressEntity = new AddressEntity()
-                .setId(1L)
-                .setCountry("Spain")
-                .setCity("Madrid")
-                .setStreet("Calle")
-                .setHouseNumber("12")
-                .setPostcode(1111111L)
-                .setUser(
-                        new UserEntity()
-                                .setId(1L)
-                                .setFirstName("First Name User")
-                                .setLastName("Last Name User")
-                                .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1)));
+        expected_AddressEntity = new AddressEntity(1L, "Spain", "Madrid", "Calle", "12", 1111111L,
+                new UserEntity(1L, "First Name User", "Last Name User",
+                        "tsyupryk.roman.lyubomyrovych@gmail.com", "strong_password",
+                        LocalDate.of(1970, Month.JANUARY, 1))
+        );
 
         // =================== Set
         expected_AddressDTOSet = new HashSet<>();
-        expected_AddressDTOSet.add(new AddressDTO()
-                .setId(1L)
-                .setCountry("Spain")
-                .setCity("Madrid")
-                .setStreet("Calle")
-                .setHouseNumber("12")
-                .setPostcode(1111111L)
-                .setUser(
-                        new UserDTO()
-                                .setId(1L)
-                                .setFirstName("First Name User_1")
-                                .setLastName("Last Name User_1")
-                                .setEmail("user_1@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
+        expected_AddressDTOSet.add(new AddressDTO(1L, "Spain", "Madrid", "Calle", "12", 1111111L,
+                new UserDTO(1L, "First Name User_1", "Last Name User_1",
+                        "user_1@gmail.com", "strong_password",
+                        LocalDate.of(1970, Month.JANUARY, 1)))
+        );
 
-        expected_AddressDTOSet.add(new AddressDTO()
-                .setId(2L)
-                .setCountry("Spain")
-                .setCity("Barcelona")
-                .setStreet("Calle")
-                .setHouseNumber("1")
-                .setPostcode(22222222L)
-                .setUser(
-                        new UserDTO()
-                                .setId(2L)
-                                .setFirstName("First Name User_2")
-                                .setLastName("Last Name User_2")
-                                .setEmail("user_2@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
+        expected_AddressDTOSet.add(new AddressDTO(2L, "Spain", "Barcelona", "Calle", "1", 22222222L,
+                new UserDTO(2L, "First Name User_2", "Last Name User_2",
+                        "user_2@gmail.com", "strong_password",
+                        LocalDate.of(1970, Month.JANUARY, 1)))
+        );
 
 
         expected_AddressEntitySet = new HashSet<>();
-        expected_AddressEntitySet.add(new AddressEntity()
-                .setId(1L)
-                .setCountry("Spain")
-                .setCity("Madrid")
-                .setStreet("Calle")
-                .setHouseNumber("12")
-                .setPostcode(1111111L)
-                .setUser(
-                        new UserEntity()
-                                .setId(1L)
-                                .setFirstName("First Name User_1")
-                                .setLastName("Last Name User_1")
-                                .setEmail("user_1@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
+        expected_AddressEntitySet.add(new AddressEntity(1L, "Spain", "Madrid", "Calle", "12", 1111111L,
+                new UserEntity(1L, "First Name User_1", "Last Name User_1",
+                        "user_1@gmail.com", "strong_password",
+                        LocalDate.of(1970, Month.JANUARY, 1)))
+        );
 
-        expected_AddressEntitySet.add(new AddressEntity()
-                .setId(2L)
-                .setCountry("Spain")
-                .setCity("Barcelona")
-                .setStreet("Calle")
-                .setHouseNumber("1")
-                .setPostcode(22222222L)
-                .setUser(
-                        new UserEntity()
-                                .setId(2L)
-                                .setFirstName("First Name User_2")
-                                .setLastName("Last Name User_2")
-                                .setEmail("user_2@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
+        expected_AddressEntitySet.add(new AddressEntity(2L, "Spain", "Barcelona", "Calle", "1", 22222222L,
+                new UserEntity(2L, "First Name User_2", "Last Name User_2",
+                        "user_2@gmail.com", "strong_password",
+                        LocalDate.of(1970, Month.JANUARY, 1)))
+        );
 
     }
 
@@ -143,50 +83,49 @@ public class ConverterAddressTest {
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_Id() {
-
-        AddressDTO actual_AddressDTO = ConverterAddress.mapEntityToDTO(new AddressEntity()
-                .setId(1000L));
-        assertNotEquals(expected_AddressDTO.getId(), actual_AddressDTO.getId());
+        Long incorrectId = 1000000000000000000L;
+        AddressDTO actual_AddressDTO = ConverterAddress.mapEntityToDTO(expected_AddressEntity);
+        assertNotEquals(incorrectId, actual_AddressDTO.getId());
     }
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_Country() {
+        String incorrectCountry = "___";
 
-        AddressDTO actual_AddressDTO = ConverterAddress.mapEntityToDTO(new AddressEntity()
-                .setCountry("Spain***"));
-        assertNotEquals(expected_AddressDTO.getCountry(), actual_AddressDTO.getCountry());
+        AddressDTO actual_AddressDTO = ConverterAddress.mapEntityToDTO(expected_AddressEntity);
+        assertNotEquals(incorrectCountry, actual_AddressDTO.getCountry());
     }
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_City() {
+        String incorrectCity = "___";
 
-        AddressDTO actual_AddressDTO = ConverterAddress.mapEntityToDTO(new AddressEntity()
-                .setCity("Madrid***"));
-        assertNotEquals(expected_AddressDTO.getCity(), actual_AddressDTO.getCity());
+        AddressDTO actual_AddressDTO = ConverterAddress.mapEntityToDTO(expected_AddressEntity);
+        assertNotEquals(incorrectCity, actual_AddressDTO.getCity());
     }
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_Street() {
+        String incorrectStreet = "___";
 
-        AddressDTO actual_AddressDTO = ConverterAddress.mapEntityToDTO(new AddressEntity()
-                .setStreet("Calle***"));
-        assertNotEquals(expected_AddressDTO.getStreet(), actual_AddressDTO.getStreet());
+        AddressDTO actual_AddressDTO = ConverterAddress.mapEntityToDTO(expected_AddressEntity);
+        assertNotEquals(incorrectStreet, actual_AddressDTO.getStreet());
     }
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_HouseNumber() {
+        String incorrectHouseNumber = "___";
 
-        AddressDTO actual_AddressDTO = ConverterAddress.mapEntityToDTO(new AddressEntity()
-                .setHouseNumber("12000"));
-        assertNotEquals(expected_AddressDTO.getHouseNumber(), actual_AddressDTO.getHouseNumber());
+        AddressDTO actual_AddressDTO = ConverterAddress.mapEntityToDTO(expected_AddressEntity);
+        assertNotEquals(incorrectHouseNumber, actual_AddressDTO.getHouseNumber());
     }
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_PostCode() {
+        Integer incorrectPostcode = 1000000000;
 
-        AddressDTO actual_AddressDTO = ConverterAddress.mapEntityToDTO(new AddressEntity()
-                .setPostcode(1111111000L));
-        assertNotEquals(expected_AddressDTO.getPostcode(), actual_AddressDTO.getPostcode());
+        AddressDTO actual_AddressDTO = ConverterAddress.mapEntityToDTO(expected_AddressEntity);
+        assertNotEquals(incorrectPostcode, actual_AddressDTO.getPostcode());
     }
 
     @Test
@@ -216,102 +155,50 @@ public class ConverterAddressTest {
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_Id() {
+        Long incorrectId = 1000000000000000000L;
 
-        AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(new AddressDTO()
-                .setId(1000L)
-                .setUser(
-                        new UserDTO()
-                                .setId(1L)
-                                .setFirstName("First Name User_1")
-                                .setLastName("Last Name User_1")
-                                .setEmail("user_1@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        assertNotEquals(expected_AddressEntity.getId(), actual_AddressEntity.getId());
+        AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(expected_AddressDTO);
+        assertNotEquals(incorrectId, actual_AddressEntity.getId());
     }
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_Country() {
+        String incorrectCountry = "___";
 
-        AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(new AddressDTO()
-                .setCountry("Spain***")
-                .setUser(
-                        new UserDTO()
-                                .setId(1L)
-                                .setFirstName("First Name User_1")
-                                .setLastName("Last Name User_1")
-                                .setEmail("user_1@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        assertNotEquals(expected_AddressEntity.getCountry(), actual_AddressEntity.getCountry());
+        AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(expected_AddressDTO);
+        assertNotEquals(incorrectCountry, actual_AddressEntity.getCountry());
     }
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_City() {
+        String incorrectCity = "___";
 
-        AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(new AddressDTO()
-                .setId(1L)
-                .setCity("Madrid***")
-                .setUser(
-                        new UserDTO()
-                                .setId(1L)
-                                .setFirstName("First Name User_1")
-                                .setLastName("Last Name User_1")
-                                .setEmail("user_1@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        assertNotEquals(expected_AddressEntity.getCity(), actual_AddressEntity.getCity());
+        AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(expected_AddressDTO);
+        assertNotEquals(incorrectCity, actual_AddressEntity.getCity());
     }
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_Street() {
+        String incorrectStreet = "___";
 
-        AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(new AddressDTO()
-                .setId(1L)
-                .setStreet("Calle***")
-                .setUser(
-                        new UserDTO()
-                                .setId(1L)
-                                .setFirstName("First Name User_1")
-                                .setLastName("Last Name User_1")
-                                .setEmail("user_1@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        assertNotEquals(expected_AddressEntity.getStreet(), actual_AddressEntity.getStreet());
+        AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(expected_AddressDTO);
+        assertNotEquals(incorrectStreet, actual_AddressEntity.getStreet());
     }
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_HouseNumber() {
+        String incorrectHouseNumber = "___";
 
-        AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(new AddressDTO()
-                .setId(1L)
-                .setHouseNumber("12***")
-                .setUser(
-                        new UserDTO()
-                                .setId(1L)
-                                .setFirstName("First Name User_1")
-                                .setLastName("Last Name User_1")
-                                .setEmail("user_1@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        assertNotEquals(expected_AddressEntity.getHouseNumber(), actual_AddressEntity.getHouseNumber());
+        AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(expected_AddressDTO);
+        assertNotEquals(incorrectHouseNumber, actual_AddressEntity.getHouseNumber());
     }
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_PostCode() {
+        Integer incorrectPostcode = 1000000000;
 
-        AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(new AddressDTO()
-                .setId(1L)
-                .setPostcode(1111111000L)
-                .setUser(
-                        new UserDTO()
-                                .setId(1L)
-                                .setFirstName("First Name User_1")
-                                .setLastName("Last Name User_1")
-                                .setEmail("user_1@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        assertNotEquals(expected_AddressEntity.getPostcode(), actual_AddressEntity.getPostcode());
+        AddressEntity actual_AddressEntity = ConverterAddress.mapDTOToEntity(expected_AddressDTO);
+        assertNotEquals(incorrectPostcode, actual_AddressEntity.getPostcode());
     }
 
     @Test

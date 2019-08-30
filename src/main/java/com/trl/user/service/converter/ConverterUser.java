@@ -2,7 +2,8 @@ package com.trl.user.service.converter;
 
 import com.trl.user.controller.dto.UserDTO;
 import com.trl.user.repository.entity.UserEntity;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Comparator;
 import java.util.Set;
@@ -12,8 +13,9 @@ import java.util.stream.Collectors;
 /**
  *
  */
-@Slf4j
 public final class ConverterUser {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ConverterUser.class);
 
     private ConverterUser() {
     }
@@ -25,21 +27,22 @@ public final class ConverterUser {
     public static UserDTO mapEntityToDTO(UserEntity userEntity) {
         UserDTO result = null;
 
-        log.debug("************ mapEntityToDTO() ---> userEntity = " + userEntity + " ---> userEntity.getClass().getSimpleName() = " + (userEntity != null ? userEntity.getClass().getSimpleName() : "null"));
+        LOG.debug("************ mapEntityToDTO() ---> userEntity = " + userEntity + " ---> userEntity.getClass().getSimpleName() = " + (userEntity != null ? userEntity.getClass().getSimpleName() : "null"));
 
         if (userEntity != null) {
-            result = new UserDTO()
-                    .setId(userEntity.getId())
-                    .setFirstName(userEntity.getFirstName())
-                    .setLastName(userEntity.getLastName())
-                    .setEmail(userEntity.getEmail())
-                    .setPassword(userEntity.getPassword())
-                    .setBankData(ConverterBankData.mapSetEntityToSetDTO(userEntity.getBankData()))
-                    .setAddress(ConverterAddress.mapSetEntityToSetDTO(userEntity.getAddress()))
-                    .setBirthday(userEntity.getBirthday());
+            result = new UserDTO(
+                    userEntity.getId(),
+                    userEntity.getFirstName(),
+                    userEntity.getLastName(),
+                    userEntity.getEmail(),
+                    userEntity.getPassword(),
+                    ConverterBankData.mapSetEntityToSetDTO(userEntity.getBankData()),
+                    ConverterAddress.mapSetEntityToSetDTO(userEntity.getAddress()),
+                    userEntity.getBirthday()
+            );
         }
 
-        log.debug("************ mapEntityToDTO() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));
+        LOG.debug("************ mapEntityToDTO() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));
 
         return result;
     }
@@ -51,7 +54,7 @@ public final class ConverterUser {
     public static Set<UserDTO> mapSetEntityToSetDTO(Set<UserEntity> userEntitySet) {
         Set<UserDTO> resultSet = null;
 
-        log.debug("************ mapSetEntityToSetDTO() ---> userEntitySet = " + userEntitySet);
+        LOG.debug("************ mapSetEntityToSetDTO() ---> userEntitySet = " + userEntitySet);
 
         if (userEntitySet != null) {
             resultSet = userEntitySet.parallelStream()
@@ -60,7 +63,7 @@ public final class ConverterUser {
                             () -> new TreeSet<>(Comparator.comparingLong(UserDTO::getId))));
         }
 
-        log.debug("************ mapSetEntityToSetDTO() ---> resultSet = " + resultSet);
+        LOG.debug("************ mapSetEntityToSetDTO() ---> resultSet = " + resultSet);
 
         return resultSet;
     }
@@ -72,21 +75,22 @@ public final class ConverterUser {
     public static UserEntity mapDTOToEntity(UserDTO userDTO) {
         UserEntity result = null;
 
-        log.debug("************ mapDTOToEntity() ---> userDTO = " + userDTO + " ---> userDTO.getClass().getSimpleName() = " + (userDTO != null ? userDTO.getClass().getSimpleName() : "null"));
+        LOG.debug("************ mapDTOToEntity() ---> userDTO = " + userDTO + " ---> userDTO.getClass().getSimpleName() = " + (userDTO != null ? userDTO.getClass().getSimpleName() : "null"));
 
         if (userDTO != null) {
-            result = new UserEntity()
-                    .setId(userDTO.getId())
-                    .setFirstName(userDTO.getFirstName())
-                    .setLastName(userDTO.getLastName())
-                    .setEmail(userDTO.getEmail())
-                    .setPassword(userDTO.getPassword())
-                    .setBankData(ConverterBankData.mapSetDTOToSetEntity(userDTO.getBankData()))
-                    .setAddress(ConverterAddress.mapSetDTOToSetEntity(userDTO.getAddress()))
-                    .setBirthday(userDTO.getBirthday());
+            result = new UserEntity(
+                    userDTO.getId(),
+                    userDTO.getFirstName(),
+                    userDTO.getLastName(),
+                    userDTO.getEmail(),
+                    userDTO.getPassword(),
+                    ConverterBankData.mapSetDTOToSetEntity(userDTO.getBankData()),
+                    ConverterAddress.mapSetDTOToSetEntity(userDTO.getAddress()),
+                    userDTO.getBirthday()
+            );
         }
 
-        log.debug("************ mapDTOToEntity() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));
+        LOG.debug("************ mapDTOToEntity() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));
 
         return result;
     }
@@ -98,7 +102,7 @@ public final class ConverterUser {
     public static Set<UserEntity> mapSetDTOToSetEntity(Set<UserDTO> userDTOSet) {
         Set<UserEntity> resultSet = null;
 
-        log.debug("************ mapSetDTOToSetEntity() ---> userDTOSet = " + userDTOSet);
+        LOG.debug("************ mapSetDTOToSetEntity() ---> userDTOSet = " + userDTOSet);
 
         if (userDTOSet != null) {
             resultSet = userDTOSet.stream()
@@ -107,7 +111,7 @@ public final class ConverterUser {
                             () -> new TreeSet<>(Comparator.comparingLong(UserEntity::getId))));
         }
 
-        log.debug("************ mapSetDTOToSetEntity() ---> resultSet = " + resultSet);
+        LOG.debug("************ mapSetDTOToSetEntity() ---> resultSet = " + resultSet);
 
         return resultSet;
     }

@@ -38,27 +38,11 @@ public class UserServiceImplTest {
     @Before
     public void setUp() throws Exception {
 
-        userEntity = new UserEntity()
-                .setId(1L)
-                .setFirstName("User_FirstName_1")
-                .setLastName("User_LastName_1")
-                .setEmail("user_1@email.com")
-                .setPassword("strong_password")
-                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1));
+        userEntity = new UserEntity(1L, "User_FirstName_1", "User_LastName_1", "user_1@email.com", "strong_password", LocalDate.of(1970, Month.JANUARY, 1));
 
-        userDTO = new UserDTO()
-                .setFirstName("User_FirstName_1")
-                .setLastName("User_LastName_1")
-                .setEmail("user_1@email.com")
-                .setPassword("strong_password")
-                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1));
+        userDTO = new UserDTO(1L, "User_FirstName_1", "User_LastName_1", "user_1@email.com", "strong_password", LocalDate.of(1970, Month.JANUARY, 1));
 
-        userDTOExpected = new UserDTO()
-                .setFirstName("User_FirstName_144444444444444444444")
-                .setLastName("User_LastName_1")
-                .setEmail("user_1@email.com")
-                .setPassword("strong_password")
-                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1));
+        userDTOExpected = new UserDTO(2L, "User_FirstName_144444444444444444444", "User_LastName_1", "user_1@email.com", "strong_password", LocalDate.of(1970, Month.JANUARY, 1));
     }
 
     @After

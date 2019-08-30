@@ -28,9 +28,12 @@ spring:
     password: 1,5Lht.nt!o0#
     url: jdbc:postgresql://localhost/user
 
+  #============================== Configuration JPA
   jpa:
+    show-sql: true
     hibernate:
       ddl-auto: create-drop
+#    database-platform: org.hibernate.dialect.H2Dialect
 
 #  #============================== Configuration H2
 #  h2:
@@ -45,8 +48,3 @@ spring:
 #    password:
 #    driver-class-name: org.h2.Driver
 #    url: jdbc:h2:mem:user
-#  jpa:
-#    database-platform: org.hibernate.dialect.H2Dialect
-#    show-sql: true
-#    hibernate:
-#      ddl-auto: update

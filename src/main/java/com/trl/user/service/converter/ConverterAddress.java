@@ -2,7 +2,8 @@ package com.trl.user.service.converter;
 
 import com.trl.user.controller.dto.AddressDTO;
 import com.trl.user.repository.entity.AddressEntity;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Comparator;
 import java.util.Set;
@@ -12,8 +13,9 @@ import java.util.stream.Collectors;
 /**
  *
  */
-@Slf4j
 public final class ConverterAddress {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ConverterAddress.class);
 
     private ConverterAddress() {
     }
@@ -25,20 +27,21 @@ public final class ConverterAddress {
     public static AddressDTO mapEntityToDTO(AddressEntity addressEntity) {
         AddressDTO result = null;
 
-        log.debug("************ mapEntityToDTO() ---> addressEntity = " + addressEntity + " ---> addressEntity.getClass().getSimpleName() = " + (addressEntity != null ? addressEntity.getClass().getSimpleName() : "null"));
+        LOG.debug("************ mapEntityToDTO() ---> addressEntity = " + addressEntity + " ---> addressEntity.getClass().getSimpleName() = " + (addressEntity != null ? addressEntity.getClass().getSimpleName() : "null"));
 
         if (addressEntity != null) {
-            result = new AddressDTO()
-                    .setId(addressEntity.getId())
-                    .setCountry(addressEntity.getCountry())
-                    .setCity(addressEntity.getCity())
-                    .setStreet(addressEntity.getStreet())
-                    .setHouseNumber(addressEntity.getHouseNumber())
-                    .setPostcode(addressEntity.getPostcode())
-                    .setUser(ConverterUser.mapEntityToDTO(addressEntity.getUser()));
+            result = new AddressDTO(
+                    addressEntity.getId(),
+                    addressEntity.getCountry(),
+                    addressEntity.getCity(),
+                    addressEntity.getStreet(),
+                    addressEntity.getHouseNumber(),
+                    addressEntity.getPostcode(),
+                    ConverterUser.mapEntityToDTO(addressEntity.getUser())
+            );
         }
 
-        log.debug("************ mapEntityToDTO() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));
+        LOG.debug("************ mapEntityToDTO() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));
 
         return result;
     }
@@ -50,7 +53,7 @@ public final class ConverterAddress {
     public static Set<AddressDTO> mapSetEntityToSetDTO(Set<AddressEntity> addressEntitySet) {
         Set<AddressDTO> resultSet = null;
 
-        log.debug("************ mapSetEntityToSetDTO() ---> addressEntitySet = " + addressEntitySet);
+        LOG.debug("************ mapSetEntityToSetDTO() ---> addressEntitySet = " + addressEntitySet);
 
         if (addressEntitySet != null) {
 
@@ -60,7 +63,7 @@ public final class ConverterAddress {
                             () -> new TreeSet<>(Comparator.comparingLong(AddressDTO::getId))));
         }
 
-        log.debug("************ mapSetEntityToSetDTO() ---> resultSet = " + resultSet);
+        LOG.debug("************ mapSetEntityToSetDTO() ---> resultSet = " + resultSet);
 
         return resultSet;
     }
@@ -72,20 +75,21 @@ public final class ConverterAddress {
     public static AddressEntity mapDTOToEntity(AddressDTO addressDTO) {
         AddressEntity result = null;
 
-        log.debug("************ mapDTOToEntity() ---> addressDTO = " + addressDTO + " ---> addressDTO.getClass().getSimpleName() = " + (addressDTO != null ? addressDTO.getClass().getSimpleName() : "null"));
+        LOG.debug("************ mapDTOToEntity() ---> addressDTO = " + addressDTO + " ---> addressDTO.getClass().getSimpleName() = " + (addressDTO != null ? addressDTO.getClass().getSimpleName() : "null"));
 
         if (addressDTO != null) {
-            result = new AddressEntity()
-                    .setId(addressDTO.getId())
-                    .setCountry(addressDTO.getCountry())
-                    .setCity(addressDTO.getCity())
-                    .setStreet(addressDTO.getStreet())
-                    .setHouseNumber(addressDTO.getHouseNumber())
-                    .setPostcode(addressDTO.getPostcode())
-                    .setUser(ConverterUser.mapDTOToEntity(addressDTO.getUser()));
+            result = new AddressEntity(
+                    addressDTO.getId(),
+                    addressDTO.getCountry(),
+                    addressDTO.getCity(),
+                    addressDTO.getStreet(),
+                    addressDTO.getHouseNumber(),
+                    addressDTO.getPostcode(),
+                    ConverterUser.mapDTOToEntity(addressDTO.getUser())
+            );
         }
 
-        log.debug("************ mapDTOToEntity() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));
+        LOG.debug("************ mapDTOToEntity() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));
 
         return result;
     }
@@ -97,7 +101,7 @@ public final class ConverterAddress {
     public static Set<AddressEntity> mapSetDTOToSetEntity(Set<AddressDTO> addressDTOSet) {
         Set<AddressEntity> resultSet = null;
 
-        log.debug("************ mapSetDTOToSetEntity() ---> addressDTOSet = " + addressDTOSet);
+        LOG.debug("************ mapSetDTOToSetEntity() ---> addressDTOSet = " + addressDTOSet);
 
         if (addressDTOSet != null) {
             resultSet = addressDTOSet.stream()
@@ -106,7 +110,7 @@ public final class ConverterAddress {
                             () -> new TreeSet<>(Comparator.comparingLong(AddressEntity::getId))));
         }
 
-        log.debug("************ mapSetDTOToSetEntity() ---> resultSet = " + resultSet);
+        LOG.debug("************ mapSetDTOToSetEntity() ---> resultSet = " + resultSet);
 
         return resultSet;
     }

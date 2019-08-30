@@ -1,19 +1,43 @@
 package com.trl.user.controller.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import java.util.Objects;
 
 /**
  *
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Accessors(chain = true)
 public class OneGenericValueDetailsRequestModel<A> {
 
     private A value;
+
+    public OneGenericValueDetailsRequestModel() {
+    }
+
+    public OneGenericValueDetailsRequestModel(A value) {
+        this.value = value;
+    }
+
+    public A getValue() {
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OneGenericValueDetailsRequestModel<?> that = (OneGenericValueDetailsRequestModel<?>) o;
+        return value.equals(that.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return "OneGenericValueDetailsRequestModel{" +
+                "value=" + value +
+                '}';
+    }
 
 }

@@ -13,8 +13,8 @@ import com.trl.user.repository.entity.UserEntity;
 import com.trl.user.service.BankDataService;
 import com.trl.user.service.converter.ConverterBankData;
 import com.trl.user.service.converter.ConverterUser;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,13 +24,18 @@ import java.util.Set;
 /**
  *
  */
-@AllArgsConstructor
-@Slf4j
 @Service
 public class BankDataServiceImpl implements BankDataService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(BankDataServiceImpl.class);
+
     private final BankDataRepository bankDataRepository;
     private final UserRepository userRepository;
+
+    public BankDataServiceImpl(BankDataRepository bankDataRepository, UserRepository userRepository) {
+        this.bankDataRepository = bankDataRepository;
+        this.userRepository = userRepository;
+    }
 
     /**
      * @param bankDataDTO
@@ -41,7 +46,7 @@ public class BankDataServiceImpl implements BankDataService {
 
         BankDataDTO bankDataResult = null;
 
-        log.debug("************ create() ---> idUser = " + bankDataDTO.getUser() + " ---> bankDataDTO = " + bankDataDTO);
+        LOG.debug("************ create() ---> idUser = " + bankDataDTO.getUser() + " ---> bankDataDTO = " + bankDataDTO);
 
         // TODO: Nose si es necesario comprobar de null todos parametros que se van utilizar en meethodo. Es que se compica mucho la lectura ce mtodo.
 
@@ -55,7 +60,7 @@ public class BankDataServiceImpl implements BankDataService {
 
                     BankDataEntity savedBankData = bankDataRepository.save(ConverterBankData.mapDTOToEntity(bankDataDTO));
 
-                    log.debug("************ create() ---> savedBankData = " + savedBankData);
+                    LOG.debug("************ create() ---> savedBankData = " + savedBankData);
 
                     bankDataResult = ConverterBankData.mapEntityToDTO(savedBankData);
 
@@ -69,7 +74,7 @@ public class BankDataServiceImpl implements BankDataService {
             throw new UserIsNullException("The parameter 'user' that is passed, equal NULL. Not allowed parameter NULL.");
         }
 
-        log.debug("************ create() ---> bankDataResult = " + bankDataResult);
+        LOG.debug("************ create() ---> bankDataResult = " + bankDataResult);
 
         return bankDataResult;
     }
@@ -79,15 +84,15 @@ public class BankDataServiceImpl implements BankDataService {
 
         Set<BankDataDTO> bankDataSetResult = null;
 
-        log.debug("************ findByUser() ---> userDTO = " + userDTO);
+        LOG.debug("************ findByUser() ---> userDTO = " + userDTO);
 
         Set<BankDataEntity> usersFromRepositoryById = bankDataRepository.findByUser(ConverterUser.mapDTOToEntity(userDTO));
 
-        log.debug("************ findByUser() ---> usersFromRepositoryById = " + usersFromRepositoryById);
+        LOG.debug("************ findByUser() ---> usersFromRepositoryById = " + usersFromRepositoryById);
 
         bankDataSetResult = ConverterBankData.mapSetEntityToSetDTO(usersFromRepositoryById);
 
-        log.debug("************ findByUser() ---> bankDataSetResult  = " + bankDataSetResult);
+        LOG.debug("************ findByUser() ---> bankDataSetResult  = " + bankDataSetResult);
 
         return bankDataSetResult;
     }
@@ -103,23 +108,23 @@ public class BankDataServiceImpl implements BankDataService {
 
         boolean isDeletedBankData = false;
 
-        log.debug("************ deleteByUser() ---> userDTO = " + userDTO);
+        LOG.debug("************ deleteByUser() ---> userDTO = " + userDTO);
 
         UserEntity userEntity = ConverterUser.mapDTOToEntity(userDTO);
 
         Set<BankDataEntity> bankDataFromRepositoryByUser = bankDataRepository.findByUser(userEntity);
 
-        log.debug("************ deleteByUser() ---> bankDataFromRepositoryByUser = " + bankDataFromRepositoryByUser);
+        LOG.debug("************ deleteByUser() ---> bankDataFromRepositoryByUser = " + bankDataFromRepositoryByUser);
 
         if (!bankDataFromRepositoryByUser.isEmpty()) {
             bankDataRepository.deleteByUser(userEntity);
             isDeletedBankData = true;
         } else {
-            log.debug("************ deleteByUser() ---> this user = '" + userDTO + "' not have bankData");
+            LOG.debug("************ deleteByUser() ---> this user = '" + userDTO + "' not have bankData");
             throw new UserNotHaveBankDataException("This user = '" + userDTO + "' not have bankData");
         }
 
-        log.debug("************ deleteByUser() ---> isDeletedBankData = " + isDeletedBankData);
+        LOG.debug("************ deleteByUser() ---> isDeletedBankData = " + isDeletedBankData);
 
         return isDeletedBankData;
     }

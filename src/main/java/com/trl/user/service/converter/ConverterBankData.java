@@ -2,7 +2,8 @@ package com.trl.user.service.converter;
 
 import com.trl.user.controller.dto.BankDataDTO;
 import com.trl.user.repository.entity.BankDataEntity;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Comparator;
 import java.util.Set;
@@ -12,8 +13,9 @@ import java.util.stream.Collectors;
 /**
  *
  */
-@Slf4j
 public final class ConverterBankData {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ConverterBankData.class);
 
     private ConverterBankData() {
     }
@@ -25,18 +27,19 @@ public final class ConverterBankData {
     public static BankDataDTO mapEntityToDTO(BankDataEntity bankDataEntity) {
         BankDataDTO result = null;
 
-        log.debug("************ mapEntityToDTO() ---> bankDataEntity = " + bankDataEntity + " ---> bankDataEntity.getClass().getSimpleName() = " + (bankDataEntity != null ? bankDataEntity.getClass().getSimpleName() : "null"));
+        LOG.debug("************ mapEntityToDTO() ---> bankDataEntity = " + bankDataEntity + " ---> bankDataEntity.getClass().getSimpleName() = " + (bankDataEntity != null ? bankDataEntity.getClass().getSimpleName() : "null"));
 
         if (bankDataEntity != null) {
-            result = new BankDataDTO()
-                    .setId(bankDataEntity.getId())
-                    .setBankAccountNumber(bankDataEntity.getBankAccountNumber())
-                    .setDateOfExpiry(bankDataEntity.getDateOfExpiry())
-                    .setCvi(bankDataEntity.getCvi())
-                    .setUser(ConverterUser.mapEntityToDTO(bankDataEntity.getUser()));
+            result = new BankDataDTO(
+                    bankDataEntity.getId(),
+                    bankDataEntity.getBankAccountNumber(),
+                    bankDataEntity.getDateOfExpiry(),
+                    bankDataEntity.getCvi(),
+                    ConverterUser.mapEntityToDTO(bankDataEntity.getUser())
+            );
         }
 
-        log.debug("************ mapEntityToDTO() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));
+        LOG.debug("************ mapEntityToDTO() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));
 
         return result;
     }
@@ -48,7 +51,7 @@ public final class ConverterBankData {
     public static Set<BankDataDTO> mapSetEntityToSetDTO(Set<BankDataEntity> bankDataEntitySet) {
         Set<BankDataDTO> resultSet = null;
 
-        log.debug("************ mapSetEntityToSetDTO() ---> bankDataEntitySet = " + bankDataEntitySet);
+        LOG.debug("************ mapSetEntityToSetDTO() ---> bankDataEntitySet = " + bankDataEntitySet);
 
         if (bankDataEntitySet != null) {
             resultSet = bankDataEntitySet.stream()
@@ -57,7 +60,7 @@ public final class ConverterBankData {
                             () -> new TreeSet<>(Comparator.comparingLong(BankDataDTO::getId))));
         }
 
-        log.debug("************ mapSetEntityToSetDTO() ---> resultSet = " + resultSet);
+        LOG.debug("************ mapSetEntityToSetDTO() ---> resultSet = " + resultSet);
 
         return resultSet;
     }
@@ -69,18 +72,19 @@ public final class ConverterBankData {
     public static BankDataEntity mapDTOToEntity(BankDataDTO bankDataDTO) {
         BankDataEntity result = null;
 
-        log.debug("************ mapDTOToEntity() ---> bankDataDTO = " + bankDataDTO + " ---> bankDataDTO.getClass().getSimpleName() = " + (bankDataDTO != null ? bankDataDTO.getClass().getSimpleName() : "null"));
+        LOG.debug("************ mapDTOToEntity() ---> bankDataDTO = " + bankDataDTO + " ---> bankDataDTO.getClass().getSimpleName() = " + (bankDataDTO != null ? bankDataDTO.getClass().getSimpleName() : "null"));
 
         if (bankDataDTO != null) {
-            result = new BankDataEntity()
-                    .setId(bankDataDTO.getId())
-                    .setBankAccountNumber(bankDataDTO.getBankAccountNumber())
-                    .setDateOfExpiry(bankDataDTO.getDateOfExpiry())
-                    .setCvi(bankDataDTO.getCvi())
-                    .setUser(ConverterUser.mapDTOToEntity(bankDataDTO.getUser()));
+            result = new BankDataEntity(
+                    bankDataDTO.getId(),
+                    bankDataDTO.getBankAccountNumber(),
+                    bankDataDTO.getDateOfExpiry(),
+                    bankDataDTO.getCvi(),
+                    ConverterUser.mapDTOToEntity(bankDataDTO.getUser())
+            );
         }
 
-        log.debug("************ mapDTOToEntity() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));
+        LOG.debug("************ mapDTOToEntity() ---> result = " + result + " ---> result.getClass().getSimpleName() = " + (result != null ? result.getClass().getSimpleName() : "null"));
 
         return result;
     }
@@ -92,7 +96,7 @@ public final class ConverterBankData {
     public static Set<BankDataEntity> mapSetDTOToSetEntity(Set<BankDataDTO> bankDataDTOSet) {
         Set<BankDataEntity> resultSet = null;
 
-        log.debug("************ mapSetDTOToSetEntity() ---> bankDataDTOSet = " + bankDataDTOSet);
+        LOG.debug("************ mapSetDTOToSetEntity() ---> bankDataDTOSet = " + bankDataDTOSet);
 
         if (bankDataDTOSet != null) {
             resultSet = bankDataDTOSet.stream()
@@ -101,7 +105,7 @@ public final class ConverterBankData {
                             () -> new TreeSet<>(Comparator.comparingLong(BankDataEntity::getId))));
         }
 
-        log.debug("************ mapSetDTOToSetEntity() ---> resultSet = " + resultSet);
+        LOG.debug("************ mapSetDTOToSetEntity() ---> resultSet = " + resultSet);
 
         return resultSet;
     }

@@ -15,7 +15,6 @@ import java.util.Set;
 import static org.junit.Assert.*;
 
 public class ConverterBankDataTest {
-
     private BankDataDTO expected_BankDataDTO;
     private BankDataEntity expected_BankDataEntity;
 
@@ -25,89 +24,23 @@ public class ConverterBankDataTest {
     @Before
     public void setUp() throws Exception {
 
-        expected_BankDataDTO = new BankDataDTO()
-                .setId(1L)
-                .setBankAccountNumber("1111111111111111111111111111")
-                .setDateOfExpiry(LocalDate.of(1970, Month.JANUARY, 1))
-                .setCvi(111)
-                .setUser(
-                        new UserDTO()
-                                .setId(1L)
-                                .setFirstName("First Name User")
-                                .setLastName("Last Name User")
-                                .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1)));
+        expected_BankDataDTO = new BankDataDTO(1L, "1111111111111111111111111111", LocalDate.of(1970, Month.JANUARY, 1), 111,
+                new UserDTO(1L, "First Name User", "Last Name User", "tsyupryk.roman.lyubomyrovych@gmail.com", "strong_password", LocalDate.of(1970, Month.JANUARY, 1)));
 
-        expected_BankDataEntity = new BankDataEntity()
-                .setId(1L)
-                .setBankAccountNumber("1111111111111111111111111111")
-                .setDateOfExpiry(LocalDate.of(1970, Month.JANUARY, 1))
-                .setCvi(111)
-                .setUser(
-                        new UserEntity()
-                                .setId(1L)
-                                .setFirstName("First Name User")
-                                .setLastName("Last Name User")
-                                .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1)));
+        expected_BankDataEntity = new BankDataEntity(1L, "1111111111111111111111111111", LocalDate.of(1970, Month.JANUARY, 1), 111,
+                new UserEntity(1L, "First Name User", "Last Name User", "tsyupryk.roman.lyubomyrovych@gmail.com", "strong_password", LocalDate.of(1970, Month.JANUARY, 1)));
 
         expected_BankDataDTOSet = new HashSet<>();
-        expected_BankDataDTOSet.add(new BankDataDTO()
-                .setId(1L)
-                .setBankAccountNumber("1111111111111111111111111111")
-                .setDateOfExpiry(LocalDate.of(1970, Month.JANUARY, 1))
-                .setCvi(111)
-                .setUser(
-                        new UserDTO()
-                                .setId(1L)
-                                .setFirstName("First Name User_1")
-                                .setLastName("Last Name User_1")
-                                .setEmail("user_1@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        expected_BankDataDTOSet.add(new BankDataDTO()
-                .setId(2L)
-                .setBankAccountNumber("2222222222222222222222222222")
-                .setDateOfExpiry(LocalDate.of(1970, Month.FEBRUARY, 2))
-                .setCvi(222)
-                .setUser(
-                        new UserDTO()
-                                .setId(2L)
-                                .setFirstName("First Name User_2")
-                                .setLastName("Last Name User_2")
-                                .setEmail("user_2@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
+        expected_BankDataDTOSet.add(new BankDataDTO(1L, "1111111111111111111111111111", LocalDate.of(1970, Month.JANUARY, 1), 111,
+                new UserDTO(1L, "First Name User_1", "Last Name User_1", "user_1@gmail.com", "strong_password", LocalDate.of(1970, Month.JANUARY, 1))));
+        expected_BankDataDTOSet.add(new BankDataDTO(2L, "2222222222222222222222222222", LocalDate.of(1970, Month.FEBRUARY, 2), 222,
+                new UserDTO(2L, "First Name User_2", "Last Name User_2", "user_2@gmail.com", "strong_password", LocalDate.of(1970, Month.JANUARY, 1))));
 
         expected_BankDataEntitySet = new HashSet<>();
-        expected_BankDataEntitySet.add(new BankDataEntity()
-                .setId(1L)
-                .setBankAccountNumber("1111111111111111111111111111")
-                .setDateOfExpiry(LocalDate.of(1970, Month.JANUARY, 1))
-                .setCvi(111)
-                .setUser(
-                        new UserEntity()
-                                .setId(1L)
-                                .setFirstName("First Name User_1")
-                                .setLastName("Last Name User_1")
-                                .setEmail("user_1@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        expected_BankDataEntitySet.add(new BankDataEntity()
-                .setId(2L)
-                .setBankAccountNumber("2222222222222222222222222222")
-                .setDateOfExpiry(LocalDate.of(1970, Month.FEBRUARY, 2))
-                .setCvi(222)
-                .setUser(
-                        new UserEntity()
-                                .setId(2L)
-                                .setFirstName("First Name User_2")
-                                .setLastName("Last Name User_2")
-                                .setEmail("user_2@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
+        expected_BankDataEntitySet.add(new BankDataEntity(1L, "1111111111111111111111111111", LocalDate.of(1970, Month.JANUARY, 1), 111,
+                new UserEntity(1L, "First Name User_1", "Last Name User_1", "user_1@gmail.com", "strong_password", LocalDate.of(1970, Month.JANUARY, 1))));
+        expected_BankDataEntitySet.add(new BankDataEntity(2L, "2222222222222222222222222222", LocalDate.of(1970, Month.FEBRUARY, 2), 222,
+                new UserEntity(2L, "First Name User_2", "Last Name User_2", "user_2@gmail.com", "strong_password", LocalDate.of(1970, Month.JANUARY, 1))));
 
     }
 
@@ -128,65 +61,34 @@ public class ConverterBankDataTest {
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_Id() {
-        BankDataDTO actual_BankDataDTO = ConverterBankData.mapEntityToDTO(new BankDataEntity()
-                .setId(1000L)
-                .setUser(
-                        new UserEntity()
-                                .setId(1L)
-                                .setFirstName("First Name User")
-                                .setLastName("Last Name User")
-                                .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        assertNotEquals(expected_BankDataDTO.getId(), actual_BankDataDTO.getId());
+        Long incorrectId = 1000000000000000000L;
+
+        BankDataDTO actual_BankDataDTO = ConverterBankData.mapEntityToDTO(expected_BankDataEntity);
+        assertNotEquals(incorrectId, actual_BankDataDTO.getId());
     }
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_BankAccountNumber() {
-        BankDataDTO actual_BankDataDTO = ConverterBankData.mapEntityToDTO(new BankDataEntity()
-                .setBankAccountNumber("1111111111111111111111111111***")
-                .setUser(
-                        new UserEntity()
-                                .setId(1L)
-                                .setFirstName("First Name User")
-                                .setLastName("Last Name User")
-                                .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        assertNotEquals(expected_BankDataDTO.getBankAccountNumber(), actual_BankDataDTO.getBankAccountNumber());
+        String incorrectAccountNumber = "___";
+
+        BankDataDTO actual_BankDataDTO = ConverterBankData.mapEntityToDTO(expected_BankDataEntity);
+        assertNotEquals(incorrectAccountNumber, actual_BankDataDTO.getBankAccountNumber());
     }
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_DateOfExpiry() {
-        BankDataDTO actual_BankDataDTO = ConverterBankData.mapEntityToDTO(new BankDataEntity()
-                .setDateOfExpiry(LocalDate.of(1970, Month.JANUARY, 2))
-                .setUser(
-                        new UserEntity()
-                                .setId(1L)
-                                .setFirstName("First Name User")
-                                .setLastName("Last Name User")
-                                .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        assertNotEquals(expected_BankDataDTO.getDateOfExpiry(), actual_BankDataDTO.getDateOfExpiry());
+        LocalDate incorrectDateOfExpiry = LocalDate.MAX;
+
+        BankDataDTO actual_BankDataDTO = ConverterBankData.mapEntityToDTO(expected_BankDataEntity);
+        assertNotEquals(incorrectDateOfExpiry, actual_BankDataDTO.getDateOfExpiry());
     }
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_Cvi() {
-        BankDataDTO actual_BankDataDTO = ConverterBankData.mapEntityToDTO(new BankDataEntity()
-                .setId(1L)
-                .setBankAccountNumber("1111111111111111111111111111")
-                .setDateOfExpiry(LocalDate.of(1970, Month.JANUARY, 1))
-                .setCvi(112)
-                .setUser(
-                        new UserEntity()
-                                .setId(1L)
-                                .setFirstName("First Name User")
-                                .setLastName("Last Name User")
-                                .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        assertNotEquals(expected_BankDataDTO.getCvi(), actual_BankDataDTO.getCvi());
+        Integer incorrectCvi = 1000000000;
+
+        BankDataDTO actual_BankDataDTO = ConverterBankData.mapEntityToDTO(expected_BankDataEntity);
+        assertNotEquals(incorrectCvi, actual_BankDataDTO.getCvi());
     }
 
     // =================================================================================================================
@@ -222,62 +124,34 @@ public class ConverterBankDataTest {
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_Id() {
-        BankDataEntity actual_BankDataEntity = ConverterBankData.mapDTOToEntity(new BankDataDTO()
-                .setId(1000L)
-                .setUser(
-                        new UserDTO()
-                                .setId(1L)
-                                .setFirstName("First Name User")
-                                .setLastName("Last Name User")
-                                .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        assertNotEquals(expected_BankDataEntity.getId(), actual_BankDataEntity.getId());
+        Long incorrectId = 1000000000000000000L;
+
+        BankDataEntity actual_BankDataEntity = ConverterBankData.mapDTOToEntity(expected_BankDataDTO);
+        assertNotEquals(incorrectId, actual_BankDataEntity.getId());
     }
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_BankAccountNumber() {
-        BankDataEntity actual_BankDataEntity = ConverterBankData.mapDTOToEntity(new BankDataDTO()
-                .setBankAccountNumber("1111111111111111111111111111***")
-                .setUser(
-                        new UserDTO()
-                                .setId(1L)
-                                .setFirstName("First Name User")
-                                .setLastName("Last Name User")
-                                .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        assertNotEquals(expected_BankDataEntity.getBankAccountNumber(), actual_BankDataEntity.getBankAccountNumber());
+        String incorrectAccountNumber = "___";
+
+        BankDataEntity actual_BankDataEntity = ConverterBankData.mapDTOToEntity(expected_BankDataDTO);
+        assertNotEquals(incorrectAccountNumber, actual_BankDataEntity.getBankAccountNumber());
     }
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_DateOfExpiry() {
-        BankDataEntity actual_BankDataEntity = ConverterBankData.mapDTOToEntity(new BankDataDTO()
-                .setDateOfExpiry(LocalDate.of(1970, Month.JANUARY, 2))
-                .setUser(
-                        new UserDTO()
-                                .setId(1L)
-                                .setFirstName("First Name User")
-                                .setLastName("Last Name User")
-                                .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        assertNotEquals(expected_BankDataEntity.getDateOfExpiry(), actual_BankDataEntity.getDateOfExpiry());
+        LocalDate incorrectDateOfExpiry = LocalDate.MAX;
+
+        BankDataEntity actual_BankDataEntity = ConverterBankData.mapDTOToEntity(expected_BankDataDTO);
+        assertNotEquals(incorrectDateOfExpiry, actual_BankDataEntity.getDateOfExpiry());
     }
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_Cvi() {
-        BankDataEntity actual_BankDataEntity = ConverterBankData.mapDTOToEntity(new BankDataDTO()
-                .setCvi(112)
-                .setUser(
-                        new UserDTO()
-                                .setId(1L)
-                                .setFirstName("First Name User")
-                                .setLastName("Last Name User")
-                                .setEmail("tsyupryk.roman.lyubomyrovych@gmail.com")
-                                .setPassword("strong_password")
-                                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1))));
-        assertNotEquals(expected_BankDataEntity.getCvi(), actual_BankDataEntity.getCvi());
+        Integer incorrectCvi = 1000000000;
+
+        BankDataEntity actual_BankDataEntity = ConverterBankData.mapDTOToEntity(expected_BankDataDTO);
+        assertNotEquals(incorrectCvi, actual_BankDataEntity.getCvi());
     }
 
     // =================================================================================================================

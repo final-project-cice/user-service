@@ -9,8 +9,8 @@ import com.trl.user.repository.UserRepository;
 import com.trl.user.repository.entity.UserEntity;
 import com.trl.user.service.UserService;
 import com.trl.user.service.converter.ConverterUser;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,14 +23,20 @@ import java.util.TreeSet;
 /**
  *
  */
-@AllArgsConstructor
-@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
     private final BankDataServiceImpl bankDataService;
     private final AddressServiceImpl addressService;
+
+    public UserServiceImpl(UserRepository userRepository, BankDataServiceImpl bankDataService, AddressServiceImpl addressService) {
+        this.userRepository = userRepository;
+        this.bankDataService = bankDataService;
+        this.addressService = addressService;
+    }
 
     /**
      * @param user
@@ -40,20 +46,20 @@ public class UserServiceImpl implements UserService {
     public UserDTO create(UserDTO user) throws UserWithEmailExistException {
         UserDTO userResult = null;
 
-        log.debug("************ create() ---> user = " + user);
+        LOG.debug("************ create() ---> user = " + user);
 
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            log.debug("************ updateEmail() ---> user with this email = '" + user.getEmail() + "' exist.");
+            LOG.debug("************ updateEmail() ---> user with this email = '" + user.getEmail() + "' exist.");
             throw new UserWithEmailExistException("User with this email = '" + user.getEmail() + "' exist. It is not allowed to register multiple users with the same e-mail.");
         }
 
         UserEntity savedUser = userRepository.save(ConverterUser.mapDTOToEntity(user));
 
-        log.debug("************ create() ---> savedUser = " + savedUser);
+        LOG.debug("************ create() ---> savedUser = " + savedUser);
 
         userResult = ConverterUser.mapEntityToDTO(savedUser);
 
-        log.debug("************ create() ---> userResult = " + userResult);
+        LOG.debug("************ create() ---> userResult = " + userResult);
 
         return userResult;
     }
@@ -66,11 +72,11 @@ public class UserServiceImpl implements UserService {
     public UserDTO updateFirstName(Long id, String firstName) throws UserWithIdNotExistException {
         UserDTO userResult = null;
 
-        log.debug("************ updateFirstName() ---> id = " + id + " ---> firstName = " + firstName);
+        LOG.debug("************ updateFirstName() ---> id = " + id + " ---> firstName = " + firstName);
 
         Optional<UserEntity> userFromRepositoryById = userRepository.findById(id);
 
-        log.debug("************ updateFirstName() ---> userFromRepositoryById = " + userFromRepositoryById);
+        LOG.debug("************ updateFirstName() ---> userFromRepositoryById = " + userFromRepositoryById);
 
         if (userFromRepositoryById.isPresent()) {
             UserEntity userEntityUpdate = userFromRepositoryById.get();
@@ -82,16 +88,16 @@ public class UserServiceImpl implements UserService {
 
                 UserEntity savedUserFromRepository = userRepository.findById(id).get();
 
-                log.debug("************ updateFirstName() ---> savedUserFromRepository = " + savedUserFromRepository);
+                LOG.debug("************ updateFirstName() ---> savedUserFromRepository = " + savedUserFromRepository);
 
                 userResult = ConverterUser.mapEntityToDTO(savedUserFromRepository);
             }
         } else {
-            log.debug("************ updateFirstName() ---> user with this id = '" + id + "' not exist.");
+            LOG.debug("************ updateFirstName() ---> user with this id = '" + id + "' not exist.");
             throw new UserWithIdNotExistException("User with this id = '" + id + "' not exist.");
         }
 
-        log.debug("************ updateFirstName() ---> userResult = " + userResult);
+        LOG.debug("************ updateFirstName() ---> userResult = " + userResult);
 
         return userResult;
     }
@@ -104,11 +110,11 @@ public class UserServiceImpl implements UserService {
     public UserDTO updateLastName(Long id, String lastName) throws UserWithIdNotExistException {
         UserDTO userResult = null;
 
-        log.debug("************ updateLastName() ---> id = " + id + " ---> lastName = " + lastName);
+        LOG.debug("************ updateLastName() ---> id = " + id + " ---> lastName = " + lastName);
 
         Optional<UserEntity> userFromRepositoryById = userRepository.findById(id);
 
-        log.debug("************ updateLastName() ---> userFromRepositoryById = " + userFromRepositoryById);
+        LOG.debug("************ updateLastName() ---> userFromRepositoryById = " + userFromRepositoryById);
 
         if (userFromRepositoryById.isPresent()) {
             UserEntity userEntityUpdate = userFromRepositoryById.get();
@@ -121,16 +127,16 @@ public class UserServiceImpl implements UserService {
 
                 UserEntity savedUserFromRepository = userRepository.findById(id).get();
 
-                log.debug("************ updateLastName() ---> savedUserFromRepository = " + savedUserFromRepository);
+                LOG.debug("************ updateLastName() ---> savedUserFromRepository = " + savedUserFromRepository);
 
                 userResult = ConverterUser.mapEntityToDTO(savedUserFromRepository);
             }
         } else {
-            log.debug("************ updateLastName() ---> user with this id = '" + id + "' not exist.");
+            LOG.debug("************ updateLastName() ---> user with this id = '" + id + "' not exist.");
             throw new UserWithIdNotExistException("User with this id = '" + id + "' not exist.");
         }
 
-        log.debug("************ updateLastName() ---> userResult = " + userResult);
+        LOG.debug("************ updateLastName() ---> userResult = " + userResult);
 
         return userResult;
     }
@@ -143,16 +149,16 @@ public class UserServiceImpl implements UserService {
     public UserDTO updateEmail(Long id, String email) throws UserWithIdNotExistException, UserWithEmailExistException {
         UserDTO userResult = null;
 
-        log.debug("************ updateEmail() ---> id = " + id + " ---> email = " + email);
+        LOG.debug("************ updateEmail() ---> id = " + id + " ---> email = " + email);
 
         if (userRepository.findByEmail(email).isPresent()) {
-            log.debug("************ updateEmail() ---> user with this email = '" + email + "' exist.");
+            LOG.debug("************ updateEmail() ---> user with this email = '" + email + "' exist.");
             throw new UserWithEmailExistException("User with this email = '" + email + "' exist. It is not allowed to register multiple users with the same e-mail.");
         }
 
         Optional<UserEntity> userFromRepositoryById = userRepository.findById(id);
 
-        log.debug("************ updateEmail() ---> userFromRepositoryById = " + userFromRepositoryById);
+        LOG.debug("************ updateEmail() ---> userFromRepositoryById = " + userFromRepositoryById);
 
         if (userFromRepositoryById.isPresent()) {
             UserEntity userEntityUpdate = userFromRepositoryById.get();
@@ -164,16 +170,16 @@ public class UserServiceImpl implements UserService {
 
                 Optional<UserEntity> updatedUserFromRepository = userRepository.findById(id);
 
-                log.debug("************ updateEmail() ---> savedUserFromRepository = " + updatedUserFromRepository.get());
+                LOG.debug("************ updateEmail() ---> savedUserFromRepository = " + updatedUserFromRepository.get());
 
                 userResult = ConverterUser.mapEntityToDTO(updatedUserFromRepository.get());
             }
         } else {
-            log.debug("************ updateEmail() ---> user with this id = '" + id + "' not exist.");
+            LOG.debug("************ updateEmail() ---> user with this id = '" + id + "' not exist.");
             throw new UserWithIdNotExistException("User with this id = '" + id + "' not exist.");
         }
 
-        log.debug("************ updateEmail() ---> userResult = " + userResult);
+        LOG.debug("************ updateEmail() ---> userResult = " + userResult);
 
         return userResult;
     }
@@ -186,11 +192,11 @@ public class UserServiceImpl implements UserService {
     public UserDTO updatePassword(Long id, String password) throws UserWithIdNotExistException {
         UserDTO userResult = null;
 
-        log.debug("************ updatePassword() ---> id = " + id + " ---> password = " + password);
+        LOG.debug("************ updatePassword() ---> id = " + id + " ---> password = " + password);
 
         Optional<UserEntity> userFromRepositoryById = userRepository.findById(id);
 
-        log.debug("************ updatePassword() ---> userFromRepositoryById = " + userFromRepositoryById);
+        LOG.debug("************ updatePassword() ---> userFromRepositoryById = " + userFromRepositoryById);
 
         if (userFromRepositoryById.isPresent()) {
             UserEntity userEntityUpdate = userFromRepositoryById.get();
@@ -202,16 +208,16 @@ public class UserServiceImpl implements UserService {
 
                 Optional<UserEntity> updatedUserFromRepository = userRepository.findById(id);
 
-                log.debug("************ updatePassword() ---> updatedUserFromRepository = " + updatedUserFromRepository.get());
+                LOG.debug("************ updatePassword() ---> updatedUserFromRepository = " + updatedUserFromRepository.get());
 
                 userResult = ConverterUser.mapEntityToDTO(updatedUserFromRepository.get());
             }
         } else {
-            log.debug("************ updatePassword() ---> user with this id = '" + id + "' not exist.");
+            LOG.debug("************ updatePassword() ---> user with this id = '" + id + "' not exist.");
             throw new UserWithIdNotExistException("User with this id = '" + id + "' not exist.");
         }
 
-        log.debug("************ updatePassword() ---> userResult = " + userResult);
+        LOG.debug("************ updatePassword() ---> userResult = " + userResult);
 
         return userResult;
     }
@@ -224,11 +230,11 @@ public class UserServiceImpl implements UserService {
     public UserDTO updateBirthday(Long id, LocalDate birthday) throws UserWithIdNotExistException {
         UserDTO userResult = null;
 
-        log.debug("************ updateBirthday() ---> id = " + id + " ---> birthday = " + birthday);
+        LOG.debug("************ updateBirthday() ---> id = " + id + " ---> birthday = " + birthday);
 
         Optional<UserEntity> userFromRepositoryById = userRepository.findById(id);
 
-        log.debug("************ updateBirthday() ---> userFromRepositoryById = " + userFromRepositoryById);
+        LOG.debug("************ updateBirthday() ---> userFromRepositoryById = " + userFromRepositoryById);
 
         if (userFromRepositoryById.isPresent()) {
             UserEntity userEntityUpdate = userFromRepositoryById.get();
@@ -238,16 +244,16 @@ public class UserServiceImpl implements UserService {
 
                 Optional<UserEntity> savedUserFromRepository = userRepository.findById(id);
 
-                log.debug("************ updateBirthday() ---> savedUserFromRepository = " + savedUserFromRepository.get());
+                LOG.debug("************ updateBirthday() ---> savedUserFromRepository = " + savedUserFromRepository.get());
 
                 userResult = ConverterUser.mapEntityToDTO(savedUserFromRepository.get());
             }
         } else {
-            log.debug("************ updateBirthday() ---> user with this id = '" + id + "' not exist.");
+            LOG.debug("************ updateBirthday() ---> user with this id = '" + id + "' not exist.");
             throw new UserWithIdNotExistException("User with this id = '" + id + "' not exist.");
         }
 
-        log.debug("************ updateBirthday() ---> userResult = " + userResult);
+        LOG.debug("************ updateBirthday() ---> userResult = " + userResult);
 
         return userResult;
     }
@@ -260,11 +266,11 @@ public class UserServiceImpl implements UserService {
     public Boolean delete(Long userId) throws UserWithIdNotExistException {
         boolean isDeletedUser = false;
 
-        log.debug("************ delete() ---> user = " + userId);
+        LOG.debug("************ delete() ---> user = " + userId);
 
         Optional<UserEntity> userFromRepositoryById = userRepository.findById(userId);
 
-        log.debug("************ delete() ---> userFromRepositoryById = " + userFromRepositoryById);
+        LOG.debug("************ delete() ---> userFromRepositoryById = " + userFromRepositoryById);
 
         if (userFromRepositoryById.isPresent()) {
 
@@ -273,28 +279,28 @@ public class UserServiceImpl implements UserService {
             Boolean isDeletedBankData = null;
             try {
                 isDeletedBankData = bankDataService.deleteByUser(userDTO);
-                log.debug("************ delete() ---> isDeletedBankData = " + isDeletedBankData);
+                LOG.debug("************ delete() ---> isDeletedBankData = " + isDeletedBankData);
             } catch (UserNotHaveBankDataException userNotHaveBankDataException) {
-                log.error("User with this id = '" + userId + "' not have bank data.", userNotHaveBankDataException);
+                LOG.error("User with this id = '" + userId + "' not have bank data.", userNotHaveBankDataException);
             }
 
             Boolean isDeletedAddress = null;
             try {
                 isDeletedAddress = addressService.deleteByUser(userDTO);
-                log.debug("************ delete() ---> isDeletedAddress = " + isDeletedAddress);
+                LOG.debug("************ delete() ---> isDeletedAddress = " + isDeletedAddress);
             } catch (UserNotHaveAddressException userNotHaveAddressException) {
-                log.error("User with this id = '" + userId + "' not have address.", userNotHaveAddressException);
+                LOG.error("User with this id = '" + userId + "' not have address.", userNotHaveAddressException);
             }
 
             userRepository.deleteById(userId);
             isDeletedUser = true;
 
         } else {
-            log.debug("************ delete() ---> user with this id = '" + userId + "' not exist.");
+            LOG.debug("************ delete() ---> user with this id = '" + userId + "' not exist.");
             throw new UserWithIdNotExistException("User with this id = '" + userId + "' not exist.");
         }
 
-        log.debug("************ delete() ---> isDeletedUser = " + isDeletedUser);
+        LOG.debug("************ delete() ---> isDeletedUser = " + isDeletedUser);
 
         return isDeletedUser;
     }
@@ -306,15 +312,15 @@ public class UserServiceImpl implements UserService {
     public UserDTO findById(Long id) {
         UserDTO userResult = null;
 
-        log.debug("************ findById() ---> id = " + id);
+        LOG.debug("************ findById() ---> id = " + id);
 
         Optional<UserEntity> userFromRepositoryById = userRepository.findById(id);
 
-        log.debug("************ findById() ---> userFromRepositoryById = " + userFromRepositoryById);
+        LOG.debug("************ findById() ---> userFromRepositoryById = " + userFromRepositoryById);
 
         if (userFromRepositoryById.isPresent()) userResult = ConverterUser.mapEntityToDTO(userFromRepositoryById.get());
 
-        log.debug("************ findById() ---> userResult = " + userResult);
+        LOG.debug("************ findById() ---> userResult = " + userResult);
 
         return userResult;
     }
@@ -327,16 +333,16 @@ public class UserServiceImpl implements UserService {
         Set<UserDTO> userResultSet = null;
 
 
-        log.debug("************ findByFirstName() ---> firstName = " + firstName);
+        LOG.debug("************ findByFirstName() ---> firstName = " + firstName);
 
         Set<UserEntity> usersFromRepositoryByFirstName = userRepository.findByFirstName(firstName);
 
-        log.debug("************ findByFirstName() ---> usersFromRepositoryByFirstName = " + usersFromRepositoryByFirstName);
+        LOG.debug("************ findByFirstName() ---> usersFromRepositoryByFirstName = " + usersFromRepositoryByFirstName);
 
         if (!usersFromRepositoryByFirstName.isEmpty())
             userResultSet = ConverterUser.mapSetEntityToSetDTO(usersFromRepositoryByFirstName);
 
-        log.debug("************ findByFirstName() ---> userResultSet = " + userResultSet);
+        LOG.debug("************ findByFirstName() ---> userResultSet = " + userResultSet);
 
         return userResultSet;
     }
@@ -348,16 +354,16 @@ public class UserServiceImpl implements UserService {
     public Set<UserDTO> findByLastName(String lastName) {
         Set<UserDTO> userResultSet = null;
 
-        log.debug("************ findByLastName() ---> lastName = " + lastName);
+        LOG.debug("************ findByLastName() ---> lastName = " + lastName);
 
         Set<UserEntity> usersFromRepositoryByLastName = userRepository.findByLastName(lastName);
 
-        log.debug("************ findByLastName() ---> usersFromRepositoryByLastName = " + usersFromRepositoryByLastName);
+        LOG.debug("************ findByLastName() ---> usersFromRepositoryByLastName = " + usersFromRepositoryByLastName);
 
         if (!usersFromRepositoryByLastName.isEmpty())
             userResultSet = ConverterUser.mapSetEntityToSetDTO(usersFromRepositoryByLastName);
 
-        log.debug("************ findByLastName() ---> userResultSet = " + userResultSet);
+        LOG.debug("************ findByLastName() ---> userResultSet = " + userResultSet);
 
         return userResultSet;
     }
@@ -369,16 +375,16 @@ public class UserServiceImpl implements UserService {
     public UserDTO findByEmail(String email) {
         UserDTO userResult = null;
 
-        log.debug("************ findByEmail() ---> email = " + email);
+        LOG.debug("************ findByEmail() ---> email = " + email);
 
         Optional<UserEntity> usersFromRepositoryByEmail = userRepository.findByEmail(email);
 
-        log.debug("************ findByEmail() ---> usersFromRepositoryByEmail = " + usersFromRepositoryByEmail);
+        LOG.debug("************ findByEmail() ---> usersFromRepositoryByEmail = " + usersFromRepositoryByEmail);
 
         if (usersFromRepositoryByEmail.isPresent())
             userResult = ConverterUser.mapEntityToDTO(usersFromRepositoryByEmail.get());
 
-        log.debug("************ findByEmail() ---> userResult = " + userResult);
+        LOG.debug("************ findByEmail() ---> userResult = " + userResult);
 
         return userResult;
     }
@@ -390,16 +396,16 @@ public class UserServiceImpl implements UserService {
     public Set<UserDTO> findByFirstNameAndLastName(String firstName, String lastName) {
         Set<UserDTO> userResultSet = null;
 
-        log.debug("************ findByFirstNameAndLastName() ---> firstName = " + firstName + " ---> lastName = " + lastName);
+        LOG.debug("************ findByFirstNameAndLastName() ---> firstName = " + firstName + " ---> lastName = " + lastName);
 
         Set<UserEntity> usersFromRepositoryByFullName = userRepository.findByFirstNameAndLastName(firstName, lastName);
 
-        log.debug("************ findByFirstNameAndLastName() ---> usersFromRepositoryByFullName = " + usersFromRepositoryByFullName);
+        LOG.debug("************ findByFirstNameAndLastName() ---> usersFromRepositoryByFullName = " + usersFromRepositoryByFullName);
 
         if (!usersFromRepositoryByFullName.isEmpty())
             userResultSet = ConverterUser.mapSetEntityToSetDTO(usersFromRepositoryByFullName);
 
-        log.debug("************ findByFirstNameAndLastName() ---> userResultSet = " + userResultSet);
+        LOG.debug("************ findByFirstNameAndLastName() ---> userResultSet = " + userResultSet);
 
         return userResultSet;
     }
@@ -411,16 +417,16 @@ public class UserServiceImpl implements UserService {
     public Set<UserDTO> findByBirthday(LocalDate birthday) {
         Set<UserDTO> userResultSet = null;
 
-        log.debug("************ findByBirthday() ---> birthday = " + birthday);
+        LOG.debug("************ findByBirthday() ---> birthday = " + birthday);
 
         Set<UserEntity> usersFromRepositoryByBirthday = userRepository.findByBirthday(birthday);
 
-        log.debug("************ findByBirthday() ---> usersFromRepositoryByBirthday = " + usersFromRepositoryByBirthday);
+        LOG.debug("************ findByBirthday() ---> usersFromRepositoryByBirthday = " + usersFromRepositoryByBirthday);
 
         if (!usersFromRepositoryByBirthday.isEmpty())
             userResultSet = ConverterUser.mapSetEntityToSetDTO(usersFromRepositoryByBirthday);
 
-        log.debug("************ findByBirthday() ---> userResultSet = " + userResultSet);
+        LOG.debug("************ findByBirthday() ---> userResultSet = " + userResultSet);
 
         return userResultSet;
     }
@@ -435,12 +441,12 @@ public class UserServiceImpl implements UserService {
         Set<UserEntity> allUsersFromRepository = new TreeSet<>(Comparator.comparing(UserEntity::getId));
         allUsersFromRepository.addAll(userRepository.findAll());
 
-        log.debug("************ findAll() ---> allUsersFromRepository = " + allUsersFromRepository);
+        LOG.debug("************ findAll() ---> allUsersFromRepository = " + allUsersFromRepository);
 
         if (!allUsersFromRepository.isEmpty())
             userResultSet = ConverterUser.mapSetEntityToSetDTO(allUsersFromRepository);
 
-        log.debug("************ findAll() ---> userResultSet = " + userResultSet);
+        LOG.debug("************ findAll() ---> userResultSet = " + userResultSet);
 
         return userResultSet;
     }

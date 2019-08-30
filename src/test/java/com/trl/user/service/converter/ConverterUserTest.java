@@ -24,53 +24,59 @@ public class ConverterUserTest {
     @Before
     public void setUp() throws Exception {
 
-        expected_UserEntity = new UserEntity()
-                .setId(1L)
-                .setFirstName("First Name User_1")
-                .setLastName("Last Name User_1")
-                .setEmail("user_1@email.com")
-                .setPassword("strong_password")
-                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1));
+        expected_UserEntity = new UserEntity(
+                1L,
+                "First Name User_1",
+                "Last Name User_1",
+                "user_1@email.com",
+                "strong_password",
+                LocalDate.of(1970, Month.JANUARY, 1)
+        );
 
-        expected_UserDTO = new UserDTO()
-                .setId(1L)
-                .setFirstName("First Name User_1")
-                .setLastName("Last Name User_1")
-                .setEmail("user_1@email.com")
-                .setPassword("strong_password")
-                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1));
+        expected_UserDTO = new UserDTO(
+                1L,
+                "First Name User_1",
+                "Last Name User_1",
+                "user_1@email.com",
+                "strong_password",
+                LocalDate.of(1970, Month.JANUARY, 1)
+        );
 
         expected_UserDTOSet = new HashSet<>();
-        expected_UserDTOSet.add(new UserDTO()
-                .setId(1L)
-                .setFirstName("First Name User_1")
-                .setLastName("Last Name User_1")
-                .setEmail("user_1@email.com")
-                .setPassword("strong_password")
-                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1)));
-        expected_UserDTOSet.add(new UserDTO()
-                .setId(2L)
-                .setFirstName("First Name User_2")
-                .setLastName("Last Name User_2")
-                .setEmail("user_2@email.com")
-                .setPassword("strong_password")
-                .setBirthday(LocalDate.of(1970, Month.FEBRUARY, 2)));
+        expected_UserDTOSet.add(new UserDTO(
+                1L,
+                "First Name User_1",
+                "Last Name User_1",
+                "user_1@email.com",
+                "strong_password",
+                LocalDate.of(1970, Month.JANUARY, 1))
+        );
+        expected_UserDTOSet.add(new UserDTO(
+                2L,
+                "First Name User_2",
+                "Last Name User_2",
+                "user_2@email.com",
+                "strong_password",
+                LocalDate.of(1970, Month.FEBRUARY, 2))
+        );
 
         expected_UserEntitySet = new HashSet<>();
-        expected_UserEntitySet.add(new UserEntity()
-                .setId(1L)
-                .setFirstName("First Name User_1")
-                .setLastName("Last Name User_1")
-                .setEmail("user_1@email.com")
-                .setPassword("strong_password")
-                .setBirthday(LocalDate.of(1970, Month.JANUARY, 1)));
-        expected_UserEntitySet.add(new UserEntity()
-                .setId(2L)
-                .setFirstName("First Name User_2")
-                .setLastName("Last Name User_2")
-                .setEmail("user_2@email.com")
-                .setPassword("strong_password")
-                .setBirthday(LocalDate.of(1970, Month.FEBRUARY, 2)));
+        expected_UserEntitySet.add(new UserEntity(
+                1L,
+                "First Name User_1",
+                "Last Name User_1",
+                "user_1@email.com",
+                "strong_password",
+                LocalDate.of(1970, Month.JANUARY, 1))
+        );
+        expected_UserEntitySet.add(new UserEntity(
+                2L,
+                "First Name User_2",
+                "Last Name User_2",
+                "user_2@email.com",
+                "strong_password",
+                LocalDate.of(1970, Month.FEBRUARY, 2))
+        );
 
     }
 
@@ -91,44 +97,50 @@ public class ConverterUserTest {
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_Id() {
-        UserDTO actual_UserDTO = ConverterUser.mapEntityToDTO(new UserEntity()
-                .setId(2L));
-        assertNotEquals(expected_UserDTO.getId(), actual_UserDTO.getId());
+        Long incorrectId = 1000000000000000000L;
+
+        UserDTO actual_UserDTO = ConverterUser.mapEntityToDTO(expected_UserEntity);
+        assertNotEquals(incorrectId, actual_UserDTO.getId());
     }
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_FirstName() {
-        UserDTO actual_UserDTO = ConverterUser.mapEntityToDTO(new UserEntity()
-                .setFirstName("First Name User_1***"));
-        assertNotEquals(expected_UserDTO.getFirstName(), actual_UserDTO.getFirstName());
+        String incorrectFirstName = "___";
+
+        UserDTO actual_UserDTO = ConverterUser.mapEntityToDTO(expected_UserEntity);
+        assertNotEquals(incorrectFirstName, actual_UserDTO.getFirstName());
     }
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_LastName() {
-        UserDTO actual_UserDTO = ConverterUser.mapEntityToDTO(new UserEntity()
-                .setLastName("Last Name User_1***"));
-        assertNotEquals(expected_UserDTO.getLastName(), actual_UserDTO.getLastName());
+        String incorrectLastName = "___";
+
+        UserDTO actual_UserDTO = ConverterUser.mapEntityToDTO(expected_UserEntity);
+        assertNotEquals(incorrectLastName, actual_UserDTO.getLastName());
     }
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_Email() {
-        UserDTO actual_UserDTO = ConverterUser.mapEntityToDTO(new UserEntity()
-                .setEmail("user_1@email.com***"));
-        assertNotEquals(expected_UserDTO.getEmail(), actual_UserDTO.getEmail());
+        String incorrectEmail = "___";
+
+        UserDTO actual_UserDTO = ConverterUser.mapEntityToDTO(expected_UserEntity);
+        assertNotEquals(incorrectEmail, actual_UserDTO.getEmail());
     }
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_Password() {
-        UserDTO actual_UserDTO = ConverterUser.mapEntityToDTO(new UserEntity()
-                .setPassword("strong_password***"));
-        assertNotEquals(expected_UserDTO.getPassword(), actual_UserDTO.getPassword());
+        String incorrectPassword = "___";
+
+        UserDTO actual_UserDTO = ConverterUser.mapEntityToDTO(expected_UserEntity);
+        assertNotEquals(incorrectPassword, actual_UserDTO.getPassword());
     }
 
     @Test
     public void mapEntityToDTO_Incorrect_Value_Birthday() {
-        UserDTO actual_UserDTO = ConverterUser.mapEntityToDTO(new UserEntity()
-                .setBirthday(LocalDate.of(1970, Month.JANUARY, 2)));
-        assertNotEquals(expected_UserDTO.getBirthday(), actual_UserDTO.getBirthday());
+        LocalDate incorrectBirthday = LocalDate.MAX;
+
+        UserDTO actual_UserDTO = ConverterUser.mapEntityToDTO(expected_UserEntity);
+        assertNotEquals(incorrectBirthday, actual_UserDTO.getBirthday());
     }
 
     // =================================================================================================================
@@ -163,44 +175,50 @@ public class ConverterUserTest {
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_Id() {
-        UserEntity actual_UserEntity = ConverterUser.mapDTOToEntity(new UserDTO()
-                .setId(2L));
-        assertNotEquals(expected_UserEntity.getId(), actual_UserEntity.getId());
+        Long incorrectId = 1000000000000000000L;
+
+        UserEntity actual_UserEntity = ConverterUser.mapDTOToEntity(expected_UserDTO);
+        assertNotEquals(incorrectId, actual_UserEntity.getId());
     }
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_FirstName() {
-        UserEntity actual_UserEntity = ConverterUser.mapDTOToEntity(new UserDTO()
-                .setFirstName("First Name User_1***"));
-        assertNotEquals(expected_UserEntity.getFirstName(), actual_UserEntity.getFirstName());
+        String incorrectFirstName = "___";
+
+        UserEntity actual_UserEntity = ConverterUser.mapDTOToEntity(expected_UserDTO);
+        assertNotEquals(incorrectFirstName, actual_UserEntity.getFirstName());
     }
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_LastName() {
-        UserEntity actual_UserEntity = ConverterUser.mapDTOToEntity(new UserDTO()
-                .setLastName("Last Name User_1***"));
-        assertNotEquals(expected_UserEntity.getLastName(), actual_UserEntity.getLastName());
+        String incorrectLastName = "___";
+
+        UserEntity actual_UserEntity = ConverterUser.mapDTOToEntity(expected_UserDTO);
+        assertNotEquals(incorrectLastName, actual_UserEntity.getLastName());
     }
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_Email() {
-        UserEntity actual_UserEntity = ConverterUser.mapDTOToEntity(new UserDTO()
-                .setEmail("user_1@email.com***"));
-        assertNotEquals(expected_UserEntity.getEmail(), actual_UserEntity.getEmail());
+        String incorrectEmail = "___";
+
+        UserEntity actual_UserEntity = ConverterUser.mapDTOToEntity(expected_UserDTO);
+        assertNotEquals(incorrectEmail, actual_UserEntity.getEmail());
     }
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_Password() {
-        UserEntity actual_UserEntity = ConverterUser.mapDTOToEntity(new UserDTO()
-                .setPassword("strong_password***"));
-        assertNotEquals(expected_UserEntity.getPassword(), actual_UserEntity.getPassword());
+        String incorrectPassword = "___";
+
+        UserEntity actual_UserEntity = ConverterUser.mapDTOToEntity(expected_UserDTO);
+        assertNotEquals(incorrectPassword, actual_UserEntity.getPassword());
     }
 
     @Test
     public void mapDTOToEntity_Incorrect_Value_Birthday() {
-        UserEntity actual_UserEntity = ConverterUser.mapDTOToEntity(new UserDTO()
-                .setBirthday(LocalDate.of(1970, Month.JANUARY, 2)));
-        assertNotEquals(expected_UserEntity.getBirthday(), actual_UserEntity.getBirthday());
+        LocalDate incorrectBirthday = LocalDate.MAX;
+
+        UserEntity actual_UserEntity = ConverterUser.mapDTOToEntity(expected_UserDTO);
+        assertNotEquals(incorrectBirthday, actual_UserEntity.getBirthday());
     }
 
     // =================================================================================================================

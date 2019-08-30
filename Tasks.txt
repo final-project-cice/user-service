@@ -1,8 +1,6 @@
 
 Hacer tests.
 
- Hacer cambios poner id de user en path parameter.
-
 
  UserResource_IntegrationTest
  public void findByFirstNameAndLastName_usersWithFirstNameAndLastNameNotFound()
@@ -17,7 +15,3 @@ pensar en caso cuando bank data no esta correcta.
 
 
 ??????? Comprobar de nullos, todos tarametros que entran al methodos.
-
-ya encontrado la manera como se  puede pasar los errores al frontend, implementar esto en todos methodos que se necesita.
-
-Cambiar antiguo api de date por nuevo api de date de java 8
