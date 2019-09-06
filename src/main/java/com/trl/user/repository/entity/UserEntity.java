@@ -27,11 +27,9 @@ public class UserEntity {
     private String password;
 
     @OneToMany(fetch = FetchType.EAGER, targetEntity = BankDataEntity.class)
-    @Column(name = "bankData", updatable = false, nullable = false)
     private Set<BankDataEntity> bankData;
 
     @OneToMany(fetch = FetchType.EAGER, targetEntity = AddressEntity.class)
-    @Column(name = "address", updatable = false, nullable = false)
     private Set<AddressEntity> address;
 
     @Column(name = " birthday", nullable = false)
