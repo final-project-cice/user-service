@@ -242,7 +242,7 @@ public class AddressServiceImpl implements AddressService {
      */
     @Transactional
     @Override
-    public AddressDTO updatePostCode(Long id, Long postCode) throws AddressNotExistException {
+    public AddressDTO updatePostCode(Long id, Integer postCode) throws AddressNotExistException {
         AddressDTO addressResult = null;
 
         LOG.debug("************ updatePostCode() ---> id = " + id + " ---> postCode = " + postCode);
@@ -451,7 +451,7 @@ public class AddressServiceImpl implements AddressService {
      * @return
      */
     @Override
-    public Set<AddressDTO> findByPostcode(Long postcode) throws AddressNotExistException {
+    public Set<AddressDTO> findByPostcode(Integer postcode) throws AddressNotExistException {
         Set<AddressDTO> addressSetResult = null;
 
         LOG.debug("************ findByPostcode() ---> postcode = " + postcode);

@@ -9,13 +9,13 @@ public class AddressDTO {
     private String city;
     private String street;
     private String houseNumber;
-    private Long postcode;
+    private Integer postcode;
     private UserDTO user;
 
     public AddressDTO() {
     }
 
-    public AddressDTO(Long id, String country, String city, String street, String houseNumber, Long postcode) {
+    public AddressDTO(Long id, String country, String city, String street, String houseNumber, Integer postcode) {
         this.id = id;
         this.country = country;
         this.city = city;
@@ -24,7 +24,7 @@ public class AddressDTO {
         this.postcode = postcode;
     }
 
-    public AddressDTO(Long id, String country, String city, String street, String houseNumber, Long postcode, UserDTO user) {
+    public AddressDTO(Long id, String country, String city, String street, String houseNumber, Integer postcode, UserDTO user) {
         this.id = id;
         this.country = country;
         this.city = city;
@@ -54,7 +54,7 @@ public class AddressDTO {
         return houseNumber;
     }
 
-    public Long getPostcode() {
+    public Integer getPostcode() {
         return postcode;
     }
 

@@ -19,7 +19,7 @@ public interface AddressService {
 
     AddressDTO updateHouseNumber(Long id, String houseNumber) throws AddressNotExistException;
 
-    AddressDTO updatePostCode(Long id, Long postCode) throws AddressNotExistException;
+    AddressDTO updatePostCode(Long id, Integer postCode) throws AddressNotExistException;
 
 
     Boolean deleteById(Long id);
@@ -37,7 +37,7 @@ public interface AddressService {
 
     Set<AddressDTO> findByHouseNumber(String houseNumber) throws AddressNotExistException;
 
-    Set<AddressDTO> findByPostcode(Long postCode) throws AddressNotExistException;
+    Set<AddressDTO> findByPostcode(Integer postCode) throws AddressNotExistException;
 
     Set<AddressDTO> findByUser(UserDTO userDTO) throws AddressNotExistException;
 

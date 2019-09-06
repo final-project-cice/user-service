@@ -169,7 +169,7 @@ public class AddressResource {
     }
 
     @PostMapping(path = "/update/postcode/{id}")
-    public ResponseEntity<AddressDTO> updatePostcode(@PathVariable Long id, @RequestBody OneGenericValueDetailsRequestModel<Long> postcode) {
+    public ResponseEntity<AddressDTO> updatePostcode(@PathVariable Long id, @RequestBody OneGenericValueDetailsRequestModel<Integer> postcode) {
         ResponseEntity<AddressDTO> response = null;
 
         LOG.debug("************ updatePostcode() ---> id = " + id + " ---> postcode = " + postcode.getValue());
@@ -313,7 +313,7 @@ public class AddressResource {
     }
 
     @PostMapping(path = "/findByPostcode")
-    public ResponseEntity<Set<AddressDTO>> findByPostcode(@RequestBody OneGenericValueDetailsRequestModel<Long> postcode) {
+    public ResponseEntity<Set<AddressDTO>> findByPostcode(@RequestBody OneGenericValueDetailsRequestModel<Integer> postcode) {
         ResponseEntity<Set<AddressDTO>> response = null;
 
         LOG.debug("************ findByPostcode() ---> postcode = " + postcode);

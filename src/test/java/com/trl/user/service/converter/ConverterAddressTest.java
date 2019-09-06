@@ -26,13 +26,13 @@ public class ConverterAddressTest {
     @Before
     public void setUp() throws Exception {
 
-        expected_AddressDTO = new AddressDTO(1L, "Spain", "Madrid", "Calle", "12", 1111111L,
+        expected_AddressDTO = new AddressDTO(1L, "Spain", "Madrid", "Calle", "12", 1111111,
                 new UserDTO(1L, "First Name User", "Last Name User",
                         "tsyupryk.roman.lyubomyrovych@gmail.com", "strong_password",
                         LocalDate.of(1970, Month.JANUARY, 1))
         );
 
-        expected_AddressEntity = new AddressEntity(1L, "Spain", "Madrid", "Calle", "12", 1111111L,
+        expected_AddressEntity = new AddressEntity(1L, "Spain", "Madrid", "Calle", "12", 1111111,
                 new UserEntity(1L, "First Name User", "Last Name User",
                         "tsyupryk.roman.lyubomyrovych@gmail.com", "strong_password",
                         LocalDate.of(1970, Month.JANUARY, 1))
@@ -40,13 +40,13 @@ public class ConverterAddressTest {
 
         // =================== Set
         expected_AddressDTOSet = new HashSet<>();
-        expected_AddressDTOSet.add(new AddressDTO(1L, "Spain", "Madrid", "Calle", "12", 1111111L,
+        expected_AddressDTOSet.add(new AddressDTO(1L, "Spain", "Madrid", "Calle", "12", 1111111,
                 new UserDTO(1L, "First Name User_1", "Last Name User_1",
                         "user_1@gmail.com", "strong_password",
                         LocalDate.of(1970, Month.JANUARY, 1)))
         );
 
-        expected_AddressDTOSet.add(new AddressDTO(2L, "Spain", "Barcelona", "Calle", "1", 22222222L,
+        expected_AddressDTOSet.add(new AddressDTO(2L, "Spain", "Barcelona", "Calle", "1", 22222222,
                 new UserDTO(2L, "First Name User_2", "Last Name User_2",
                         "user_2@gmail.com", "strong_password",
                         LocalDate.of(1970, Month.JANUARY, 1)))
@@ -54,13 +54,13 @@ public class ConverterAddressTest {
 
 
         expected_AddressEntitySet = new HashSet<>();
-        expected_AddressEntitySet.add(new AddressEntity(1L, "Spain", "Madrid", "Calle", "12", 1111111L,
+        expected_AddressEntitySet.add(new AddressEntity(1L, "Spain", "Madrid", "Calle", "12", 1111111,
                 new UserEntity(1L, "First Name User_1", "Last Name User_1",
                         "user_1@gmail.com", "strong_password",
                         LocalDate.of(1970, Month.JANUARY, 1)))
         );
 
-        expected_AddressEntitySet.add(new AddressEntity(2L, "Spain", "Barcelona", "Calle", "1", 22222222L,
+        expected_AddressEntitySet.add(new AddressEntity(2L, "Spain", "Barcelona", "Calle", "1", 22222222,
                 new UserEntity(2L, "First Name User_2", "Last Name User_2",
                         "user_2@gmail.com", "strong_password",
                         LocalDate.of(1970, Month.JANUARY, 1)))

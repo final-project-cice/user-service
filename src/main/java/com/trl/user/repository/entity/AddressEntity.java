@@ -25,7 +25,7 @@ public class AddressEntity {
     private String houseNumber;
 
     @Column(name = "postcode", nullable = false)
-    private Long postcode;
+    private Integer postcode;
 
     @ManyToOne
     @JoinColumn(name = "usr_id", updatable = false, nullable = false)
@@ -34,7 +34,7 @@ public class AddressEntity {
     public AddressEntity() {
     }
 
-    public AddressEntity(Long id, String country, String city, String street, String houseNumber, Long postcode) {
+    public AddressEntity(Long id, String country, String city, String street, String houseNumber, Integer postcode) {
         this.id = id;
         this.country = country;
         this.city = city;
@@ -43,7 +43,7 @@ public class AddressEntity {
         this.postcode = postcode;
     }
 
-    public AddressEntity(Long id, String country, String city, String street, String houseNumber, Long postcode, UserEntity user) {
+    public AddressEntity(Long id, String country, String city, String street, String houseNumber, Integer postcode, UserEntity user) {
         this.id = id;
         this.country = country;
         this.city = city;
@@ -73,7 +73,7 @@ public class AddressEntity {
         return houseNumber;
     }
 
-    public Long getPostcode() {
+    public Integer getPostcode() {
         return postcode;
     }
 

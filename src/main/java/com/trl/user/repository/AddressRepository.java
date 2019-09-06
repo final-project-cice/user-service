@@ -54,7 +54,7 @@ public interface AddressRepository extends JpaRepository<AddressEntity, Long> {
      */
     @Modifying(clearAutomatically = true)
     @Query("update AddressEntity e set e.postcode=:postcode where e.id =:id")
-    void updatePostcode(@Param("id") Long id, @Param("postcode") Long postcode);
+    void updatePostcode(@Param("id") Long id, @Param("postcode") Integer postcode);
 
 
     /**
@@ -105,7 +105,7 @@ public interface AddressRepository extends JpaRepository<AddressEntity, Long> {
      * @return
      */
     @Query("SELECT new AddressEntity(e.id, e.country, e.city, e.street, e.houseNumber, e.postcode) FROM AddressEntity e WHERE e.postcode=:postcode")
-    Set<AddressEntity> findByPostcode(@Param(value = "postcode") Long postcode);
+    Set<AddressEntity> findByPostcode(@Param(value = "postcode") Integer postcode);
 
     /**
      * @param user
