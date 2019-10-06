@@ -15,3 +15,6 @@ pensar en caso cuando bank data no esta correcta.
 
 
 ??????? Comprobar de nullos, todos tarametros que entran al methodos.
+
+Optimisar las tablas de base de datos.
+Hacer bien los geters
