@@ -3,7 +3,7 @@ server:
   port: 8081
 #============================== Configuration Logging
 logging:
-  file: /tmp/log/user_test.log
+  file: /tmp/log/user-service_test.log
   level:
     root: INFO
     org.springframework: INFO
@@ -14,7 +14,7 @@ logging:
 spring:
   profiles.active: test
   application:
-    name: user
+    name: user-service
 
   #============================== Configuration Eureka Client
   eureka:
