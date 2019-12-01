@@ -1,0 +1,196 @@
+[source,options="nowrap"]
+----
+[ {
+  "addressId" : 1,
+  "country" : "Spain",
+  "city" : "Madrid",
+  "street" : "Calle Madrid",
+  "houseNumber" : "1A",
+  "postcode" : 1111,
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/users/1/addresses",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "add",
+    "href" : "http://localhost:8080/users/1/addresses",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getByAddressId",
+    "href" : "http://localhost:8080/users/addresses/{addressId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfAddressesByUserId",
+    "href" : "http://localhost:8080/users/1/addresses/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedAddressesByUserId",
+    "href" : "http://localhost:8080/users/1/addresses/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateByAddressId",
+    "href" : "http://localhost:8080/users/addresses/{addressId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteByAddressId",
+    "href" : "http://localhost:8080/users/addresses/{addressId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  } ]
+}, {
+  "addressId" : 2,
+  "country" : "Spain",
+  "city" : "Barcelona",
+  "street" : "Calle Barcelona",
+  "houseNumber" : "2B",
+  "postcode" : 22222,
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/users/1/addresses",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "add",
+    "href" : "http://localhost:8080/users/1/addresses",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getByAddressId",
+    "href" : "http://localhost:8080/users/addresses/{addressId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfAddressesByUserId",
+    "href" : "http://localhost:8080/users/1/addresses/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedAddressesByUserId",
+    "href" : "http://localhost:8080/users/1/addresses/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateByAddressId",
+    "href" : "http://localhost:8080/users/addresses/{addressId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteByAddressId",
+    "href" : "http://localhost:8080/users/addresses/{addressId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  } ]
+}, {
+  "addressId" : 3,
+  "country" : "Spain",
+  "city" : "Toledo",
+  "street" : "Calle Toledo",
+  "houseNumber" : "3C",
+  "postcode" : 33333,
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/users/1/addresses",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "add",
+    "href" : "http://localhost:8080/users/1/addresses",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getByAddressId",
+    "href" : "http://localhost:8080/users/addresses/{addressId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfAddressesByUserId",
+    "href" : "http://localhost:8080/users/1/addresses/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedAddressesByUserId",
+    "href" : "http://localhost:8080/users/1/addresses/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateByAddressId",
+    "href" : "http://localhost:8080/users/addresses/{addressId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteByAddressId",
+    "href" : "http://localhost:8080/users/addresses/{addressId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  } ]
+} ]
+----

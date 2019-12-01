@@ -1,0 +1,24 @@
+|===
+|Path|Type|Description
+
+|`+country+`
+|`+String+`
+|The name of country where lives user.
+
+|`+city+`
+|`+String+`
+|The name of city where lives user.
+
+|`+street+`
+|`+String+`
+|The name of street where lives user.
+
+|`+houseNumber+`
+|`+String+`
+|The number of house where lives user.
+
+|`+postcode+`
+|`+Number+`
+|The postcode of house where lives user.
+
+|===

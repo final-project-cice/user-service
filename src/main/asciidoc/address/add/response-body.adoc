@@ -1,0 +1,36 @@
+[source,options="nowrap"]
+----
+{
+  "addressId" : 4,
+  "country" : "TestDataNameCountry",
+  "city" : "TestDataNameCity",
+  "street" : "TestDataNameStreet",
+  "houseNumber" : "TestDataNameHouseNumber",
+  "postcode" : 1111,
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/users/1/addresses"
+    },
+    "getByAddressId" : {
+      "href" : "http://localhost:8080/users/addresses/4"
+    },
+    "getPageOfAddressesByUserId" : {
+      "href" : "http://localhost:8080/users/1/addresses/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedAddressesByUserId" : {
+      "href" : "http://localhost:8080/users/1/addresses/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateByAddressId" : {
+      "href" : "http://localhost:8080/users/addresses/4"
+    },
+    "deleteByAddressId" : {
+      "href" : "http://localhost:8080/users/addresses/4"
+    },
+    "deleteAllAddressesByUserId" : {
+      "href" : "http://localhost:8080/users/1/addresses"
+    }
+  }
+}
+----

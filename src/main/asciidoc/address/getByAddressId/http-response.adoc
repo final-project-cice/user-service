@@ -1,0 +1,42 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 998
+
+{
+  "addressId" : 1,
+  "country" : "Spain",
+  "city" : "Madrid",
+  "street" : "Calle Madrid",
+  "houseNumber" : "1A",
+  "postcode" : 1111,
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/users/addresses/1"
+    },
+    "add" : {
+      "href" : "http://localhost:8080/users/{userId}/addresses",
+      "templated" : true
+    },
+    "getPageOfAddressesByUserId" : {
+      "href" : "http://localhost:8080/users/{userId}/addresses/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedAddressesByUserId" : {
+      "href" : "http://localhost:8080/users/{userId}/addresses/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateByAddressId" : {
+      "href" : "http://localhost:8080/users/addresses/1"
+    },
+    "deleteByAddressId" : {
+      "href" : "http://localhost:8080/users/addresses/1"
+    },
+    "deleteAllAddressesByUserId" : {
+      "href" : "http://localhost:8080/users/{userId}/addresses",
+      "templated" : true
+    }
+  }
+}
+----

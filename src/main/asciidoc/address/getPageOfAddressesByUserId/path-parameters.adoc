@@ -1,0 +1,14 @@
+.+http://localhost:8081/users/{userId}/addresses/{startPage}/{pageSize}+
+|===
+|Parameter|Description
+
+|`+userId+`
+|The userId used to search for a addresses.
+
+|`+startPage+`
+|zero-based page index, must not be negative
+
+|`+pageSize+`
+|the size of the page to be returned, must be greater than 0
+
+|===

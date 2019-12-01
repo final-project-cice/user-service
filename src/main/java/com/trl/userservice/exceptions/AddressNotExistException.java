@@ -1,6 +1,6 @@
 package com.trl.userservice.exceptions;
 
-public class AddressNotExistException extends Exception {
+public class AddressNotExistException extends RuntimeException {
 
     public AddressNotExistException() {
     }

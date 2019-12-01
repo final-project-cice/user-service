@@ -1,0 +1,4 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/users/1/addresses/0/2/city' -i -X GET
+----

@@ -1,0 +1,6 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/users/addresses/1' -i -X PATCH \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{"country":"TestDataNameCountry","city":"TestDataNameCity","street":"TestDataNameStreet","houseNumber":"TestDataNameHouseNumber","postcode":1111}'
+----

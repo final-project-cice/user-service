@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ echo '{"country":"TestDataNameCountry","city":"TestDataNameCity","street":"TestDataNameStreet","houseNumber":"TestDataNameHouseNumber","postcode":1111}' | http PATCH 'http://localhost:8080/users/addresses/1' \
+    'Content-Type:application/json;charset=UTF-8'
+----

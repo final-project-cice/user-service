@@ -1,117 +1,41 @@
 package com.trl.userservice.repository;
 
 import com.trl.userservice.repository.entity.AddressEntity;
-import com.trl.userservice.repository.entity.UserEntity;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-import java.util.Set;
+import java.util.List;
 
 /**
+ * This interface is designed to support JPA for {@literal AddressEntity}.
  *
+ * @author Tsyupryk Roman
  */
 public interface AddressRepository extends JpaRepository<AddressEntity, Long> {
 
-
-    /**
-     * @param id
-     * @param country
-     */
-    @Modifying(clearAutomatically = true)
-    @Query("update AddressEntity e set e.country=:country where e.id =:id")
-    void updateCountry(@Param("id") Long id, @Param("country") String country);
-
-    /**
-     * @param id
-     * @param city
-     */
-    @Modifying(clearAutomatically = true)
-    @Query("update AddressEntity e set e.city=:city where e.id =:id")
-    void updateCity(@Param("id") Long id, @Param("city") String city);
-
-    /**
-     * @param id
-     * @param street
-     */
-    @Modifying(clearAutomatically = true)
-    @Query("update AddressEntity e set e.street=:street where e.id =:id")
-    void updateStreet(@Param("id") Long id, @Param("street") String street);
-
-    /**
-     * @param id
-     * @param houseNumber
-     */
-    @Modifying(clearAutomatically = true)
-    @Query("update AddressEntity e set e.houseNumber=:houseNumber where e.id =:id")
-    void updateHouseNumber(@Param("id") Long id, @Param("houseNumber") String houseNumber);
-
-    /**
-     * @param id
-     * @param postcode
-     */
-    @Modifying(clearAutomatically = true)
-    @Query("update AddressEntity e set e.postcode=:postcode where e.id =:id")
-    void updatePostcode(@Param("id") Long id, @Param("postcode") Integer postcode);
-
-
-    /**
-     * @param user
-     */
+    @Transactional
     @Modifying
-    @Query("DELETE FROM AddressEntity e WHERE e.user=:user")
-    void deleteByUser(UserEntity user);
+    @Query(value = "INSERT INTO address_user (id, country, city, street, house_number, postcode, usr_id) " +
+            "VALUES (:id, :country, :city, :street, :houseNumber, :postcode, :userId)", nativeQuery = true)
+    void add(@Param("id") Long id, @Param("country") String country, @Param("city") String city, @Param("street")
+            String street, @Param("houseNumber") String houseNumber, @Param("postcode") Integer postcode, @Param("userId") Long userId);
 
 
-    /**
-     * @param id
-     * @return
-     */
-    @Query("SELECT new AddressEntity(e.id, e.country, e.city, e.street, e.houseNumber, e.postcode) FROM AddressEntity e WHERE e.id=:id")
-    Optional<AddressEntity> findById(@Param(value = "id") Long id);
+    @Query(value = "SELECT e FROM AddressEntity e WHERE e.user.id=:userId")
+    List<AddressEntity> findByUserId(@Param("userId") Long userId);
 
-    /**
-     * @param country
-     * @return
-     */
-    @Query("SELECT new AddressEntity(e.id, e.country, e.city, e.street, e.houseNumber, e.postcode) FROM AddressEntity e WHERE e.country=:country")
-    Set<AddressEntity> findByCountry(@Param(value = "country") String country);
+    @Query(value = "SELECT e FROM AddressEntity e WHERE e.user.id=:userId")
+    Page<AddressEntity> getPageOfAddressesByUserId(@Param("userId") Long userId, Pageable pageable);
 
-    /**
-     * @param city
-     * @return
-     */
-    @Query("SELECT new AddressEntity(e.id, e.country, e.city, e.street, e.houseNumber, e.postcode) FROM AddressEntity e WHERE e.city=:city")
-    Set<AddressEntity> findByCity(@Param(value = "city") String city);
 
-    /**
-     * @param street
-     * @return
-     */
-    @Query("SELECT new AddressEntity(e.id, e.country, e.city, e.street, e.houseNumber, e.postcode) FROM AddressEntity e WHERE e.street=:street")
-    Set<AddressEntity> findByStreet(@Param(value = "street") String street);
-
-    /**
-     * @param houseNumber
-     * @return
-     */
-    @Query("SELECT new AddressEntity(e.id, e.country, e.city, e.street, e.houseNumber, e.postcode) FROM AddressEntity e WHERE e.houseNumber=:houseNumber")
-    Set<AddressEntity> findByHouseNumber(@Param(value = "houseNumber") String houseNumber);
-
-    /**
-     * @param postcode
-     * @return
-     */
-    @Query("SELECT new AddressEntity(e.id, e.country, e.city, e.street, e.houseNumber, e.postcode) FROM AddressEntity e WHERE e.postcode=:postcode")
-    Set<AddressEntity> findByPostcode(@Param(value = "postcode") Integer postcode);
-
-    /**
-     * @param user
-     * @return
-     */
-    @Query("SELECT new AddressEntity(e.id, e.country, e.city, e.street, e.houseNumber, e.postcode, e.user) FROM AddressEntity e WHERE e.user=:user")
-    Set<AddressEntity> findByUser(@Param(value = "user") UserEntity user);
-
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM AddressEntity e WHERE e.user.id=:userId")
+    void deleteAllAddressesByUserId(@Param("userId") Long userId);
 }

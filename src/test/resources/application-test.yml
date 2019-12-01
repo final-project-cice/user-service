@@ -32,7 +32,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
 #    database-platform: org.hibernate.dialect.H2Dialect
 
 #  #============================== Configuration H2

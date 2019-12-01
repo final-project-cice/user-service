@@ -1,0 +1,325 @@
+= Books REST API Documentation Guide.
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+:author: Tsyupryk Roman
+:email: tsyupryk.roman@gmail.com
+:revdate: 15.11.2019
+
+[[introduction]]
+= Introduction
+
+Its documentation of CRUD API "book-service".
+
+[[overview-http-verbs]]
+= HTTP verbs
+
+Example Books defines HTTP verbs for all endpoints as follows:
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PUT`
+| Used to update an existing resource, see endpoint for specifics
+
+| `PATCH`
+| Currently not supported
+
+| `DELETE`
+| Used to delete a resource
+|===
+
+= Address Of User
+
+=== Get Address By Id.
+
+Obtains a specific Address by its unique identifier.
+
+====== CURL Request
+
+include::address/getByAddressId/curl-request.adoc[]
+
+====== Path Parameters
+
+include::address/getByAddressId/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::address/getByAddressId/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::address/getByAddressId/httpie-request.adoc[]
+
+====== Request Body
+
+include::address/getByAddressId/request-body.adoc[]
+
+====== Links
+
+include::address/getByAddressId/links.adoc[]
+
+====== HTTP Response
+
+include::address/getByAddressId/http-response.adoc[]
+
+====== Response Body
+
+include::address/getByAddressId/response-body.adoc[]
+
+====== Response Fields
+
+include::address/getByAddressId/response-fields.adoc[]
+
+=== Get Page Of Addresses.
+
+Obtains page of Addresses.
+
+====== CURL Request
+
+include::address/getPageOfAddressesByUserId/curl-request.adoc[]
+
+====== Path Parameters
+
+include::address/getPageOfAddressesByUserId/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::address/getPageOfAddressesByUserId/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::address/getPageOfAddressesByUserId/httpie-request.adoc[]
+
+====== Request Body
+
+include::address/getPageOfAddressesByUserId/request-body.adoc[]
+
+====== Links
+
+include::address/getPageOfAddressesByUserId/links.adoc[]
+
+====== HTTP Response
+
+include::address/getPageOfAddressesByUserId/http-response.adoc[]
+
+====== Response Body
+
+include::address/getPageOfAddressesByUserId/response-body.adoc[]
+
+====== Response Fields
+
+include::address/getPageOfAddressesByUserId/response-fields.adoc[]
+
+=== Get Page Of Sorted Addresses.
+
+Obtains a page of sorted Addresses.
+
+====== CURL Request
+
+include::address/getPageOfSortedAddressesByUserId/curl-request.adoc[]
+
+====== Path Parameters
+
+include::address/getPageOfSortedAddressesByUserId/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::address/getPageOfSortedAddressesByUserId/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::address/getPageOfSortedAddressesByUserId/httpie-request.adoc[]
+
+====== Request Body
+
+include::address/getPageOfSortedAddressesByUserId/request-body.adoc[]
+
+====== Links
+
+include::address/getPageOfSortedAddressesByUserId/links.adoc[]
+
+====== HTTP Response
+
+include::address/getPageOfSortedAddressesByUserId/http-response.adoc[]
+
+====== Response Body
+
+include::address/getPageOfSortedAddressesByUserId/response-body.adoc[]
+
+====== Response Fields
+
+include::address/getPageOfSortedAddressesByUserId/response-fields.adoc[]
+
+=== Create Address.
+
+Create Address by this body request.
+
+====== CURL Request
+
+include::address/add/curl-request.adoc[]
+
+====== Path Parameter
+
+include::address/add/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::address/add/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::address/add/httpie-request.adoc[]
+
+====== Request Body
+
+include::address/add/request-body.adoc[]
+
+====== Request Fields
+
+include::address/add/request-fields.adoc[]
+
+====== Links
+
+include::address/add/links.adoc[]
+
+====== HTTP Response
+
+include::address/add/http-response.adoc[]
+
+====== Response Body
+
+include::address/add/response-body.adoc[]
+
+====== Response Fields
+
+include::address/add/response-fields.adoc[]
+
+=== Update Address.
+
+Update Address by this body request.
+
+====== CURL Request
+
+include::address/update/curl-request.adoc[]
+
+====== Path Parameter
+
+include::address/update/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::address/update/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::address/update/httpie-request.adoc[]
+
+====== Request Body
+
+include::address/update/request-body.adoc[]
+
+====== Request Fields
+
+include::address/update/request-fields.adoc[]
+
+====== Links
+
+include::address/update/links.adoc[]
+
+====== HTTP Response
+
+include::address/update/http-response.adoc[]
+
+====== Response Body
+
+include::address/update/response-body.adoc[]
+
+====== Response Fields
+
+include::address/update/response-fields.adoc[]
+
+=== Delete Address.
+
+Delete Address by Address ID.
+
+====== CURL Request
+
+include::address/deleteByAddressId/curl-request.adoc[]
+
+====== Path Parameters
+
+include::address/deleteByAddressId/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::address/deleteByAddressId/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::address/deleteByAddressId/httpie-request.adoc[]
+
+====== Request Body
+
+include::address/deleteByAddressId/request-body.adoc[]
+
+====== Links
+
+include::address/deleteByAddressId/links.adoc[]
+
+====== HTTP Response
+
+include::address/deleteByAddressId/http-response.adoc[]
+
+====== Response Body
+
+include::address/deleteByAddressId/response-body.adoc[]
+
+====== Response Fienlds
+
+include::address/deleteByAddressId/response-fields.adoc[]
+
+=== Delete All Addresses.
+
+Delete All Addresses by User ID.
+
+====== CURL Request
+
+include::address/deleteAllAddressesByUserId/curl-request.adoc[]
+
+====== Path Parameters
+
+include::address/deleteAllAddressesByUserId/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::address/deleteAllAddressesByUserId/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::address/deleteAllAddressesByUserId/httpie-request.adoc[]
+
+====== Request Body
+
+include::address/deleteAllAddressesByUserId/request-body.adoc[]
+
+====== HTTP Response
+
+include::address/deleteAllAddressesByUserId/http-response.adoc[]
+
+====== Response Body
+
+include::address/deleteAllAddressesByUserId/response-body.adoc[]
+
+====== Response Fienlds
+
+include::address/deleteAllAddressesByUserId/response-fields.adoc[]

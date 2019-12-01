@@ -1,0 +1,8 @@
+.+http://localhost:8081/users/addresses/{addressId}+
+|===
+|Parameter|Description
+
+|`+addressId+`
+|The address id to which address will be updated.
+
+|===

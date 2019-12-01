@@ -1,65 +1,79 @@
 package com.trl.userservice.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.hateoas.ResourceSupport;
+
 import java.util.Objects;
 
-public class AddressDTO {
+public class AddressDTO extends ResourceSupport {
 
-    private Long id;
+    private Long addressId;
     private String country;
     private String city;
     private String street;
     private String houseNumber;
     private Integer postcode;
+
+    @JsonIgnore
     private UserDTO user;
 
     public AddressDTO() {
     }
 
-    public AddressDTO(Long id, String country, String city, String street, String houseNumber, Integer postcode) {
-        this.id = id;
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.houseNumber = houseNumber;
-        this.postcode = postcode;
+    public Long getAddressId() {
+        return addressId;
     }
 
-    public AddressDTO(Long id, String country, String city, String street, String houseNumber, Integer postcode, UserDTO user) {
-        this.id = id;
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.houseNumber = houseNumber;
-        this.postcode = postcode;
-        this.user = user;
-    }
-
-    public Long getId() {
-        return id;
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
     }
 
     public String getCountry() {
         return country;
     }
 
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     public String getCity() {
         return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getStreet() {
         return street;
     }
 
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
     public String getHouseNumber() {
         return houseNumber;
+    }
+
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
     }
 
     public Integer getPostcode() {
         return postcode;
     }
 
+    public void setPostcode(Integer postcode) {
+        this.postcode = postcode;
+    }
+
     public UserDTO getUser() {
         return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
     @Override
@@ -67,31 +81,28 @@ public class AddressDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AddressDTO that = (AddressDTO) o;
-        return id.equals(that.id) &&
-                country.equals(that.country) &&
-                city.equals(that.city) &&
-                street.equals(that.street) &&
-                houseNumber.equals(that.houseNumber) &&
-                postcode.equals(that.postcode) &&
-                Objects.equals(user, that.user);
+        return Objects.equals(addressId, that.addressId) &&
+                Objects.equals(country, that.country) &&
+                Objects.equals(city, that.city) &&
+                Objects.equals(street, that.street) &&
+                Objects.equals(houseNumber, that.houseNumber) &&
+                Objects.equals(postcode, that.postcode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, country, city, street, houseNumber, postcode, user);
+        return Objects.hash(addressId, country, city, street, houseNumber, postcode);
     }
 
     @Override
     public String toString() {
         return "AddressDTO{" +
-                "id=" + id +
+                "id=" + addressId +
                 ", country='" + country + '\'' +
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 ", houseNumber='" + houseNumber + '\'' +
                 ", postcode=" + postcode +
-                ", user=" + user +
                 '}';
     }
-
 }

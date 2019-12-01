@@ -1,44 +1,27 @@
 package com.trl.userservice.service;
 
 import com.trl.userservice.controller.dto.AddressDTO;
-import com.trl.userservice.controller.dto.UserDTO;
-import com.trl.userservice.exceptions.*;
 
-import java.util.Set;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 public interface AddressService {
 
-    AddressDTO create(AddressDTO addressDTO) throws UserWithIdNotExistException, UserIdIsNullException, UserIsNullException;
+    AddressDTO add(Long userId, AddressDTO address);
 
 
-    AddressDTO updateCountry(Long id, String country) throws AddressNotExistException;
+    AddressDTO getByAddressId(Long addressId);
 
-    AddressDTO updateCity(Long id, String city) throws AddressNotExistException;
+    Page<AddressDTO> getPageOfAddressesByUserId(Long userId, Integer startPage, Integer pageSize);
 
-    AddressDTO updateStreet(Long id, String street) throws AddressNotExistException;
-
-    AddressDTO updateHouseNumber(Long id, String houseNumber) throws AddressNotExistException;
-
-    AddressDTO updatePostCode(Long id, Integer postCode) throws AddressNotExistException;
+    Page<AddressDTO> getPageOfSortedAddressesByUserId(Long userId, Integer startPage, Integer pageSize, String sortOrder);
 
 
-    Boolean deleteById(Long id);
-
-    Boolean deleteByUser(UserDTO userDTO) throws UserWithIdNotExistException, UserNotHaveAddressException;
+    AddressDTO updateByAddressId(Long addressId, AddressDTO address);
 
 
-    AddressDTO findById(Long id) throws AddressNotExistException;
+    AddressDTO deleteByAddressId(Long addressId);
 
-    Set<AddressDTO> findByCountry(String country) throws AddressNotExistException;
-
-    Set<AddressDTO> findByCity(String city) throws AddressNotExistException;
-
-    Set<AddressDTO> findByStreet(String street) throws AddressNotExistException;
-
-    Set<AddressDTO> findByHouseNumber(String houseNumber) throws AddressNotExistException;
-
-    Set<AddressDTO> findByPostcode(Integer postCode) throws AddressNotExistException;
-
-    Set<AddressDTO> findByUser(UserDTO userDTO) throws AddressNotExistException;
-
+    List<AddressDTO> deleteAllAddressesByUserId(Long userId);
 }

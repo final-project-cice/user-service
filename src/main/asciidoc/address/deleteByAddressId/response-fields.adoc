@@ -1,0 +1,56 @@
+|===
+|Path|Type|Description
+
+|`+addressId+`
+|`+Number+`
+|The id of Address
+
+|`+country+`
+|`+String+`
+|The name of country where lives user.
+
+|`+city+`
+|`+String+`
+|The name of city where lives user.
+
+|`+street+`
+|`+String+`
+|The name of street where lives user.
+
+|`+houseNumber+`
+|`+String+`
+|The number of house where lives user.
+
+|`+postcode+`
+|`+Number+`
+|The postcode of house where lives user.
+
+|`+_links.self.href+`
+|`+String+`
+|Link to self(deleteByAddressId) the address resource.
+
+|`+_links.add.href+`
+|`+String+`
+|Link to add the address resource by user id.
+
+|`+_links.getByAddressId.href+`
+|`+String+`
+|Link to get address resource by address id.
+
+|`+_links.getPageOfAddressesByUserId.href+`
+|`+String+`
+|Link to get the page of addresses resource by user id.
+
+|`+_links.getPageOfSortedAddressesByUserId.href+`
+|`+String+`
+|Link to get the page of sorted addresses resource by user id.
+
+|`+_links.updateByAddressId.href+`
+|`+String+`
+|Link to upgrade address resource by address id.
+
+|`+_links.deleteAllAddressesByUserId.href+`
+|`+String+`
+|Link to delete addresses resource by user id.
+
+|===

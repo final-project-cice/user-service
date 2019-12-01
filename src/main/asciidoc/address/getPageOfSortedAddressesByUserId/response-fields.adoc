@@ -1,0 +1,28 @@
+|===
+|Path|Type|Description
+
+|`+content.[].addressId+`
+|`+Number+`
+|The id of Address
+
+|`+content.[].country+`
+|`+String+`
+|The name of country where lives user.
+
+|`+content.[].city+`
+|`+String+`
+|The name of city where lives user.
+
+|`+content.[].street+`
+|`+String+`
+|The name of street where lives user.
+
+|`+content.[].houseNumber+`
+|`+String+`
+|The number of house where lives user.
+
+|`+content.[].postcode+`
+|`+Number+`
+|The postcode of house where lives user.
+
+|===

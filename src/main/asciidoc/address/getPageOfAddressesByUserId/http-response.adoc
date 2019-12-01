@@ -1,0 +1,163 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 3979
+
+{
+  "content" : [ {
+    "addressId" : 1,
+    "country" : "Spain",
+    "city" : "Madrid",
+    "street" : "Calle Madrid",
+    "houseNumber" : "1A",
+    "postcode" : 1111,
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/users/1/addresses/0/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/users/1/addresses",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByAddressId",
+      "href" : "http://localhost:8080/users/addresses/{addressId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedAddressesByUserId",
+      "href" : "http://localhost:8080/users/1/addresses/0/2/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateByAddressId",
+      "href" : "http://localhost:8080/users/addresses/{addressId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteByAddressId",
+      "href" : "http://localhost:8080/users/addresses/{addressId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllAddressesByUserId",
+      "href" : "http://localhost:8080/users/1/addresses",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  }, {
+    "addressId" : 2,
+    "country" : "Spain",
+    "city" : "Barcelona",
+    "street" : "Calle Barcelona",
+    "houseNumber" : "2B",
+    "postcode" : 22222,
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/users/1/addresses/0/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/users/1/addresses",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByAddressId",
+      "href" : "http://localhost:8080/users/addresses/{addressId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedAddressesByUserId",
+      "href" : "http://localhost:8080/users/1/addresses/0/2/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateByAddressId",
+      "href" : "http://localhost:8080/users/addresses/{addressId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteByAddressId",
+      "href" : "http://localhost:8080/users/addresses/{addressId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllAddressesByUserId",
+      "href" : "http://localhost:8080/users/1/addresses",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  } ],
+  "pageable" : {
+    "sort" : {
+      "sorted" : false,
+      "unsorted" : true,
+      "empty" : true
+    },
+    "pageNumber" : 0,
+    "pageSize" : 2,
+    "offset" : 0,
+    "paged" : true,
+    "unpaged" : false
+  },
+  "totalPages" : 2,
+  "totalElements" : 3,
+  "last" : false,
+  "first" : true,
+  "sort" : {
+    "sorted" : false,
+    "unsorted" : true,
+    "empty" : true
+  },
+  "number" : 0,
+  "numberOfElements" : 2,
+  "size" : 2,
+  "empty" : false
+}
+----

@@ -1,30 +1,40 @@
 package com.trl.userservice.service.impl;
 
 import com.trl.userservice.controller.dto.AddressDTO;
-import com.trl.userservice.controller.dto.UserDTO;
 import com.trl.userservice.exceptions.*;
 import com.trl.userservice.repository.AddressRepository;
 import com.trl.userservice.repository.UserRepository;
 import com.trl.userservice.repository.entity.AddressEntity;
-import com.trl.userservice.repository.entity.UserEntity;
 import com.trl.userservice.service.AddressService;
-import com.trl.userservice.service.converter.ConverterAddress;
-import com.trl.userservice.service.converter.ConverterUser;
+
+import static com.trl.userservice.service.converter.AddressConverter.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
+
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 /**
+ * This class is designed to implementation methods of {@code AddressService}.
  *
+ * @author Tsyupryk Roman
  */
 @Service
 public class AddressServiceImpl implements AddressService {
 
     private static final Logger LOG = LoggerFactory.getLogger(AddressServiceImpl.class);
+    private static final String EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS = "One of parameters is illegal. Parameters must be " +
+            "not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.";
+    private static final String EXCEPTION_MESSAGE_ADDRESS_BY_ADDRESS_ID_NOT_EXIST = "Address with this addressId = %s not exist.";
+    private static final String EXCEPTION_MESSAGE_ADDRESSES_BY_USER_ID_NOT_EXIST = "Addresses with this userId = %s not exist.";
 
     private final AddressRepository addressRepository;
     private final UserRepository userRepository;
@@ -35,467 +45,330 @@ public class AddressServiceImpl implements AddressService {
     }
 
     /**
-     * @param addressDTO
-     * @return
+     * Add the {@literal AddressDTO} by this {@code userId}.
+     *
+     * @param userId  must not be equal to {@literal null}, and {@code userId} must be greater than zero.
+     * @param address must not be equal to {@literal null}.
+     * @return {@literal AddressDTO} this address to be saved.
+     * @throws IllegalArgumentException in case the given {@code userId} is {@literal null}
+     *                                  or if {@code userId} is equal or less zero.
+     *                                  And if {@code address} is equals to {@literal null}.
+     * @throws IllegalValueException    in case if one of the fields of {@code address} is equals {@literal null}, or less zero.
+     * @throws UserNotExistException    in case if user not exist by {@code userId}.
      */
     @Override
-    public AddressDTO create(AddressDTO addressDTO) throws UserWithIdNotExistException, UserIdIsNullException, UserIsNullException {
+    public AddressDTO add(Long userId, AddressDTO address) {
         AddressDTO addressResult = null;
 
-        LOG.debug("************ create() ---> idUser = " + addressDTO.getUser() + " ---> addressDTO = " + addressDTO);
-
-        // TODO: Nose si es necesario comprobar de null todos parametros que se van utilizar en meethodo. Es que se compica mucho la lectura ce mtodo.
-
-        if (addressDTO.getUser() != null) {
-
-            if (addressDTO.getUser().getId() != null && addressDTO.getUser().getId() != 0) {
-
-                Optional<UserEntity> userFromRepositoryById = userRepository.findById(addressDTO.getUser().getId());
-
-                if (userFromRepositoryById.isPresent()) {
-
-                    AddressEntity savedAddress = addressRepository.save(ConverterAddress.mapDTOToEntity(addressDTO));
-
-                    LOG.debug("************ create() ---> savedAddress = " + savedAddress);
-
-                    addressResult = ConverterAddress.mapEntityToDTO(savedAddress);
-
-                } else {
-                    throw new UserWithIdNotExistException("User with this id = '" + addressDTO.getUser().getId() + "' not exist.");
-                }
-            } else {
-                throw new UserIdIsNullException("The parameter 'user' that is passed, contains value 'userId'. Value 'userId' equal NULL or ZERO. Not allowed parameters NULL or ZERO.");
-            }
-        } else {
-            throw new UserIsNullException("The parameter 'user' that is passed, equal NULL. Not allowed parameter NULL.");
+        if ((userId == null) || (userId <= 0) || (address == null)) {
+            LOG.debug("************ add() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
         }
 
-        LOG.debug("************ create() ---> addressResult = " + addressResult);
+        LOG.debug("************ add() ---> userId = " + userId + " ---> address = " + address);
+
+        checkParametersAddress(address);
+
+        LOG.debug("************ add() ---> userId = " + userId);
+        checkExistsUserById(userId);
+
+        // TODO: Find information. How can these two lines of code be done better.
+        Long generatedId = addressRepository.count() + 1;
+        addressRepository.add(generatedId, address.getCountry(), address.getCity(), address.getStreet(), address.getHouseNumber(), address.getPostcode(), userId);
+
+        Optional<AddressEntity> savedAddressFromRepository = addressRepository.findById(generatedId);
+
+        addressResult = mapEntityToDTO(savedAddressFromRepository.get());
+
+        LOG.debug("************ add() ---> addressResult = " + addressResult);
 
         return addressResult;
     }
 
     /**
-     * @param id
-     * @param country
-     * @return
+     * Retrieves the {@literal AddressDTO} by this {@code addresId}.
+     *
+     * @param addressId must not be equal to {@literal null}, and {@code addressId} must be greater than zero.
+     * @return the {@literal AdddressDTO} with the given {@code addressId}.
+     * @throws IllegalArgumentException In case the given {@code addressId} is {@literal null} or if {@code addressId} is equal or less zero.
+     * @throws DataNotFoundException    In case if {@literal AddressDTO} not exist with this {@code addressId}.
      */
-    @Transactional
     @Override
-    public AddressDTO updateCountry(Long id, String country) throws AddressNotExistException {
+    public AddressDTO getByAddressId(Long addressId) {
         AddressDTO addressResult = null;
 
-        LOG.debug("************ updateCountry() ---> id = " + id + " ---> country = " + country);
-
-        Optional<AddressEntity> addressFromRepositoryById = addressRepository.findById(id);
-
-        LOG.debug("************ updateCountry() ---> addressFromRepositoryById = " + addressFromRepositoryById);
-
-        if (addressFromRepositoryById.isPresent()) {
-            AddressEntity addressEntityUpdate = addressFromRepositoryById.get();
-            if (country != null
-                    && (!country.equals(""))
-                    && (!country.equals(addressEntityUpdate.getCountry()))) {
-
-                addressRepository.updateCountry(id, country);
-
-                Optional<AddressEntity> savedAddressFromRepository = addressRepository.findById(id);
-
-                LOG.debug("************ updateCountry() ---> savedAddressFromRepository = " + savedAddressFromRepository);
-
-                addressResult = ConverterAddress.mapEntityToDTO(savedAddressFromRepository.get());
-            }
-        } else {
-            LOG.debug("************ updateCountry() ---> address with this id = '" + id + "' not exist.");
-            throw new AddressNotExistException("Address with this id = '" + id + "' not exist.");
+        if ((addressId == null) || (addressId <= 0)) {
+            LOG.debug("************ getByAddressId(() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
         }
 
-        LOG.debug("************ updateCountry() ---> addressResult = " + addressResult);
+        LOG.debug("************ getByAddressId(() ---> addressId = " + addressId);
+
+        Optional<AddressEntity> addressFromRepositoryByAddressId = addressRepository.findById(addressId);
+        LOG.debug("************ getByAddressId(() ---> " +
+                "addressFromRepositoryByAddressId = " + addressFromRepositoryByAddressId);
+
+        if (addressFromRepositoryByAddressId.isEmpty()) {
+            LOG.debug("************ getByAddressId(() ---> " +
+                    format(EXCEPTION_MESSAGE_ADDRESS_BY_ADDRESS_ID_NOT_EXIST, addressId));
+            throw new DataNotFoundException(
+                    format(EXCEPTION_MESSAGE_ADDRESS_BY_ADDRESS_ID_NOT_EXIST, addressId));
+        }
+
+        addressResult = mapEntityToDTO(addressFromRepositoryByAddressId.get());
+
+        LOG.debug("************ getByAddressId(() ---> addressResult = " + addressResult);
 
         return addressResult;
     }
 
     /**
-     * @param id
-     * @param city
-     * @return
+     * Retrieve page of {@literal AddressDTOs} by this {@code userId}.
+     *
+     * @param userId    must not be equal to {@literal null}, and {@code userId} must be greater than zero.
+     * @param startPage zero-based page index, must not be negative.
+     * @param pageSize  the size of the page to be returned, must be greater than 0.
+     * @return the {@literal Page<AddressDTO>} with the given {@code userId}.
+     * @throws IllegalArgumentException in case the given {@code userId} is {@literal null} or if {@code userId} is equal or less zero.
+     * @throws UserNotExistException    in case if user with this {@literal userId} not exist.
+     * @throws DataNotFoundException    in case if {@literal Page<AddressDTO>} not exist with this {@code userId}.
      */
-    @Transactional
     @Override
-    public AddressDTO updateCity(Long id, String city) throws AddressNotExistException {
-        AddressDTO addressResult = null;
+    public Page<AddressDTO> getPageOfAddressesByUserId(Long userId, Integer startPage, Integer pageSize) {
+        Page<AddressDTO> pageOfAddressesResult = null;
 
-        LOG.debug("************ updateCity() ---> id = " + id + " ---> city = " + city);
-
-        Optional<AddressEntity> addressFromRepositoryById = addressRepository.findById(id);
-
-        LOG.debug("************ updateCity() ---> addressFromRepositoryById = " + addressFromRepositoryById);
-
-        if (addressFromRepositoryById.isPresent()) {
-            AddressEntity addressEntityUpdate = addressFromRepositoryById.get();
-            if (city != null
-                    && (!city.equals(""))
-                    && (!city.equals(addressEntityUpdate.getCity()))) {
-
-                addressRepository.updateCity(id, city);
-
-                Optional<AddressEntity> savedAddressFromRepository = addressRepository.findById(id);
-
-                LOG.debug("************ updateCity() ---> savedAddressFromRepository = " + savedAddressFromRepository);
-
-                addressResult = ConverterAddress.mapEntityToDTO(savedAddressFromRepository.get());
-            }
-        } else {
-            LOG.debug("************ updateCity() ---> address with this id = '" + id + "' not exist.");
-            throw new AddressNotExistException("Address with this id = '" + id + "' not exist.");
+        if ((userId == null) || (userId <= 0)) {
+            LOG.debug("************ getPageOfAddressesByUserId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
         }
 
-        LOG.debug("************ updateCity() ---> addressResult = " + addressResult);
+        LOG.debug("************ getPageOfAddressesByUserId() ---> userId = " + userId + " ---> startPage = " + startPage + " ---> pageSize = " + pageSize);
+
+        checkExistsUserById(userId);
+
+        Page<AddressEntity> pageOfAddressesByUserId = addressRepository.getPageOfAddressesByUserId(userId, PageRequest.of(startPage, pageSize));
+        LOG.debug("************ getPageOfAddressesByUserId() ---> pageOfAddressesFromRepositoryByUserId " + pageOfAddressesByUserId);
+
+        if (pageOfAddressesByUserId.isEmpty()) {
+            LOG.debug("************ getPageOfAddressesByUserId() ---> " + format(EXCEPTION_MESSAGE_ADDRESSES_BY_USER_ID_NOT_EXIST, userId));
+            throw new DataNotFoundException(format(EXCEPTION_MESSAGE_ADDRESSES_BY_USER_ID_NOT_EXIST, userId));
+        }
+
+        pageOfAddressesResult = mapPageEntityToPageDTO(pageOfAddressesByUserId);
+        LOG.debug("************ getPageOfAddressesByUserId() ---> pageOfAddressesResult = " + pageOfAddressesResult);
+
+        return pageOfAddressesResult;
+    }
+
+    /**
+     * Retrieve page of sorted {@literal AddressDTOs} by this {@code userId}.
+     *
+     * @param userId    must not be equal to {@literal null}, and {@code userId} must be greater than zero.
+     * @param startPage zero-based page index, must not be negative.
+     * @param pageSize  the size of the page to be returned, must be greater than 0.
+     * @param sortOrder the value by which the sorted AddressDTOs will be. Must not be {@literal null}.
+     * @return the {@literal Page<AddressDTO>} with the given {@code userId}.
+     * @throws IllegalArgumentException in case the given {@code userId} is {@literal null} or if {@code userId} is equal or less zero.
+     * @throws UserNotExistException    in case if user with this {@literal userId} not exist.
+     * @throws DataNotFoundException    in case if {@literal Page<AddressDTO>} not exist with this {@code userId}.
+     */
+    @Override
+    public Page<AddressDTO> getPageOfSortedAddressesByUserId(Long userId, Integer startPage, Integer pageSize, String sortOrder) {
+        Page<AddressDTO> pageOfAddressesResult = null;
+
+        if ((userId == null) || (userId <= 0)) {
+            LOG.debug("************ getPageOfSortedAddressesByUserId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+        }
+
+        LOG.debug("************ getPageOfSortedAddressesByUserId() ---> userId = " + userId + " ---> startPage = " + startPage
+                + " ---> pageSize = " + pageSize + " ---> sortOrder = " + sortOrder);
+
+        checkExistsUserById(userId);
+
+        Page<AddressEntity> pageOfAddressesByUserId = addressRepository.getPageOfAddressesByUserId(userId, PageRequest.of(startPage, pageSize, Sort.by(sortOrder)));
+        LOG.debug("************ getPageOfSortedAddressesByUserId() ---> pageOfAddressesFromRepositoryByUserId = " + pageOfAddressesByUserId);
+
+        if (pageOfAddressesByUserId.isEmpty()) {
+            LOG.debug("************ getPageOfSortedAddressesByUserId() ---> " + format(EXCEPTION_MESSAGE_ADDRESSES_BY_USER_ID_NOT_EXIST, userId));
+            throw new DataNotFoundException(format(EXCEPTION_MESSAGE_ADDRESSES_BY_USER_ID_NOT_EXIST, userId));
+        }
+
+        pageOfAddressesResult = mapPageEntityToPageDTO(pageOfAddressesByUserId);
+        LOG.debug("************ getPageOfSortedAddressesByUserId() ---> pageOfAddressesResult = " + pageOfAddressesResult);
+
+        return pageOfAddressesResult;
+    }
+
+    /**
+     * Update the {@literal AddressDTO} by this {@code addressId}.
+     *
+     * @param addressId must not be {@literal null}, and {@code addressId} must be greater than zero.
+     * @param address   must not be {@literal null}.
+     * @return the {@literal AddressDTO} this address to be updated.
+     * @throws IllegalArgumentException in case the given {@code addressId} is {@literal null}
+     *                                  or if {@code addressId} is equal or less zero.
+     *                                  And if {@code address} is equals to {@literal null}.
+     * @throws DataNotFoundException    in case if {@literal AddressDTO} not exist by {@code addressId}.
+     * @throws TheSameValueException    in case if source value field is equals to current value field.
+     */
+    @Override
+    public AddressDTO updateByAddressId(Long addressId, AddressDTO address) {
+        AddressDTO addressResult = null;
+
+        if ((addressId == null) || (addressId <= 0) || (address == null)) {
+            LOG.debug("************ updateByAddressId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+        }
+
+        LOG.debug("************ updateByAddressId() ---> addressId = " + addressId + " ---> address = " + address);
+
+        AddressEntity addressToBeUpdated = checkExistsAddressByAddressId(addressId);
+
+        // TODO: Finish this method.
+        addressResult = mapEntityToDTO(addressToBeUpdated);
+
+        LOG.debug("************ updateByAddressId() ---> " + "Updated addressResult = " + addressResult);
 
         return addressResult;
     }
 
     /**
-     * @param id
-     * @param street
-     * @return
+     * Delete the {@literal AddressDTO} with the given {@code addressId}.
+     *
+     * @param addressId must not be equal to {@literal null}, and {@code addressId} must be greater than zero.
+     * @return {@literal AddressDTO} this address to be deleted.
+     * @throws IllegalArgumentException In case if the given {@code addressId} is {@literal null}, and if {@code addressId} is equal or less zero.
+     * @throws AddressNotExistException If address not exist with the {@code addressId}.
      */
-    @Transactional
     @Override
-    public AddressDTO updateStreet(Long id, String street) throws AddressNotExistException {
+    public AddressDTO deleteByAddressId(Long addressId) {
         AddressDTO addressResult = null;
 
-        LOG.debug("************ updateStreet() ---> id = " + id + " ---> street = " + street);
-
-        Optional<AddressEntity> addressFromRepositoryById = addressRepository.findById(id);
-
-        LOG.debug("************ updateStreet() ---> addressFromRepositoryById = " + addressFromRepositoryById);
-
-        if (addressFromRepositoryById.isPresent()) {
-            AddressEntity addressEntityUpdate = addressFromRepositoryById.get();
-            if (street != null
-                    && (!street.equals(""))
-                    && (!street.equals(addressEntityUpdate.getStreet()))) {
-
-                addressRepository.updateStreet(id, street);
-
-                Optional<AddressEntity> savedAddressFromRepository = addressRepository.findById(id);
-
-                LOG.debug("************ updateStreet() ---> savedAddressFromRepository = " + savedAddressFromRepository);
-
-                addressResult = ConverterAddress.mapEntityToDTO(savedAddressFromRepository.get());
-            }
-        } else {
-            LOG.debug("************ updateStreet() ---> address with this id = '" + id + "' not exist.");
-            throw new AddressNotExistException("Address with this id = '" + id + "' not exist.");
+        if ((addressId == null) || (addressId <= 0)) {
+            LOG.debug("************ deleteByAddressId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
         }
 
-        LOG.debug("************ updateStreet() ---> addressResult = " + addressResult);
+        LOG.debug("************ deleteByAddressId() ---> addressId = " + addressId);
+
+        AddressEntity addressToBeDeleted = checkExistsAddressByAddressId(addressId);
+
+        addressRepository.deleteById(addressId);
+
+        addressResult = mapEntityToDTO(addressToBeDeleted);
+
+        LOG.debug("************ deleteByAddressId() ---> " + "Deleted address = " + addressResult);
 
         return addressResult;
     }
 
     /**
-     * @param id
-     * @param houseNumber
-     * @return
+     * Delete all addresses by {@code userId}.
+     *
+     * @param userId must not be equal to {@literal null}, and {@code userId} must be greater than zero.
+     * @return {@literal List<AddressDTO>} this list of addresses to be deleted.
+     * @throws IllegalArgumentException In case if the given {@code userId} is {@literal null}, and if {@code userId} is equal or less zero.
+     * @throws UserNotExistException    If user not exist with the {@code userId}.
+     * @throws AddressNotExistException If addresses not exist with the {@code userId}.
      */
-    @Transactional
     @Override
-    public AddressDTO updateHouseNumber(Long id, String houseNumber) throws AddressNotExistException {
-        AddressDTO addressResult = null;
+    public List<AddressDTO> deleteAllAddressesByUserId(Long userId) {
+        List<AddressDTO> addressesResult = null;
 
-        LOG.debug("************ updateHouseNumber() ---> id = " + id + " ---> houseNumber = " + houseNumber);
-
-        Optional<AddressEntity> addressFromRepositoryById = addressRepository.findById(id);
-
-        LOG.debug("************ updateHouseNumber() ---> addressFromRepositoryById = " + addressFromRepositoryById);
-
-        if (addressFromRepositoryById.isPresent()) {
-            AddressEntity addressEntityUpdate = addressFromRepositoryById.get();
-            if (houseNumber != null
-                    && (!houseNumber.equals(""))
-                    && (!houseNumber.equals(addressEntityUpdate.getHouseNumber()))) {
-
-                addressRepository.updateHouseNumber(id, houseNumber);
-
-                Optional<AddressEntity> savedAddressFromRepository = addressRepository.findById(id);
-
-                LOG.debug("************ updateHouseNumber() ---> savedAddressFromRepository = " + savedAddressFromRepository);
-
-                addressResult = ConverterAddress.mapEntityToDTO(savedAddressFromRepository.get());
-            }
-        } else {
-            LOG.debug("************ updateHouseNumber() ---> address with this id = '" + id + "' not exist.");
-            throw new AddressNotExistException("Address with this id = '" + id + "' not exist.");
+        if ((userId == null) || (userId <= 0)) {
+            LOG.debug("************ deleteAllAddressesByUserId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
         }
 
-        LOG.debug("************ updateHouseNumber() ---> addressResult = " + addressResult);
+        LOG.debug("************ deleteAllAddressesByUserId() ---> userId = " + userId);
 
-        return addressResult;
+        checkExistsUserById(userId);
+
+        List<AddressEntity> addressesToBeDeleted = checkExistsAddressesByUserId(userId);
+
+        addressRepository.deleteAllAddressesByUserId(userId);
+
+        addressesResult = mapListEntityToListDTO(addressesToBeDeleted);
+
+        LOG.debug("************ deleteAllAddressesByUserId() ---> " + "Deleted addresses = " + addressesResult);
+
+        return addressesResult;
     }
 
-    /**
-     * @param id
-     * @param postCode
-     * @return
-     */
-    @Transactional
-    @Override
-    public AddressDTO updatePostCode(Long id, Integer postCode) throws AddressNotExistException {
-        AddressDTO addressResult = null;
+    private void checkParametersAddress(AddressDTO address) {
+        String message = "Field %s, check the field that it has the 'address' parameter.";
 
-        LOG.debug("************ updatePostCode() ---> id = " + id + " ---> postCode = " + postCode);
-
-        Optional<AddressEntity> addressFromRepositoryById = addressRepository.findById(id);
-
-        LOG.debug("************ updatePostCode() ---> addressFromRepositoryById = " + addressFromRepositoryById);
-
-        if (addressFromRepositoryById.isPresent()) {
-            AddressEntity addressEntityUpdate = addressFromRepositoryById.get();
-            if (postCode != null
-                    && (!postCode.equals(addressEntityUpdate.getPostcode()))) {
-
-                addressRepository.updatePostcode(id, postCode);
-
-                Optional<AddressEntity> savedAddressFromRepository = addressRepository.findById(id);
-
-                LOG.debug("************ updatePostCode() ---> savedAddressFromRepository = " + savedAddressFromRepository);
-
-                addressResult = ConverterAddress.mapEntityToDTO(savedAddressFromRepository.get());
-            }
-        } else {
-            LOG.debug("************ updatePostCode() ---> address with this id = '" + id + "' not exist.");
-            throw new AddressNotExistException("Address with this id = '" + id + "' not exist.");
+        if (address.getCountry() == null) {
+            LOG.debug("************ add() ---> " + format(message, "'country' not be equals to null"));
+            throw new IllegalValueException(format(message, "'country' not be equals to null"));
+        } else if ((deleteWhitespace(address.getCountry()).isEmpty())) {
+            LOG.debug("************ add() ---> " + format(message, "'country' is empty"));
+            throw new IllegalValueException(format(message, "'country' is empty"));
         }
 
-        LOG.debug("************ updatePostCode() ---> addressResult = " + addressResult);
-
-        return addressResult;
-    }
-
-    /**
-     * @param id
-     * @return
-     */
-    @Override
-    public Boolean deleteById(Long id) {
-
-        // TODO: Terminar este metodo.
-
-        return null;
-    }
-
-    /**
-     * @param userDTO
-     * @return
-     */
-    @Transactional
-    @Override
-    public Boolean deleteByUser(UserDTO userDTO) throws UserNotHaveAddressException {
-        boolean isDeletedAddress = false;
-
-        LOG.debug("************ deleteByUser() ---> userDTO = " + userDTO);
-
-        UserEntity userEntity = ConverterUser.mapDTOToEntity(userDTO);
-
-        Set<AddressEntity> addressFromRepositoryByUser = addressRepository.findByUser(userEntity);
-
-        LOG.debug("************ deleteByUser() ---> addressFromRepositoryById = " + addressFromRepositoryByUser);
-
-        if (!addressFromRepositoryByUser.isEmpty()) {
-            addressRepository.deleteByUser(userEntity);
-            isDeletedAddress = true;
-        } else {
-            LOG.debug("************ deleteByUser() ---> user with this id = '" + userDTO + "' not exist.");
-            throw new UserNotHaveAddressException("This user = '" + userDTO + "' not have address.");
+        if (address.getCity() == null) {
+            LOG.debug("************ add() ---> " + format(message, "'city' not be equals to null"));
+            throw new IllegalValueException(format(message, "'city' not be equals to null"));
+        } else if ((deleteWhitespace(address.getCity()).isEmpty())) {
+            LOG.debug("************ add() ---> " + format(message, "'city' is empty"));
+            throw new IllegalValueException(format(message, "'city' is empty"));
         }
 
-        LOG.debug("************ deleteByUser() ---> isDeletedAddress = " + isDeletedAddress);
-
-        return isDeletedAddress;
-    }
-
-    /**
-     * @param id
-     * @return
-     */
-    @Override
-    public AddressDTO findById(Long id) throws AddressNotExistException {
-        AddressDTO addressResult = null;
-
-        LOG.debug("************ findById() ---> id = " + id);
-
-        Optional<AddressEntity> addressFromRepositoryById = addressRepository.findById(id);
-
-        LOG.debug("************ findById() ---> addressFromRepositoryById = " + addressFromRepositoryById);
-
-        if (addressFromRepositoryById.isPresent()) {
-            addressResult = ConverterAddress.mapEntityToDTO(addressFromRepositoryById.get());
-        } else {
-            LOG.debug("************ findById() ---> address with this id = '" + id + "' not exist.");
-            throw new AddressNotExistException("Address with this id = '" + id + "' not exist.");
+        if (address.getStreet() == null) {
+            LOG.debug("************ add() ---> " + format(message, "'street' not be equals to null"));
+            throw new IllegalValueException(format(message, "'street' not be equals to null"));
+        } else if ((deleteWhitespace(address.getStreet()).isEmpty())) {
+            LOG.debug("************ add() ---> " + format(message, "'street' is empty"));
+            throw new IllegalValueException(format(message, "'street' is empty"));
         }
 
-        LOG.debug("************ findById() ---> addressResult = " + addressResult);
-
-        return addressResult;
-    }
-
-    /**
-     * @param country
-     * @return
-     */
-    @Override
-    public Set<AddressDTO> findByCountry(String country) throws AddressNotExistException {
-        Set<AddressDTO> addressSetResult = null;
-
-        LOG.debug("************ findByCountry() ---> country = " + country);
-
-        Set<AddressEntity> addressSetFromRepositoryByCountry = addressRepository.findByCountry(country);
-
-        LOG.debug("************ findByCountry() ---> addressSetFromRepositoryByCountry = " + addressSetFromRepositoryByCountry);
-
-        if (!addressSetFromRepositoryByCountry.isEmpty()) {
-            addressSetResult = ConverterAddress.mapSetEntityToSetDTO(addressSetFromRepositoryByCountry);
-        } else {
-            LOG.debug("************ findByCountry() ---> address with this name country = '" + country + "' not exist.");
-            throw new AddressNotExistException("Address with this name country = '" + country + "' not exist.");
+        if (address.getHouseNumber() == null) {
+            LOG.debug("************ add() ---> " + format(message, "'houseNumber' not be equals to null"));
+            throw new IllegalValueException(format(message, "'houseNumber' not be equals to null"));
+        } else if ((deleteWhitespace(address.getHouseNumber()).isEmpty())) {
+            LOG.debug("************ add() ---> " + format(message, "'houseNumber' is empty"));
+            throw new IllegalValueException(format(message, "'houseNumber' is empty"));
         }
 
-        LOG.debug("************ findByCountry() ---> addressSetResult = " + addressSetResult);
-
-        return addressSetResult;
+        if (address.getPostcode() == null) {
+            LOG.debug("************ add() ---> " + format(message, "'postcode' not be equals to null"));
+            throw new IllegalValueException(format(message, "'postcode' not be equals to null"));
+        } else if (address.getPostcode() <= 0) {
+            LOG.debug("************ add() ---> " + format(message, "'postcode' must be greater that zero"));
+            throw new IllegalValueException(format(message, "'postcode' must be greater that zero"));
+        }
     }
 
-    /**
-     * @param city
-     * @return
-     */
-    @Override
-    public Set<AddressDTO> findByCity(String city) throws AddressNotExistException {
-        Set<AddressDTO> addressSetResult = null;
-
-        LOG.debug("************ findByCity() ---> city = " + city);
-
-        Set<AddressEntity> addressSetFromRepositoryByCity = addressRepository.findByCity(city);
-
-        LOG.debug("************ findByCity() ---> addressSetFromRepositoryByCity = " + addressSetFromRepositoryByCity);
-
-        if (!addressSetFromRepositoryByCity.isEmpty()) {
-            addressSetResult = ConverterAddress.mapSetEntityToSetDTO(addressSetFromRepositoryByCity);
-        } else {
-            LOG.debug("************ findByCity() ---> address with this name city = '" + city + "' not exist.");
-            throw new AddressNotExistException("Address with this name city = '" + city + "' not exist.");
+    private void checkExistsUserById(Long userId) {
+        if (!userRepository.existsById(userId)) {
+            LOG.debug("************ checkExistsUserById() ---> " + "User with this id = " + userId + " not exist.");
+            throw new UserNotExistException("User with this id = " + userId + " not exist.");
         }
-
-        LOG.debug("************ findByCity() ---> addressSetResult = " + addressSetResult);
-
-        return addressSetResult;
     }
 
-    /**
-     * @param street
-     * @return
-     */
-    @Override
-    public Set<AddressDTO> findByStreet(String street) throws AddressNotExistException {
-        Set<AddressDTO> addressSetResult = null;
+    private AddressEntity checkExistsAddressByAddressId(Long addressId) {
 
-        LOG.debug("************ findByStreet() ---> street = " + street);
+        Optional<AddressEntity> addressFromRepository = addressRepository.findById(addressId);
 
-        Set<AddressEntity> addressSetFromRepositoryByStreet = addressRepository.findByStreet(street);
-
-        LOG.debug("************ findByStreet() ---> addressSetFromRepositoryByStreet = " + addressSetFromRepositoryByStreet);
-
-        if (!addressSetFromRepositoryByStreet.isEmpty()) {
-            addressSetResult = ConverterAddress.mapSetEntityToSetDTO(addressSetFromRepositoryByStreet);
-        } else {
-            LOG.debug("************ findByStreet() ---> address with this name street = '" + street + "' not exist.");
-            throw new AddressNotExistException("Address with this name street = '" + street + "' not exist.");
+        if (addressFromRepository.isEmpty()) {
+            LOG.debug("************ checkExistsAddressByAddressId() ---> " + "Address with this addressId = " + addressId + " not exist.");
+            throw new AddressNotExistException("Address with this addressId = " + addressId + " not exist.");
         }
 
-        LOG.debug("************ findByStreet() ---> addressSetResult = " + addressSetResult);
-
-        return addressSetResult;
+        return addressFromRepository.get();
     }
 
-    /**
-     * @param houseNumber
-     * @return
-     */
-    @Override
-    public Set<AddressDTO> findByHouseNumber(String houseNumber) throws AddressNotExistException {
-        Set<AddressDTO> addressSetResult = null;
+    private List<AddressEntity> checkExistsAddressesByUserId(Long userId) {
 
-        LOG.debug("************ findByHouseNumber() ---> houseNumber = " + houseNumber);
+        List<AddressEntity> addressesFromRepository = addressRepository.findByUserId(userId);
 
-        Set<AddressEntity> addressSetFromRepositoryByHouseNumber = addressRepository.findByHouseNumber(houseNumber);
-
-        LOG.debug("************ findByHouseNumber() ---> addressSetFromRepositoryByHouseNumber = " + addressSetFromRepositoryByHouseNumber);
-
-        if (!addressSetFromRepositoryByHouseNumber.isEmpty()) {
-            addressSetResult = ConverterAddress.mapSetEntityToSetDTO(addressSetFromRepositoryByHouseNumber);
-        } else {
-            LOG.debug("************ findByHouseNumber() ---> address with this house number = '" + houseNumber + "' not exist.");
-            throw new AddressNotExistException("Address with this house number = '" + houseNumber + "' not exist.");
+        if (addressesFromRepository.isEmpty()) {
+            LOG.debug("************ checkExistsAddressesByUserId() ---> Addresses with this userId = " + userId + " not exist.");
+            throw new AddressNotExistException("Addresses with this userId = " + userId + " not exist.");
         }
 
-        LOG.debug("************ findByHouseNumber() ---> addressSetResult = " + addressSetResult);
-
-        return addressSetResult;
-    }
-
-    /**
-     * @param postcode
-     * @return
-     */
-    @Override
-    public Set<AddressDTO> findByPostcode(Integer postcode) throws AddressNotExistException {
-        Set<AddressDTO> addressSetResult = null;
-
-        LOG.debug("************ findByPostcode() ---> postcode = " + postcode);
-
-        Set<AddressEntity> addressSetFromRepositoryByPostcode = addressRepository.findByPostcode(postcode);
-
-        LOG.debug("************ findByPostcode() ---> addressSetFromRepositoryByPostcode = " + addressSetFromRepositoryByPostcode);
-
-        if (!addressSetFromRepositoryByPostcode.isEmpty()) {
-            addressSetResult = ConverterAddress.mapSetEntityToSetDTO(addressSetFromRepositoryByPostcode);
-        } else {
-            LOG.debug("************ findByPostcode() ---> address with this postcode = '" + postcode + "' not exist.");
-            throw new AddressNotExistException("Address with this postcode = '" + postcode + "' not exist.");
-        }
-
-        LOG.debug("************ findByPostcode() ---> addressSetResult = " + addressSetResult);
-
-        return addressSetResult;
-    }
-
-    /**
-     * @param user
-     * @return
-     */
-    @Override
-    public Set<AddressDTO> findByUser(UserDTO user) throws AddressNotExistException {
-        Set<AddressDTO> addressSetResult = null;
-
-        LOG.debug("************ findByUser() ---> user = " + user);
-
-        Set<AddressEntity> addressSetFromRepositoryByUser = addressRepository.findByUser(ConverterUser.mapDTOToEntity(user));
-
-        LOG.debug("************ findByUser() ---> addressSetFromRepositoryByUser = " + addressSetFromRepositoryByUser);
-
-        if (!addressSetFromRepositoryByUser.isEmpty()) {
-            addressSetResult = ConverterAddress.mapSetEntityToSetDTO(addressSetFromRepositoryByUser);
-        } else {
-            LOG.debug("************ findByUser() ---> address with this user id = '" + user.getId() + "' not exist.");
-            throw new AddressNotExistException("Address with this user id = '" + user.getId() + "' not exist.");
-        }
-
-        LOG.debug("************ findByUser() ---> addressSetResult = " + addressSetResult);
-
-        return addressSetResult;
+        return addressesFromRepository;
     }
 
 }

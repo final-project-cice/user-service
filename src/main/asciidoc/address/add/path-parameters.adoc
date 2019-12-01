@@ -1,0 +1,8 @@
+.+http://localhost:8081/users/{userId}/addresses+
+|===
+|Parameter|Description
+
+|`+userId+`
+|The user id to which address will be added.
+
+|===

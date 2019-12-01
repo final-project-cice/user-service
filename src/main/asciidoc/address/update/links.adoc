@@ -1,0 +1,25 @@
+|===
+|Relation|Description
+
+|`+self+`
+|Link to self(updateByAddressId) the address resource.
+
+|`+add+`
+|Link to add address resource by user id.
+
+|`+getByAddressId+`
+|Link to get the address resource by address id.
+
+|`+getPageOfAddressesByUserId+`
+|Link to get the page of addresses resource by user id.
+
+|`+getPageOfSortedAddressesByUserId+`
+|Link to get the page of sorted addresses resource by user id.
+
+|`+deleteByAddressId+`
+|Link to delete address resource by address id.
+
+|`+deleteAllAddressesByUserId+`
+|Link to delete addresses resource by user id.
+
+|===

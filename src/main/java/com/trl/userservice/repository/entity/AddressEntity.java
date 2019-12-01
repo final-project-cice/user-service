@@ -1,10 +1,12 @@
 package com.trl.userservice.repository.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "address")
+@Entity(name = "AddressEntity")
+@Table(name = "address_user")
 public class AddressEntity {
 
     @Id
@@ -21,64 +23,74 @@ public class AddressEntity {
     @Column(name = "street", nullable = false)
     private String street;
 
-    @Column(name = "houseNumber", nullable = false)
+    @Column(name = "house_number", nullable = false)
     private String houseNumber;
 
     @Column(name = "postcode", nullable = false)
     private Integer postcode;
 
-    @ManyToOne
-    @JoinColumn(name = "usr_id", updatable = false, nullable = false)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usr_id")
     private UserEntity user;
 
     public AddressEntity() {
-    }
-
-    public AddressEntity(Long id, String country, String city, String street, String houseNumber, Integer postcode) {
-        this.id = id;
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.houseNumber = houseNumber;
-        this.postcode = postcode;
-    }
-
-    public AddressEntity(Long id, String country, String city, String street, String houseNumber, Integer postcode, UserEntity user) {
-        this.id = id;
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.houseNumber = houseNumber;
-        this.postcode = postcode;
-        this.user = user;
     }
 
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getCountry() {
         return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getCity() {
         return city;
     }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getStreet() {
         return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public String getHouseNumber() {
         return houseNumber;
     }
 
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
     public Integer getPostcode() {
         return postcode;
     }
 
+    public void setPostcode(Integer postcode) {
+        this.postcode = postcode;
+    }
+
     public UserEntity getUser() {
         return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     @Override
@@ -86,18 +98,17 @@ public class AddressEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AddressEntity that = (AddressEntity) o;
-        return id.equals(that.id) &&
-                country.equals(that.country) &&
-                city.equals(that.city) &&
-                street.equals(that.street) &&
-                houseNumber.equals(that.houseNumber) &&
-                postcode.equals(that.postcode) &&
-                Objects.equals(user, that.user);
+        return Objects.equals(id, that.id) &&
+                Objects.equals(country, that.country) &&
+                Objects.equals(city, that.city) &&
+                Objects.equals(street, that.street) &&
+                Objects.equals(houseNumber, that.houseNumber) &&
+                Objects.equals(postcode, that.postcode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, country, city, street, houseNumber, postcode, user);
+        return Objects.hash(id, country, city, street, houseNumber, postcode);
     }
 
     @Override
@@ -109,8 +120,6 @@ public class AddressEntity {
                 ", street='" + street + '\'' +
                 ", houseNumber='" + houseNumber + '\'' +
                 ", postcode=" + postcode +
-                ", user=" + user +
                 '}';
     }
-
 }

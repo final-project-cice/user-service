@@ -1,0 +1,38 @@
+[source,options="nowrap"]
+----
+{
+  "addressId" : 1,
+  "country" : "Spain",
+  "city" : "Madrid",
+  "street" : "Calle Madrid",
+  "houseNumber" : "1A",
+  "postcode" : 1111,
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/users/addresses/1"
+    },
+    "add" : {
+      "href" : "http://localhost:8080/users/{userId}/addresses",
+      "templated" : true
+    },
+    "getByAddressId" : {
+      "href" : "http://localhost:8080/users/addresses/1"
+    },
+    "getPageOfAddressesByUserId" : {
+      "href" : "http://localhost:8080/users/{userId}/addresses/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedAddressesByUserId" : {
+      "href" : "http://localhost:8080/users/{userId}/addresses/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "deleteByAddressId" : {
+      "href" : "http://localhost:8080/users/addresses/1"
+    },
+    "deleteAllAddressesByUserId" : {
+      "href" : "http://localhost:8080/users/{userId}/addresses",
+      "templated" : true
+    }
+  }
+}
+----
