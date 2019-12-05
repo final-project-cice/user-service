@@ -6,6 +6,7 @@ import com.trl.userservice.repository.entity.BankDataEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,12 +18,13 @@ import java.util.stream.Collectors;
  *
  * @author Tsyupryk Roman
  */
+@Component
 public final class BankDataConverter {
 
     private static final Logger LOG = LoggerFactory.getLogger(BankDataConverter.class);
     private static final String EXCEPTION_MESSAGE = "Parameter is illegal, check the parameter that are passed to the method.";
 
-    private BankDataConverter() {
+    public BankDataConverter() {
     }
 
     /**
@@ -32,7 +34,7 @@ public final class BankDataConverter {
      * @return the {@literal BankDataDTO}.
      * @throws IllegalArgumentException in case the given {@code entity} is {@literal null}.
      */
-    public static BankDataDTO mapEntityToDTO(BankDataEntity entity) {
+    public BankDataDTO mapEntityToDTO(BankDataEntity entity) {
         BankDataDTO result = null;
 
         if (entity == null) {
@@ -62,7 +64,7 @@ public final class BankDataConverter {
      * @return the {@literal List<BankDataDTO>}.
      * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
      */
-    public static List<BankDataDTO> mapListEntityToListDTO(List<BankDataEntity> entities) {
+    public List<BankDataDTO> mapListEntityToListDTO(List<BankDataEntity> entities) {
         List<BankDataDTO> resultList = null;
 
         if (entities == null) {
@@ -73,7 +75,7 @@ public final class BankDataConverter {
         LOG.debug("************ mapListEntityToListDTO() ---> bankDataEntityList = " + entities);
 
         resultList = entities.parallelStream()
-                .map(BankDataConverter::mapEntityToDTO)
+                .map(bankDataEntity -> new BankDataConverter().mapEntityToDTO(bankDataEntity))
                 .collect(Collectors.toList());
 
         LOG.debug("************ mapListEntityToListDTO() ---> resultList = " + resultList);
@@ -88,7 +90,7 @@ public final class BankDataConverter {
      * @return the {@literal Page<BankDataDTO>}.
      * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
      */
-    public static Page<BankDataDTO> mapPageEntityToPageDTO(Page<BankDataEntity> entities) {
+    public Page<BankDataDTO> mapPageEntityToPageDTO(Page<BankDataEntity> entities) {
         Page<BankDataDTO> resultPage;
 
         if (entities == null) {
@@ -98,7 +100,7 @@ public final class BankDataConverter {
 
         LOG.debug("************ mapPageEntityToPageDTO() ---> BankDataEntityPage = " + entities);
 
-        resultPage = entities.map(BankDataConverter::mapEntityToDTO);
+        resultPage = entities.map(bankDataEntity -> new BankDataConverter().mapEntityToDTO(bankDataEntity));
 
         LOG.debug("************ mapPageEntityToPageDTO() ---> resultList = " + resultPage);
 
@@ -112,7 +114,7 @@ public final class BankDataConverter {
      * @return the {@literal BankDataEntity}.
      * @throws IllegalArgumentException in case the given {@code dto} is {@literal null}.
      */
-    public static BankDataEntity mapDTOToEntity(BankDataDTO dto) {
+    public BankDataEntity mapDTOToEntity(BankDataDTO dto) {
         BankDataEntity result = null;
 
         if (dto == null) {
@@ -142,7 +144,7 @@ public final class BankDataConverter {
      * @return the {@literal List<BankDataEntity>}.
      * @throws IllegalArgumentException in case the given {@code dtos} is {@literal null}.
      */
-    public static List<BankDataEntity> mapListDTOToListEntity(List<BankDataDTO> dtos) {
+    public List<BankDataEntity> mapListDTOToListEntity(List<BankDataDTO> dtos) {
         List<BankDataEntity> resultList;
 
         if (dtos == null) {
@@ -153,7 +155,7 @@ public final class BankDataConverter {
         LOG.debug("************ mapListDTOToListEntity() ---> bankDataDTOList = " + dtos);
 
         resultList = dtos.parallelStream()
-                .map(BankDataConverter::mapDTOToEntity)
+                .map(bankDataDTO -> new BankDataConverter().mapDTOToEntity(bankDataDTO))
                 .collect(Collectors.toList());
 
         LOG.debug("************ mapListDTOToListEntity() ---> resultList = " + resultList);

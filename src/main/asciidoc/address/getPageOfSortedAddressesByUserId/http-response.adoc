@@ -140,8 +140,8 @@ Content-Length: 3955
       "unsorted" : false,
       "empty" : false
     },
-    "pageNumber" : 0,
     "pageSize" : 2,
+    "pageNumber" : 0,
     "offset" : 0,
     "paged" : true,
     "unpaged" : false
@@ -150,14 +150,14 @@ Content-Length: 3955
   "totalElements" : 3,
   "last" : false,
   "first" : true,
+  "size" : 2,
+  "number" : 0,
   "sort" : {
     "sorted" : true,
     "unsorted" : false,
     "empty" : false
   },
-  "number" : 0,
   "numberOfElements" : 2,
-  "size" : 2,
   "empty" : false
 }
 ----

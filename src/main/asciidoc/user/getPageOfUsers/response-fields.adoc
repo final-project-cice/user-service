@@ -1,0 +1,80 @@
+|===
+|Path|Type|Description
+
+|`+content.[].userId+`
+|`+Number+`
+|The id of the User.
+
+|`+content.[].firstName+`
+|`+String+`
+|The firstName of the User.
+
+|`+content.[].lastName+`
+|`+String+`
+|The lastName of the User.
+
+|`+content.[].userName+`
+|`+String+`
+|The userName of the User.
+
+|`+content.[].email+`
+|`+String+`
+|The email of the User.
+
+|`+content.[].password+`
+|`+String+`
+|The password of the User.
+
+|`+content.[].bankData.[]+`
+|`+Array+`
+|The array of bank data of the User.
+
+|`+content.[].bankData.[].bankDataId+`
+|`+Number+`
+|The id of bank account of the User.
+
+|`+content.[].bankData.[].bankAccountNumber+`
+|`+String+`
+|The bank account number of bank account of the User.
+
+|`+content.[].bankData.[].dateOfExpiry+`
+|`+String+`
+|The date of expiry of bank account of the User.
+
+|`+content.[].bankData.[].cvi+`
+|`+Number+`
+|The cvi number of bank account of the User.
+
+|`+content.[].address.[]+`
+|`+Array+`
+|The array of addresses of the User.
+
+|`+content.[].address.[].addressId+`
+|`+Number+`
+|The id of address of the User.
+
+|`+content.[].address.[].country+`
+|`+String+`
+|The country of address of the User.
+
+|`+content.[].address.[].city+`
+|`+String+`
+|The city of address of the User.
+
+|`+content.[].address.[].street+`
+|`+String+`
+|The street of address of the User.
+
+|`+content.[].address.[].houseNumber+`
+|`+String+`
+|The house number of address of the User.
+
+|`+content.[].address.[].postcode+`
+|`+Number+`
+|The postcode of address of the User.
+
+|`+content.[].birthday+`
+|`+String+`
+|The birthday of the User.
+
+|===

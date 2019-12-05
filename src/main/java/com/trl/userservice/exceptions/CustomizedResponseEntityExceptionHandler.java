@@ -65,4 +65,14 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         errorDetails.setDescription(request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(BankDataNotExistException.class)
+    public final ResponseEntity<ErrorDetailsDTO> handleBankDataNotExistException(BankDataNotExistException ex, WebRequest request) {
+        ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
+        errorDetails.setErrorMessage(ex.getMessage());
+        errorDetails.setErrorCode(HttpStatus.NOT_FOUND.value());
+        errorDetails.setTimestamp(LocalDateTime.now());
+        errorDetails.setDescription(request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
 }

@@ -1,0 +1,4 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/users/0/10/firstName' -i -X GET
+----

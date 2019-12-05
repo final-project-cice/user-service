@@ -1,0 +1,6 @@
+[source,http,options="nowrap"]
+----
+GET /users/1/bankData/0/3/cvi HTTP/1.1
+Host: localhost:8080
+
+----

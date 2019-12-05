@@ -1,0 +1,25 @@
+|===
+|Relation|Description
+
+|`+self+`
+|Link to self(deleteByBankDataId) the bankData resource.
+
+|`+add+`
+|Link to add the bank data resource by user id.
+
+|`+getByBankDataId+`
+|Link to get the bank data resource by bank data id.
+
+|`+getPageOfBankDataByUserId+`
+|Link to get page of bank data resource by user id.
+
+|`+getPageOfSortedBankDataByUserId+`
+|Link to get page of sorted bank data resource by user id.
+
+|`+updateByBankDataId+`
+|Link to update the bank data resource by bank data id.
+
+|`+deleteAllBankDataByUserId+`
+|Link to delete all the bank data resource by user id.
+
+|===

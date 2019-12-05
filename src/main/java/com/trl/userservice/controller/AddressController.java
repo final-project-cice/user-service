@@ -15,6 +15,11 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import java.util.List;
 
+/**
+ * This class is designed to support controller layout for {@literal AddressDTO}.
+ *
+ * @author Tsyupryk Roman
+ */
 @RestController
 @RequestMapping(path = "/users")
 public class AddressController {
@@ -136,7 +141,7 @@ public class AddressController {
     }
 
     /**
-     * Retrieve page of {@literal AddressDTOs} by this {@code userId}.
+     * Retrieve page of sorted {@literal AddressDTOs} by this {@code userId}.
      *
      * @param userId    must not be equals to {@literal null}, and {@code userId} must be greater than zero.
      * @param startPage zero-based page index, must not be negative.
@@ -250,7 +255,7 @@ public class AddressController {
      * Deletes all {@literal AddressDTO} with the given {@code userId}.
      *
      * @param userId must not be equals to {@literal null}, and {@code userId} must be greater than zero.
-     * @return the {@literal ResponseEntity.ok(List<UserDTO>)} if {@literal List<UserDTO>} is deleted correctly.
+     * @return the {@literal ResponseEntity.ok(List<AddressDTO>)} if {@literal List<AddressDTO>} is deleted correctly.
      */
     @DeleteMapping(
             path = "/{userId}/addresses",

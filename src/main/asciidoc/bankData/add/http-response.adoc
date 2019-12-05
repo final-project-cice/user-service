@@ -1,0 +1,41 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 201 Created
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 1002
+
+{
+  "bankDataId" : 4,
+  "bankAccountNumber" : "0123456789",
+  "dateOfExpiry" : "01.01.2000",
+  "cvi" : 111,
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/users/1/bankData"
+    },
+    "getByBankDataId" : {
+      "href" : "http://localhost:8080/users/bankData/{bankDataId}",
+      "templated" : true
+    },
+    "getPageOfBankDataByUserId" : {
+      "href" : "http://localhost:8080/users/1/bankData/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedBankDataByUserId" : {
+      "href" : "http://localhost:8080/users/1/bankData/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateByBankDataId" : {
+      "href" : "http://localhost:8080/users/bankData/{bankDataId}",
+      "templated" : true
+    },
+    "deleteByBankDataId" : {
+      "href" : "http://localhost:8080/users/bankData/{bankDataId}",
+      "templated" : true
+    },
+    "deleteAllBankDataByUserId" : {
+      "href" : "http://localhost:8080/users/1/bankData"
+    }
+  }
+}
+----

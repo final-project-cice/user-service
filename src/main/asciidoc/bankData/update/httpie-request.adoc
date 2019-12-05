@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ echo '{"bankAccountNumber":"0123456789","dateOfExpiry":"01.01.2000","cvi":111}' | http PATCH 'http://localhost:8080/users/bankData/1' \
+    'Content-Type:application/json;charset=UTF-8'
+----

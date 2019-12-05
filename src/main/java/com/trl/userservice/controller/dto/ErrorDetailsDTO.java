@@ -5,6 +5,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent DTO object of error details.
+ *
+ * @author Tsyupryk Roman
+ */
 public class ErrorDetailsDTO {
 
     private String errorMessage;

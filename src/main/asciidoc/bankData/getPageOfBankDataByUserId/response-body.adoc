@@ -1,0 +1,217 @@
+[source,options="nowrap"]
+----
+{
+  "content" : [ {
+    "bankDataId" : 1,
+    "bankAccountNumber" : "1212121212121212",
+    "dateOfExpiry" : "01.01.2000",
+    "cvi" : 333,
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/users/1/bankData/0/3",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/users/1/bankData",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByBankDataId",
+      "href" : "http://localhost:8080/users/bankData/{bankDataId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedBankDataByUserId",
+      "href" : "http://localhost:8080/users/1/bankData/0/3/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateByBankDataId",
+      "href" : "http://localhost:8080/users/bankData/{bankDataId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteByBankDataId",
+      "href" : "http://localhost:8080/users/bankData/{bankDataId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllBankDataByUserId",
+      "href" : "http://localhost:8080/users/1/bankData",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  }, {
+    "bankDataId" : 2,
+    "bankAccountNumber" : "343434343434343",
+    "dateOfExpiry" : "02.01.2000",
+    "cvi" : 222,
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/users/1/bankData/0/3",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/users/1/bankData",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByBankDataId",
+      "href" : "http://localhost:8080/users/bankData/{bankDataId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedBankDataByUserId",
+      "href" : "http://localhost:8080/users/1/bankData/0/3/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateByBankDataId",
+      "href" : "http://localhost:8080/users/bankData/{bankDataId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteByBankDataId",
+      "href" : "http://localhost:8080/users/bankData/{bankDataId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllBankDataByUserId",
+      "href" : "http://localhost:8080/users/1/bankData",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  }, {
+    "bankDataId" : 3,
+    "bankAccountNumber" : "565656565656565",
+    "dateOfExpiry" : "03.01.2000",
+    "cvi" : 111,
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/users/1/bankData/0/3",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/users/1/bankData",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByBankDataId",
+      "href" : "http://localhost:8080/users/bankData/{bankDataId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedBankDataByUserId",
+      "href" : "http://localhost:8080/users/1/bankData/0/3/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateByBankDataId",
+      "href" : "http://localhost:8080/users/bankData/{bankDataId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteByBankDataId",
+      "href" : "http://localhost:8080/users/bankData/{bankDataId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllBankDataByUserId",
+      "href" : "http://localhost:8080/users/1/bankData",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  } ],
+  "pageable" : {
+    "sort" : {
+      "sorted" : false,
+      "unsorted" : true,
+      "empty" : true
+    },
+    "pageSize" : 3,
+    "pageNumber" : 0,
+    "offset" : 0,
+    "paged" : true,
+    "unpaged" : false
+  },
+  "totalPages" : 1,
+  "totalElements" : 3,
+  "last" : true,
+  "first" : true,
+  "size" : 3,
+  "number" : 0,
+  "sort" : {
+    "sorted" : false,
+    "unsorted" : true,
+    "empty" : true
+  },
+  "numberOfElements" : 3,
+  "empty" : false
+}
+----

@@ -7,6 +7,11 @@ import org.springframework.hateoas.ResourceSupport;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent DTO object of bank data of user.
+ *
+ * @author Tsyupryk Roman
+ */
 public class BankDataDTO extends ResourceSupport {
 
     private Long bankDataId;

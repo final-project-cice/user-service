@@ -6,6 +6,11 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
+/**
+ * This interface is designed to support service for {@literal AddressDTO}.
+ *
+ * @author Tsyupryk Roman
+ */
 public interface AddressService {
 
     AddressDTO add(Long userId, AddressDTO address);

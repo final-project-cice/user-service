@@ -5,6 +5,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent Entity object of user.
+ *
+ * @author Tsyupryk Roman
+ */
 @Entity(name = "UserEntity")
 @Table(name = "usr")
 public class UserEntity {

@@ -6,6 +6,7 @@ import com.trl.userservice.repository.entity.AddressEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,12 +18,13 @@ import java.util.stream.Collectors;
  *
  * @author Tsyupryk Roman
  */
+@Component
 public final class AddressConverter {
 
     private static final Logger LOG = LoggerFactory.getLogger(AddressConverter.class);
     private static final String EXCEPTION_MESSAGE = "Parameter is illegal, check the parameter that are passed to the method.";
 
-    private AddressConverter() {
+    public AddressConverter() {
     }
 
     /**
@@ -32,7 +34,7 @@ public final class AddressConverter {
      * @return the {@literal AddressDTO}.
      * @throws IllegalArgumentException in case the given {@code entity} is {@literal null}.
      */
-    public static AddressDTO mapEntityToDTO(AddressEntity entity) {
+    public AddressDTO mapEntityToDTO(AddressEntity entity) {
         AddressDTO result = null;
 
         if (entity == null) {
@@ -64,7 +66,7 @@ public final class AddressConverter {
      * @return the {@literal List<AddressDTO>}.
      * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
      */
-    public static List<AddressDTO> mapListEntityToListDTO(List<AddressEntity> entities) {
+    public List<AddressDTO> mapListEntityToListDTO(List<AddressEntity> entities) {
         List<AddressDTO> resultList = null;
 
         if (entities == null) {
@@ -75,7 +77,7 @@ public final class AddressConverter {
         LOG.debug("************ mapListEntityToListDTO() ---> addressEntityList = " + entities);
 
         resultList = entities.parallelStream()
-                .map(AddressConverter::mapEntityToDTO)
+                .map(address -> new AddressConverter().mapEntityToDTO(address))
                 .collect(Collectors.toList());
 
         LOG.debug("************ mapListEntityToListDTO() ---> resultList = " + resultList);
@@ -90,7 +92,7 @@ public final class AddressConverter {
      * @return the {@literal Page<AddressDTO>}.
      * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
      */
-    public static Page<AddressDTO> mapPageEntityToPageDTO(Page<AddressEntity> entities) {
+    public Page<AddressDTO> mapPageEntityToPageDTO(Page<AddressEntity> entities) {
         Page<AddressDTO> resultPage;
 
         if (entities == null) {
@@ -100,7 +102,7 @@ public final class AddressConverter {
 
         LOG.debug("************ mapPageEntityToPageDTO() ---> addressEntityPage = " + entities);
 
-        resultPage = entities.map(AddressConverter::mapEntityToDTO);
+        resultPage = entities.map(address -> new AddressConverter().mapEntityToDTO(address));
 
         LOG.debug("************ mapPageEntityToPageDTO() ---> resultList = " + resultPage);
 
@@ -114,7 +116,7 @@ public final class AddressConverter {
      * @return the {@literal AddressEntity}.
      * @throws IllegalArgumentException in case the given {@code dto} is {@literal null}.
      */
-    public static AddressEntity mapDTOToEntity(AddressDTO dto) {
+    public AddressEntity mapDTOToEntity(AddressDTO dto) {
         AddressEntity result = null;
 
         if (dto == null) {
@@ -146,7 +148,7 @@ public final class AddressConverter {
      * @return the {@literal List<AddressEntity>}.
      * @throws IllegalArgumentException in case the given {@code dtos} is {@literal null}.
      */
-    public static List<AddressEntity> mapListDTOToListEntity(List<AddressDTO> dtos) {
+    public List<AddressEntity> mapListDTOToListEntity(List<AddressDTO> dtos) {
         List<AddressEntity> resultList = null;
 
         if (dtos == null) {
@@ -157,7 +159,7 @@ public final class AddressConverter {
         LOG.debug("************ mapListDTOToListEntity() ---> addressDTOList = " + dtos);
 
         resultList = dtos.parallelStream()
-                .map(AddressConverter::mapDTOToEntity)
+                .map(address -> new AddressConverter().mapDTOToEntity(address))
                 .collect(Collectors.toList());
 
         LOG.debug("************ mapListDTOToListEntity() ---> resultList = " + resultList);

@@ -5,6 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent Entity object of address of user.
+ *
+ * @author Tsyupryk Roman
+ */
 @Entity(name = "AddressEntity")
 @Table(name = "address_user")
 public class AddressEntity {

@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ echo '{"bankAccountNumber":"0123456789","dateOfExpiry":"01.01.2000","cvi":111}' | http POST 'http://localhost:8080/users/1/bankData' \
+    'Content-Type:application/json;charset=UTF-8'
+----

@@ -3,11 +3,11 @@ package com.trl.userservice.service.impl;
 import com.trl.userservice.controller.dto.AddressDTO;
 import com.trl.userservice.exceptions.*;
 import com.trl.userservice.repository.AddressRepository;
-import com.trl.userservice.repository.UserRepository;
 import com.trl.userservice.repository.entity.AddressEntity;
 import com.trl.userservice.service.AddressService;
-
-import static com.trl.userservice.service.converter.AddressConverter.*;
+import com.trl.userservice.service.converter.AddressConverter;
+import com.trl.userservice.utils.AddressUtils;
+import com.trl.userservice.utils.UserUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import static java.lang.String.format;
-import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,11 +36,15 @@ public class AddressServiceImpl implements AddressService {
     private static final String EXCEPTION_MESSAGE_ADDRESSES_BY_USER_ID_NOT_EXIST = "Addresses with this userId = %s not exist.";
 
     private final AddressRepository addressRepository;
-    private final UserRepository userRepository;
+    private final AddressUtils addressUtils;
+    private final AddressConverter addressConverter;
+    private final UserUtils userUtils;
 
-    public AddressServiceImpl(AddressRepository addressRepository, UserRepository userRepository) {
+    public AddressServiceImpl(AddressRepository addressRepository, AddressUtils addressUtils, AddressConverter addressConverter, UserUtils userUtils) {
         this.addressRepository = addressRepository;
-        this.userRepository = userRepository;
+        this.addressUtils = addressUtils;
+        this.addressConverter = addressConverter;
+        this.userUtils = userUtils;
     }
 
     /**
@@ -67,10 +70,10 @@ public class AddressServiceImpl implements AddressService {
 
         LOG.debug("************ add() ---> userId = " + userId + " ---> address = " + address);
 
-        checkParametersAddress(address);
+        addressUtils.checkFieldsOfAddress(address);
 
         LOG.debug("************ add() ---> userId = " + userId);
-        checkExistsUserById(userId);
+        userUtils.checkExistsUser(userId);
 
         // TODO: Find information. How can these two lines of code be done better.
         Long generatedId = addressRepository.count() + 1;
@@ -78,7 +81,7 @@ public class AddressServiceImpl implements AddressService {
 
         Optional<AddressEntity> savedAddressFromRepository = addressRepository.findById(generatedId);
 
-        addressResult = mapEntityToDTO(savedAddressFromRepository.get());
+        addressResult = addressConverter.mapEntityToDTO(savedAddressFromRepository.get());
 
         LOG.debug("************ add() ---> addressResult = " + addressResult);
 
@@ -89,7 +92,7 @@ public class AddressServiceImpl implements AddressService {
      * Retrieves the {@literal AddressDTO} by this {@code addresId}.
      *
      * @param addressId must not be equal to {@literal null}, and {@code addressId} must be greater than zero.
-     * @return the {@literal AdddressDTO} with the given {@code addressId}.
+     * @return the {@literal AddressDTO} with the given {@code addressId}.
      * @throws IllegalArgumentException In case the given {@code addressId} is {@literal null} or if {@code addressId} is equal or less zero.
      * @throws DataNotFoundException    In case if {@literal AddressDTO} not exist with this {@code addressId}.
      */
@@ -98,26 +101,26 @@ public class AddressServiceImpl implements AddressService {
         AddressDTO addressResult = null;
 
         if ((addressId == null) || (addressId <= 0)) {
-            LOG.debug("************ getByAddressId(() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            LOG.debug("************ getByAddressId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
             throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
         }
 
-        LOG.debug("************ getByAddressId(() ---> addressId = " + addressId);
+        LOG.debug("************ getByAddressId() ---> addressId = " + addressId);
 
         Optional<AddressEntity> addressFromRepositoryByAddressId = addressRepository.findById(addressId);
-        LOG.debug("************ getByAddressId(() ---> " +
+        LOG.debug("************ getByAddressId() ---> " +
                 "addressFromRepositoryByAddressId = " + addressFromRepositoryByAddressId);
 
         if (addressFromRepositoryByAddressId.isEmpty()) {
-            LOG.debug("************ getByAddressId(() ---> " +
+            LOG.debug("************ getByAddressId() ---> " +
                     format(EXCEPTION_MESSAGE_ADDRESS_BY_ADDRESS_ID_NOT_EXIST, addressId));
             throw new DataNotFoundException(
                     format(EXCEPTION_MESSAGE_ADDRESS_BY_ADDRESS_ID_NOT_EXIST, addressId));
         }
 
-        addressResult = mapEntityToDTO(addressFromRepositoryByAddressId.get());
+        addressResult = addressConverter.mapEntityToDTO(addressFromRepositoryByAddressId.get());
 
-        LOG.debug("************ getByAddressId(() ---> addressResult = " + addressResult);
+        LOG.debug("************ getByAddressId() ---> addressResult = " + addressResult);
 
         return addressResult;
     }
@@ -144,7 +147,7 @@ public class AddressServiceImpl implements AddressService {
 
         LOG.debug("************ getPageOfAddressesByUserId() ---> userId = " + userId + " ---> startPage = " + startPage + " ---> pageSize = " + pageSize);
 
-        checkExistsUserById(userId);
+        userUtils.checkExistsUser(userId);
 
         Page<AddressEntity> pageOfAddressesByUserId = addressRepository.getPageOfAddressesByUserId(userId, PageRequest.of(startPage, pageSize));
         LOG.debug("************ getPageOfAddressesByUserId() ---> pageOfAddressesFromRepositoryByUserId " + pageOfAddressesByUserId);
@@ -154,7 +157,7 @@ public class AddressServiceImpl implements AddressService {
             throw new DataNotFoundException(format(EXCEPTION_MESSAGE_ADDRESSES_BY_USER_ID_NOT_EXIST, userId));
         }
 
-        pageOfAddressesResult = mapPageEntityToPageDTO(pageOfAddressesByUserId);
+        pageOfAddressesResult = addressConverter.mapPageEntityToPageDTO(pageOfAddressesByUserId);
         LOG.debug("************ getPageOfAddressesByUserId() ---> pageOfAddressesResult = " + pageOfAddressesResult);
 
         return pageOfAddressesResult;
@@ -184,7 +187,7 @@ public class AddressServiceImpl implements AddressService {
         LOG.debug("************ getPageOfSortedAddressesByUserId() ---> userId = " + userId + " ---> startPage = " + startPage
                 + " ---> pageSize = " + pageSize + " ---> sortOrder = " + sortOrder);
 
-        checkExistsUserById(userId);
+        userUtils.checkExistsUser(userId);
 
         Page<AddressEntity> pageOfAddressesByUserId = addressRepository.getPageOfAddressesByUserId(userId, PageRequest.of(startPage, pageSize, Sort.by(sortOrder)));
         LOG.debug("************ getPageOfSortedAddressesByUserId() ---> pageOfAddressesFromRepositoryByUserId = " + pageOfAddressesByUserId);
@@ -194,7 +197,7 @@ public class AddressServiceImpl implements AddressService {
             throw new DataNotFoundException(format(EXCEPTION_MESSAGE_ADDRESSES_BY_USER_ID_NOT_EXIST, userId));
         }
 
-        pageOfAddressesResult = mapPageEntityToPageDTO(pageOfAddressesByUserId);
+        pageOfAddressesResult = addressConverter.mapPageEntityToPageDTO(pageOfAddressesByUserId);
         LOG.debug("************ getPageOfSortedAddressesByUserId() ---> pageOfAddressesResult = " + pageOfAddressesResult);
 
         return pageOfAddressesResult;
@@ -223,10 +226,10 @@ public class AddressServiceImpl implements AddressService {
 
         LOG.debug("************ updateByAddressId() ---> addressId = " + addressId + " ---> address = " + address);
 
-        AddressEntity addressToBeUpdated = checkExistsAddressByAddressId(addressId);
+        AddressDTO addressToBeUpdated = addressUtils.checkExistsAddress(addressId);
 
         // TODO: Finish this method.
-        addressResult = mapEntityToDTO(addressToBeUpdated);
+        addressResult = addressToBeUpdated;
 
         LOG.debug("************ updateByAddressId() ---> " + "Updated addressResult = " + addressResult);
 
@@ -252,11 +255,11 @@ public class AddressServiceImpl implements AddressService {
 
         LOG.debug("************ deleteByAddressId() ---> addressId = " + addressId);
 
-        AddressEntity addressToBeDeleted = checkExistsAddressByAddressId(addressId);
+        AddressDTO addressToBeDeleted = addressUtils.checkExistsAddress(addressId);
 
         addressRepository.deleteById(addressId);
 
-        addressResult = mapEntityToDTO(addressToBeDeleted);
+        addressResult = addressToBeDeleted;
 
         LOG.debug("************ deleteByAddressId() ---> " + "Deleted address = " + addressResult);
 
@@ -283,92 +286,16 @@ public class AddressServiceImpl implements AddressService {
 
         LOG.debug("************ deleteAllAddressesByUserId() ---> userId = " + userId);
 
-        checkExistsUserById(userId);
+        userUtils.checkExistsUser(userId);
 
-        List<AddressEntity> addressesToBeDeleted = checkExistsAddressesByUserId(userId);
+        List<AddressDTO> addressesToBeDeleted = addressUtils.checkExistsAddressesByUserId(userId);
 
         addressRepository.deleteAllAddressesByUserId(userId);
 
-        addressesResult = mapListEntityToListDTO(addressesToBeDeleted);
+        addressesResult = addressesToBeDeleted;
 
         LOG.debug("************ deleteAllAddressesByUserId() ---> " + "Deleted addresses = " + addressesResult);
 
         return addressesResult;
     }
-
-    private void checkParametersAddress(AddressDTO address) {
-        String message = "Field %s, check the field that it has the 'address' parameter.";
-
-        if (address.getCountry() == null) {
-            LOG.debug("************ add() ---> " + format(message, "'country' not be equals to null"));
-            throw new IllegalValueException(format(message, "'country' not be equals to null"));
-        } else if ((deleteWhitespace(address.getCountry()).isEmpty())) {
-            LOG.debug("************ add() ---> " + format(message, "'country' is empty"));
-            throw new IllegalValueException(format(message, "'country' is empty"));
-        }
-
-        if (address.getCity() == null) {
-            LOG.debug("************ add() ---> " + format(message, "'city' not be equals to null"));
-            throw new IllegalValueException(format(message, "'city' not be equals to null"));
-        } else if ((deleteWhitespace(address.getCity()).isEmpty())) {
-            LOG.debug("************ add() ---> " + format(message, "'city' is empty"));
-            throw new IllegalValueException(format(message, "'city' is empty"));
-        }
-
-        if (address.getStreet() == null) {
-            LOG.debug("************ add() ---> " + format(message, "'street' not be equals to null"));
-            throw new IllegalValueException(format(message, "'street' not be equals to null"));
-        } else if ((deleteWhitespace(address.getStreet()).isEmpty())) {
-            LOG.debug("************ add() ---> " + format(message, "'street' is empty"));
-            throw new IllegalValueException(format(message, "'street' is empty"));
-        }
-
-        if (address.getHouseNumber() == null) {
-            LOG.debug("************ add() ---> " + format(message, "'houseNumber' not be equals to null"));
-            throw new IllegalValueException(format(message, "'houseNumber' not be equals to null"));
-        } else if ((deleteWhitespace(address.getHouseNumber()).isEmpty())) {
-            LOG.debug("************ add() ---> " + format(message, "'houseNumber' is empty"));
-            throw new IllegalValueException(format(message, "'houseNumber' is empty"));
-        }
-
-        if (address.getPostcode() == null) {
-            LOG.debug("************ add() ---> " + format(message, "'postcode' not be equals to null"));
-            throw new IllegalValueException(format(message, "'postcode' not be equals to null"));
-        } else if (address.getPostcode() <= 0) {
-            LOG.debug("************ add() ---> " + format(message, "'postcode' must be greater that zero"));
-            throw new IllegalValueException(format(message, "'postcode' must be greater that zero"));
-        }
-    }
-
-    private void checkExistsUserById(Long userId) {
-        if (!userRepository.existsById(userId)) {
-            LOG.debug("************ checkExistsUserById() ---> " + "User with this id = " + userId + " not exist.");
-            throw new UserNotExistException("User with this id = " + userId + " not exist.");
-        }
-    }
-
-    private AddressEntity checkExistsAddressByAddressId(Long addressId) {
-
-        Optional<AddressEntity> addressFromRepository = addressRepository.findById(addressId);
-
-        if (addressFromRepository.isEmpty()) {
-            LOG.debug("************ checkExistsAddressByAddressId() ---> " + "Address with this addressId = " + addressId + " not exist.");
-            throw new AddressNotExistException("Address with this addressId = " + addressId + " not exist.");
-        }
-
-        return addressFromRepository.get();
-    }
-
-    private List<AddressEntity> checkExistsAddressesByUserId(Long userId) {
-
-        List<AddressEntity> addressesFromRepository = addressRepository.findByUserId(userId);
-
-        if (addressesFromRepository.isEmpty()) {
-            LOG.debug("************ checkExistsAddressesByUserId() ---> Addresses with this userId = " + userId + " not exist.");
-            throw new AddressNotExistException("Addresses with this userId = " + userId + " not exist.");
-        }
-
-        return addressesFromRepository;
-    }
-
 }

@@ -1,0 +1,36 @@
+[source,options="nowrap"]
+----
+{
+  "bankDataId" : 1,
+  "bankAccountNumber" : "1212121212121212",
+  "dateOfExpiry" : "01.01.2000",
+  "cvi" : 333,
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/users/bankData/1"
+    },
+    "add" : {
+      "href" : "http://localhost:8080/users/{userId}/bankData",
+      "templated" : true
+    },
+    "getPageOfBankDataByUserId" : {
+      "href" : "http://localhost:8080/users/{userId}/bankData/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedBankDataByUserId" : {
+      "href" : "http://localhost:8080/users/{userId}/bankData/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateByBankDataId" : {
+      "href" : "http://localhost:8080/users/bankData/1"
+    },
+    "deleteByBankDataId" : {
+      "href" : "http://localhost:8080/users/bankData/1"
+    },
+    "deleteAllBankDataByUserId" : {
+      "href" : "http://localhost:8080/users/{userId}/bankData",
+      "templated" : true
+    }
+  }
+}
+----

@@ -1,4 +1,4 @@
-= Books REST API Documentation Guide.
+= User REST API Documentation Guide.
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
@@ -7,17 +7,17 @@
 :sectlinks:
 :author: Tsyupryk Roman
 :email: tsyupryk.roman@gmail.com
-:revdate: 15.11.2019
+:revdate: 5.12.2019
 
 [[introduction]]
 = Introduction
 
-Its documentation of CRUD API "book-service".
+Its documentation of CRUD API "user-service".
 
 [[overview-http-verbs]]
 = HTTP verbs
 
-Example Books defines HTTP verbs for all endpoints as follows:
+Example User defines HTTP verbs for all endpoints as follows:
 
 |===
 | Verb | Usage
@@ -37,6 +37,252 @@ Example Books defines HTTP verbs for all endpoints as follows:
 | `DELETE`
 | Used to delete a resource
 |===
+
+= User
+
+=== Get User By Id.
+
+Obtains a specific User by its unique identifier.
+
+====== CURL Request
+
+include::user/getById/curl-request.adoc[]
+
+====== Path Parameters
+
+include::user/getById/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::user/getById/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::user/getById/httpie-request.adoc[]
+
+====== Request Body
+
+include::user/getById/request-body.adoc[]
+
+====== Links
+
+include::user/getById/links.adoc[]
+
+====== HTTP Response
+
+include::user/getById/http-response.adoc[]
+
+====== Response Body
+
+include::user/getById/response-body.adoc[]
+
+====== Response Fields
+
+include::user/getById/response-fields.adoc[]
+
+=== Get Page Of Users.
+
+Obtains page of Users.
+
+====== CURL Request
+
+include::user/getPageOfUsers/curl-request.adoc[]
+
+====== Path Parameters
+
+include::user/getPageOfUsers/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::user/getPageOfUsers/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::user/getPageOfUsers/httpie-request.adoc[]
+
+====== Request Body
+
+include::user/getPageOfUsers/request-body.adoc[]
+
+====== Links
+
+include::user/getPageOfUsers/links.adoc[]
+
+====== HTTP Response
+
+include::user/getPageOfUsers/http-response.adoc[]
+
+====== Response Body
+
+include::user/getPageOfUsers/response-body.adoc[]
+
+====== Response Fields
+
+include::user/getPageOfUsers/response-fields.adoc[]
+
+=== Get Page Of Sorted Users.
+
+Obtains a page of sorted Users.
+
+====== CURL Request
+
+include::user/getPageOfSortedUsers/curl-request.adoc[]
+
+====== Path Parameters
+
+include::user/getPageOfSortedUsers/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::user/getPageOfSortedUsers/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::user/getPageOfSortedUsers/httpie-request.adoc[]
+
+====== Request Body
+
+include::user/getPageOfSortedUsers/request-body.adoc[]
+
+====== Links
+
+include::user/getPageOfSortedUsers/links.adoc[]
+
+====== HTTP Response
+
+include::user/getPageOfSortedUsers/http-response.adoc[]
+
+====== Response Body
+
+include::user/getPageOfSortedUsers/response-body.adoc[]
+
+====== Response Fields
+
+include::user/getPageOfSortedUsers/response-fields.adoc[]
+
+=== Create User.
+
+Create User by this body request.
+
+====== CURL Request
+
+include::user/add/curl-request.adoc[]
+
+====== HTTP Request
+
+include::user/add/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::user/add/httpie-request.adoc[]
+
+====== Request Body
+
+include::user/add/request-body.adoc[]
+
+====== Request Fields
+
+include::user/add/request-fields.adoc[]
+
+====== Links
+
+include::user/add/links.adoc[]
+
+====== HTTP Response
+
+include::user/add/http-response.adoc[]
+
+====== Response Body
+
+include::user/add/response-body.adoc[]
+
+====== Response Fields
+
+include::user/add/response-fields.adoc[]
+
+=== Update User.
+
+Update User by this body request.
+
+====== CURL Request
+
+include::user/updateById/curl-request.adoc[]
+
+====== Path Parameter
+
+include::user/updateById/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::user/updateById/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::user/updateById/httpie-request.adoc[]
+
+====== Request Body
+
+include::user/updateById/request-body.adoc[]
+
+====== Request Fields
+
+include::user/updateById/request-fields.adoc[]
+
+====== Links
+
+include::user/updateById/links.adoc[]
+
+====== HTTP Response
+
+include::user/updateById/http-response.adoc[]
+
+====== Response Body
+
+include::user/updateById/response-body.adoc[]
+
+====== Response Fields
+
+include::user/updateById/response-fields.adoc[]
+
+=== Delete User.
+
+Delete User by ID.
+
+====== CURL Request
+
+include::user/delete/curl-request.adoc[]
+
+====== Path Parameters
+
+include::user/delete/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::user/delete/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::user/delete/httpie-request.adoc[]
+
+====== Request Body
+
+include::user/delete/request-body.adoc[]
+
+====== Links
+
+include::user/delete/links.adoc[]
+
+====== HTTP Response
+
+include::user/delete/http-response.adoc[]
+
+====== Response Body
+
+include::user/delete/response-body.adoc[]
+
+====== Response Fienlds
+
+include::user/delete/response-fields.adoc[]
 
 = Address Of User
 
@@ -323,3 +569,289 @@ include::address/deleteAllAddressesByUserId/response-body.adoc[]
 ====== Response Fienlds
 
 include::address/deleteAllAddressesByUserId/response-fields.adoc[]
+
+= BankData Of User
+
+=== Get BankData By Id.
+
+Obtains a specific BankData by its unique identifier.
+
+====== CURL Request
+
+include::bankData/getByBankDataId/curl-request.adoc[]
+
+====== Path Parameters
+
+include::bankData/getByBankDataId/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::bankData/getByBankDataId/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::bankData/getByBankDataId/httpie-request.adoc[]
+
+====== Request Body
+
+include::bankData/getByBankDataId/request-body.adoc[]
+
+====== Links
+
+include::bankData/getByBankDataId/links.adoc[]
+
+====== HTTP Response
+
+include::bankData/getByBankDataId/http-response.adoc[]
+
+====== Response Body
+
+include::bankData/getByBankDataId/response-body.adoc[]
+
+====== Response Fields
+
+include::bankData/getByBankDataId/response-fields.adoc[]
+
+=== Get Page Of BankData.
+
+Obtains page of BankData of User ID.
+
+====== CURL Request
+
+include::bankData/getPageOfBankDataByUserId/curl-request.adoc[]
+
+====== Path Parameters
+
+include::bankData/getPageOfBankDataByUserId/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::bankData/getPageOfBankDataByUserId/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::bankData/getPageOfBankDataByUserId/httpie-request.adoc[]
+
+====== Request Body
+
+include::bankData/getPageOfBankDataByUserId/request-body.adoc[]
+
+====== Links
+
+include::bankData/getPageOfBankDataByUserId/links.adoc[]
+
+====== HTTP Response
+
+include::bankData/getPageOfBankDataByUserId/http-response.adoc[]
+
+====== Response Body
+
+include::bankData/getPageOfBankDataByUserId/response-body.adoc[]
+
+====== Response Fields
+
+include::bankData/getPageOfBankDataByUserId/response-fields.adoc[]
+
+=== Get Page Of Sorted BankData.
+
+Obtains a page of sorted BankData by User ID.
+
+====== CURL Request
+
+include::bankData/getPageOfSortedBankDataByUserId/curl-request.adoc[]
+
+====== Path Parameters
+
+include::bankData/getPageOfSortedBankDataByUserId/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::bankData/getPageOfSortedBankDataByUserId/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::bankData/getPageOfSortedBankDataByUserId/httpie-request.adoc[]
+
+====== Request Body
+
+include::bankData/getPageOfSortedBankDataByUserId/request-body.adoc[]
+
+====== Links
+
+include::bankData/getPageOfSortedBankDataByUserId/links.adoc[]
+
+====== HTTP Response
+
+include::bankData/getPageOfSortedBankDataByUserId/http-response.adoc[]
+
+====== Response Body
+
+include::bankData/getPageOfSortedBankDataByUserId/response-body.adoc[]
+
+====== Response Fields
+
+include::bankData/getPageOfSortedBankDataByUserId/response-fields.adoc[]
+
+=== Create BankData.
+
+Create BankDat by this body request.
+
+====== CURL Request
+
+include::bankData/add/curl-request.adoc[]
+
+====== Path Parameter
+
+include::bankData/add/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::bankData/add/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::bankData/add/httpie-request.adoc[]
+
+====== Request Body
+
+include::bankData/add/request-body.adoc[]
+
+====== Request Fields
+
+include::bankData/add/request-fields.adoc[]
+
+====== Links
+
+include::bankData/add/links.adoc[]
+
+====== HTTP Response
+
+include::bankData/add/http-response.adoc[]
+
+====== Response Body
+
+include::bankData/add/response-body.adoc[]
+
+====== Response Fields
+
+include::bankData/add/response-fields.adoc[]
+
+=== Update BankData.
+
+Update BankData by this body request.
+
+====== CURL Request
+
+include::bankData/update/curl-request.adoc[]
+
+====== Path Parameter
+
+include::bankData/update/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::bankData/update/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::bankData/update/httpie-request.adoc[]
+
+====== Request Body
+
+include::bankData/update/request-body.adoc[]
+
+====== Request Fields
+
+include::bankData/update/request-fields.adoc[]
+
+====== Links
+
+include::bankData/update/links.adoc[]
+
+====== HTTP Response
+
+include::bankData/update/http-response.adoc[]
+
+====== Response Body
+
+include::bankData/update/response-body.adoc[]
+
+====== Response Fields
+
+include::bankData/update/response-fields.adoc[]
+
+=== Delete BankData.
+
+Delete BankData by BankData ID.
+
+====== CURL Request
+
+include::bankData/deleteByBankDataId/curl-request.adoc[]
+
+====== Path Parameters
+
+include::bankData/deleteByBankDataId/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::bankData/deleteByBankDataId/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::bankData/deleteByBankDataId/httpie-request.adoc[]
+
+====== Request Body
+
+include::bankData/deleteByBankDataId/request-body.adoc[]
+
+====== Links
+
+include::bankData/deleteByBankDataId/links.adoc[]
+
+====== HTTP Response
+
+include::bankData/deleteByBankDataId/http-response.adoc[]
+
+====== Response Body
+
+include::bankData/deleteByBankDataId/response-body.adoc[]
+
+====== Response Fienlds
+
+include::bankData/deleteByBankDataId/response-fields.adoc[]
+
+=== Delete All BankData By Use ID.
+
+Delete All Addresses by User ID.
+
+====== CURL Request
+
+include::bankData/deleteAllBankDataByUserId/curl-request.adoc[]
+
+====== Path Parameters
+
+include::bankData/deleteAllBankDataByUserId/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::bankData/deleteAllBankDataByUserId/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::bankData/deleteAllBankDataByUserId/httpie-request.adoc[]
+
+====== Request Body
+
+include::bankData/deleteAllBankDataByUserId/request-body.adoc[]
+
+====== HTTP Response
+
+include::bankData/deleteAllBankDataByUserId/http-response.adoc[]
+
+====== Response Body
+
+include::bankData/deleteAllBankDataByUserId/response-body.adoc[]
+
+====== Response Fienlds
+
+include::bankData/deleteAllBankDataByUserId/response-fields.adoc[]

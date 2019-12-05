@@ -1,0 +1,100 @@
+[source,options="nowrap"]
+----
+{
+  "userId" : 1,
+  "firstName" : "Tsyupryk",
+  "lastName" : "Roman",
+  "userName" : "TRL",
+  "email" : "tsyupryk.roman@gmail.com",
+  "password" : "strong password",
+  "bankData" : [ {
+    "bankDataId" : 1,
+    "bankAccountNumber" : "0123456789",
+    "dateOfExpiry" : "01.01.2000",
+    "cvi" : 111
+  } ],
+  "address" : [ {
+    "addressId" : 1,
+    "country" : "Spain",
+    "city" : "Madrid",
+    "street" : "Calle",
+    "houseNumber" : "1",
+    "postcode" : 111111
+  } ],
+  "birthday" : "26.06.1988",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/users"
+    },
+    "getById" : {
+      "href" : "http://localhost:8080/users/1"
+    },
+    "getPageOfUsers" : {
+      "href" : "http://localhost:8080/users/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedUsers" : {
+      "href" : "http://localhost:8080/users/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateById" : {
+      "href" : "http://localhost:8080/users/1"
+    },
+    "deleteById" : {
+      "href" : "http://localhost:8080/users/1"
+    },
+    "addAddress" : {
+      "href" : "http://localhost:8080/users/1/addresses"
+    },
+    "getByAddressId" : {
+      "href" : "http://localhost:8080/users/addresses/{addressId}",
+      "templated" : true
+    },
+    "getPageOfAddressesByUserId" : {
+      "href" : "http://localhost:8080/users/1/addresses/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedAddressesByUserId" : {
+      "href" : "http://localhost:8080/users/1/addresses/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateByAddressId" : {
+      "href" : "http://localhost:8080/users/addresses/{addressId}",
+      "templated" : true
+    },
+    "deleteByAddressId" : {
+      "href" : "http://localhost:8080/users/addresses/{addressId}",
+      "templated" : true
+    },
+    "deleteAllAddressesByUserId" : {
+      "href" : "http://localhost:8080/users/1/addresses"
+    },
+    "addBankData" : {
+      "href" : "http://localhost:8080/users/1/bankData"
+    },
+    "getByBankDataId" : {
+      "href" : "http://localhost:8080/users/bankData/{bankDataId}",
+      "templated" : true
+    },
+    "getPageOfBankDataByUserId" : {
+      "href" : "http://localhost:8080/users/1/bankData/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedBankDataByUserId" : {
+      "href" : "http://localhost:8080/users/1/bankData/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateByBankDataId" : {
+      "href" : "http://localhost:8080/users/bankData/{bankDataId}",
+      "templated" : true
+    },
+    "deleteByBankDataId" : {
+      "href" : "http://localhost:8080/users/bankData/{bankDataId}",
+      "templated" : true
+    },
+    "deleteAllBankDataByUserId" : {
+      "href" : "http://localhost:8080/users/1/bankData"
+    }
+  }
+}
+----

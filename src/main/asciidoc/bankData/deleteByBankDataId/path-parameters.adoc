@@ -1,0 +1,8 @@
+.+http://localhost:8081/users/bankData/{bankDataId}+
+|===
+|Parameter|Description
+
+|`+bankDataId+`
+|The bank data id to which bankData will be deleted.
+
+|===

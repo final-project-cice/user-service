@@ -1,0 +1,14 @@
+.+http://localhost:8081/users/{userId}/bankData/{startPage}/{pageSize}+
+|===
+|Parameter|Description
+
+|`+userId+`
+|The user id to which bankData will be added.
+
+|`+startPage+`
+|zero-based page index, must not be negative
+
+|`+pageSize+`
+|the size of the page to be returned, must be greater than 0
+
+|===

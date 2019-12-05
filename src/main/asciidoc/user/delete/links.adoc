@@ -1,0 +1,64 @@
+|===
+|Relation|Description
+
+|`+self+`
+|Link to delete USER by ID.
+
+|`+add+`
+|Link to add the USER.
+
+|`+getById+`
+|Link to get the USER by ID.
+
+|`+getPageOfUsers+`
+|Link to get page of USERS.
+
+|`+getPageOfSortedUsers+`
+|Link to get page of sorted USERS.
+
+|`+updateById+`
+|Link to update the USER by ID.
+
+|`+addAddress+`
+|Link to add address to the USER.
+
+|`+getByAddressId+`
+|Link to get address of the USER.
+
+|`+getPageOfAddressesByUserId+`
+|Link to get page of addresses of the USER.
+
+|`+getPageOfSortedAddressesByUserId+`
+|Link to get page of sorted addresses of the USER.
+
+|`+updateByAddressId+`
+|Link to update address of the USER.
+
+|`+deleteByAddressId+`
+|Link to delete address of the USER.
+
+|`+deleteAllAddressesByUserId+`
+|Link to delete all addresses of the USER.
+
+|`+addBankData+`
+|Link to add bank data of the USER.
+
+|`+getByBankDataId+`
+|Link to get bank data of the USER.
+
+|`+getPageOfBankDataByUserId+`
+|Link to get page of bank data of the USER.
+
+|`+getPageOfSortedBankDataByUserId+`
+|Link to get page of sorted bank data of the USER.
+
+|`+updateByBankDataId+`
+|Link to update bank data of the USER.
+
+|`+deleteByBankDataId+`
+|Link to delete one bank data of the USER.
+
+|`+deleteAllBankDataByUserId+`
+|Link to delete all bank data of the USER.
+
+|===

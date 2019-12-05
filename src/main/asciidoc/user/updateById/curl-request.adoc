@@ -1,0 +1,6 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/users/1' -i -X PATCH \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{"firstName":"Tsyupryk","lastName":"Roman","userName":"TRL","email":"tsyupryk.roman@gmail.com","password":"strong password","bankData":[{"bankAccountNumber":"0123456789","dateOfExpiry":"01.01.2000","cvi":111}],"address":[{"country":"Spain","city":"Madrid","street":"Calle","houseNumber":"1","postcode":111111}],"birthday":"26.06.1988"}'
+----

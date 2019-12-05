@@ -6,6 +6,11 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent Entity object of bank data of user.
+ *
+ * @author Tsyupryk Roman
+ */
 @Entity(name = "BankDataEntity")
 @Table(name = "bank_data_user")
 public class BankDataEntity {

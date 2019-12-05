@@ -1,0 +1,48 @@
+|===
+|Path|Type|Description
+
+|`+bankDataId+`
+|`+Number+`
+|The id of bank account of the user.
+
+|`+bankAccountNumber+`
+|`+String+`
+|The number of bank account of the user.
+
+|`+dateOfExpiry+`
+|`+String+`
+|The date of expiry of bank account of the user.
+
+|`+cvi+`
+|`+Number+`
+|The cvi number of bank account of the user.
+
+|`+_links.self.href+`
+|`+String+`
+|Link to self(updateByBankDataId) the bankData resource.
+
+|`+_links.add.href+`
+|`+String+`
+|Link to add the bank data resource by user id.
+
+|`+_links.getByBankDataId.href+`
+|`+String+`
+|Link to get the bank data resource by bank data id.
+
+|`+_links.getPageOfBankDataByUserId.href+`
+|`+String+`
+|Link to get page of bank data resource by user id.
+
+|`+_links.getPageOfSortedBankDataByUserId.href+`
+|`+String+`
+|Link to get page of sorted bank data resource by user id.
+
+|`+_links.deleteByBankDataId.href+`
+|`+String+`
+|Link to delete the bank data resource by bank data id.
+
+|`+_links.deleteAllBankDataByUserId.href+`
+|`+String+`
+|Link to delete all the bank data resource by user id.
+
+|===

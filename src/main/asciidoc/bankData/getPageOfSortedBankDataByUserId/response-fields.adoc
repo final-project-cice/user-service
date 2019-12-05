@@ -1,0 +1,20 @@
+|===
+|Path|Type|Description
+
+|`+content.[].bankDataId+`
+|`+Number+`
+|The id of bank account of the user.
+
+|`+content.[].bankAccountNumber+`
+|`+String+`
+|The number of bank account of the user.
+
+|`+content.[].dateOfExpiry+`
+|`+String+`
+|The date of expiry of bank account of the user.
+
+|`+content.[].cvi+`
+|`+Number+`
+|The cvi number of bank account of the user.
+
+|===

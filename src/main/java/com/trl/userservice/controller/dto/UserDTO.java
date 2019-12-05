@@ -7,6 +7,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent DTO object of user.
+ *
+ * @author Tsyupryk Roman
+ */
 public class UserDTO extends ResourceSupport {
 
     private Long userId;

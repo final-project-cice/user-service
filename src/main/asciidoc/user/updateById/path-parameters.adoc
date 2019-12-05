@@ -1,0 +1,8 @@
+.+http://localhost:8081/users/{userId}+
+|===
+|Parameter|Description
+
+|`+userId+`
+|This id will be use to update the user.
+
+|===

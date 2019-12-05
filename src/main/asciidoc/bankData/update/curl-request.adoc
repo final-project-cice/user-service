@@ -1,0 +1,6 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/users/bankData/1' -i -X PATCH \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{"bankAccountNumber":"0123456789","dateOfExpiry":"01.01.2000","cvi":111}'
+----

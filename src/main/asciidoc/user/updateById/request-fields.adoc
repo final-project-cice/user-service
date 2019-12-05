@@ -1,0 +1,68 @@
+|===
+|Path|Type|Description
+
+|`+firstName+`
+|`+String+`
+|The firstName of the User.
+
+|`+lastName+`
+|`+String+`
+|The lastName of the User.
+
+|`+userName+`
+|`+String+`
+|The userName of the User.
+
+|`+email+`
+|`+String+`
+|The email of the User.
+
+|`+password+`
+|`+String+`
+|The password of the User.
+
+|`+bankData.[]+`
+|`+Array+`
+|The array of bank data of the User.
+
+|`+bankData.[].bankAccountNumber+`
+|`+String+`
+|The bank account number of bank account of the User.
+
+|`+bankData.[].dateOfExpiry+`
+|`+String+`
+|The date of expiry of bank account of the User.
+
+|`+bankData.[].cvi+`
+|`+Number+`
+|The cvi number of bank account of the User.
+
+|`+address.[]+`
+|`+Array+`
+|The array of addresses of the User.
+
+|`+address.[].country+`
+|`+String+`
+|The country of address of the User.
+
+|`+address.[].city+`
+|`+String+`
+|The city of address of the User.
+
+|`+address.[].street+`
+|`+String+`
+|The street of address of the User.
+
+|`+address.[].houseNumber+`
+|`+String+`
+|The house number of address of the User.
+
+|`+address.[].postcode+`
+|`+Number+`
+|The postcode of address of the User.
+
+|`+birthday+`
+|`+String+`
+|The birthday of the User.
+
+|===

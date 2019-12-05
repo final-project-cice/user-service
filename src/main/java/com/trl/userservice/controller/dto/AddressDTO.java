@@ -5,6 +5,11 @@ import org.springframework.hateoas.ResourceSupport;
 
 import java.util.Objects;
 
+/**
+ * This class is designed to represent DTO object of address of user.
+ *
+ * @author Tsyupryk Roman
+ */
 public class AddressDTO extends ResourceSupport {
 
     private Long addressId;

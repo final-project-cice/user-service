@@ -6,7 +6,7 @@ INSERT INTO usr (id, first_name, last_name, user_name,  email, password, birthda
 VALUES (1, 'Tsyupryk', 'Roman', 'TRL', 'tsyupryk.roman@gmail.com', 'strong_password', TO_DATE('26-JUN-1988', 'DD-MON-YYYY'));
 
 INSERT INTO usr (id, first_name, last_name, user_name,  email, password, birthday)
-VALUES (2, 'Tsyupryk_2', 'Roman_2', 'TRL_2', 'tsyupryk.roman_2@gmail.com', 'strong_password', TO_DATE('01-JAN-2000', 'DD-MON-YYYY'));
+VALUES (2, 'AAAAAAAA', 'AAAAAAA', '', 'aaaaaaaaa@mail.com', 'strong_password', TO_DATE('01-JAN-2000', 'DD-MON-YYYY'));
 
 
 

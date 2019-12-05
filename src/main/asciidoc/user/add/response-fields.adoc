@@ -1,0 +1,160 @@
+|===
+|Path|Type|Description
+
+|`+userId+`
+|`+Number+`
+|The id of the User.
+
+|`+firstName+`
+|`+String+`
+|The firstName of the User.
+
+|`+lastName+`
+|`+String+`
+|The lastName of the User.
+
+|`+userName+`
+|`+String+`
+|The userName of the User.
+
+|`+email+`
+|`+String+`
+|The email of the User.
+
+|`+password+`
+|`+String+`
+|The password of the User.
+
+|`+bankData.[]+`
+|`+Array+`
+|The array of bank data of the User.
+
+|`+bankData.[].bankDataId+`
+|`+Number+`
+|The id of bank account of the User.
+
+|`+bankData.[].bankAccountNumber+`
+|`+String+`
+|The bank account number of bank account of the User.
+
+|`+bankData.[].dateOfExpiry+`
+|`+String+`
+|The date of expiry of bank account of the User.
+
+|`+bankData.[].cvi+`
+|`+Number+`
+|The cvi number of bank account of the User.
+
+|`+address.[]+`
+|`+Array+`
+|The array of addresses of the User.
+
+|`+address.[].addressId+`
+|`+Number+`
+|The id of address of the User.
+
+|`+address.[].country+`
+|`+String+`
+|The country of address of the User.
+
+|`+address.[].city+`
+|`+String+`
+|The city of address of the User.
+
+|`+address.[].street+`
+|`+String+`
+|The street of address of the User.
+
+|`+address.[].houseNumber+`
+|`+String+`
+|The house number of address of the User.
+
+|`+address.[].postcode+`
+|`+Number+`
+|The postcode of address of the User.
+
+|`+birthday+`
+|`+String+`
+|The birthday of the User.
+
+|`+_links.self.href+`
+|`+String+`
+|Link to add USER.
+
+|`+_links.getById.href+`
+|`+String+`
+|Link to get the USER by ID.
+
+|`+_links.getPageOfUsers.href+`
+|`+String+`
+|Link to get page of USERS.
+
+|`+_links.getPageOfSortedUsers.href+`
+|`+String+`
+|Link to get page of sorted USERS.
+
+|`+_links.updateById.href+`
+|`+String+`
+|Link to update the USER by ID.
+
+|`+_links.deleteById.href+`
+|`+String+`
+|Link to delete the USER by ID.
+
+|`+_links.addAddress.href+`
+|`+String+`
+|Link to add address to the USER.
+
+|`+_links.getByAddressId.href+`
+|`+String+`
+|Link to get address of the USER.
+
+|`+_links.getPageOfAddressesByUserId.href+`
+|`+String+`
+|Link to get page of addresses of the USER.
+
+|`+_links.getPageOfSortedAddressesByUserId.href+`
+|`+String+`
+|Link to get page of sorted addresses of the USER.
+
+|`+_links.updateByAddressId.href+`
+|`+String+`
+|Link to update address of the USER.
+
+|`+_links.deleteByAddressId.href+`
+|`+String+`
+|Link to delete address of the USER.
+
+|`+_links.deleteAllAddressesByUserId.href+`
+|`+String+`
+|Link to delete all addresses of the USER.
+
+|`+_links.addBankData.href+`
+|`+String+`
+|Link to add bank data of the USER.
+
+|`+_links.getByBankDataId.href+`
+|`+String+`
+|Link to get bank data of the USER.
+
+|`+_links.getPageOfBankDataByUserId.href+`
+|`+String+`
+|Link to get page of bank data of the USER.
+
+|`+_links.getPageOfSortedBankDataByUserId.href+`
+|`+String+`
+|Link to get page of sorted bank data of the USER.
+
+|`+_links.updateByBankDataId.href+`
+|`+String+`
+|Link to update bank data of the USER.
+
+|`+_links.deleteByBankDataId.href+`
+|`+String+`
+|Link to delete one bank data of the USER.
+
+|`+_links.deleteAllBankDataByUserId.href+`
+|`+String+`
+|Link to delete all bank data of the USER.
+
+|===

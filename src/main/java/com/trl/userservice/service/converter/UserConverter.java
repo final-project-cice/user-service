@@ -6,6 +6,7 @@ import com.trl.userservice.repository.entity.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,12 +18,13 @@ import java.util.stream.Collectors;
  *
  * @author Tsyupryk Roman
  */
+@Component
 public final class UserConverter {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserConverter.class);
     private static final String EXCEPTION_MESSAGE = "Parameter is illegal, check the parameter that are passed to the method.";
 
-    private UserConverter() {
+    public UserConverter() {
     }
 
     /**
@@ -32,7 +34,7 @@ public final class UserConverter {
      * @return the {@literal UserDTO}.
      * @throws IllegalArgumentException in case the given {@code entity} is {@literal null}.
      */
-    public static UserDTO mapEntityToDTO(UserEntity entity) {
+    public UserDTO mapEntityToDTO(UserEntity entity) {
         UserDTO result = null;
 
         if (entity == null) {
@@ -50,8 +52,8 @@ public final class UserConverter {
         result.setUserName(entity.getUserName());
         result.setEmail(entity.getEmail());
         result.setPassword(entity.getPassword());
-        result.setBankData(BankDataConverter.mapListEntityToListDTO(entity.getBankData()));
-        result.setAddress(AddressConverter.mapListEntityToListDTO(entity.getAddress()));
+        result.setBankData(new BankDataConverter().mapListEntityToListDTO(entity.getBankData()));
+        result.setAddress(new AddressConverter().mapListEntityToListDTO(entity.getAddress()));
         result.setBirthday(entity.getBirthday());
 
         LOG.debug("************ mapEntityToDTO() ---> result = " + result
@@ -67,7 +69,7 @@ public final class UserConverter {
      * @return the {@literal List<UserDTO>}.
      * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
      */
-    public static List<UserDTO> mapListEntityToListDTO(List<UserEntity> entities) {
+    public List<UserDTO> mapListEntityToListDTO(List<UserEntity> entities) {
         List<UserDTO> resultList = null;
 
         if (entities == null) {
@@ -78,7 +80,7 @@ public final class UserConverter {
         LOG.debug("************ mapListEntityToListDTO() ---> userEntityList = " + entities);
 
         resultList = entities.parallelStream()
-                .map(UserConverter::mapEntityToDTO)
+                .map(userEntity -> new UserConverter().mapEntityToDTO(userEntity))
                 .collect(Collectors.toList());
 
         LOG.debug("************ mapListEntityToListDTO() ---> resultList = " + resultList);
@@ -93,7 +95,7 @@ public final class UserConverter {
      * @return the {@literal Page<UserDTO>}.
      * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
      */
-    public static Page<UserDTO> mapPageEntityToPageDTO(Page<UserEntity> entities) {
+    public Page<UserDTO> mapPageEntityToPageDTO(Page<UserEntity> entities) {
         Page<UserDTO> resultPage;
 
         if (entities == null) {
@@ -103,7 +105,7 @@ public final class UserConverter {
 
         LOG.debug("************ mapPageEntityToPageDTO() ---> userEntityPage = " + entities);
 
-        resultPage = entities.map(UserConverter::mapEntityToDTO);
+        resultPage = entities.map(userEntity -> new UserConverter().mapEntityToDTO(userEntity));
 
         LOG.debug("************ mapPageEntityToPageDTO() ---> resultPage = " + resultPage);
 
@@ -117,7 +119,7 @@ public final class UserConverter {
      * @return the {@literal UserEntity}.
      * @throws IllegalArgumentException in case the given {@code dto} is {@literal null}.
      */
-    public static UserEntity mapDTOToEntity(UserDTO dto) {
+    public UserEntity mapDTOToEntity(UserDTO dto) {
         UserEntity result = null;
 
         if (dto == null) {
@@ -135,8 +137,8 @@ public final class UserConverter {
         result.setUserName(dto.getUserName());
         result.setEmail(dto.getEmail());
         result.setPassword(dto.getPassword());
-        result.setBankData(BankDataConverter.mapListDTOToListEntity(dto.getBankData()));
-        result.setAddress(AddressConverter.mapListDTOToListEntity(dto.getAddress()));
+        result.setBankData(new BankDataConverter().mapListDTOToListEntity(dto.getBankData()));
+        result.setAddress(new AddressConverter().mapListDTOToListEntity(dto.getAddress()));
         result.setBirthday(dto.getBirthday());
 
         LOG.debug("************ mapDTOToEntity() ---> result = "
@@ -152,7 +154,7 @@ public final class UserConverter {
      * @return the {@literal List<UserEntity>}.
      * @throws IllegalArgumentException in case the given {@code dtos} is {@literal null}.
      */
-    public static List<UserEntity> mapListDTOToListEntity(List<UserDTO> dtos) {
+    public List<UserEntity> mapListDTOToListEntity(List<UserDTO> dtos) {
         List<UserEntity> resultList = null;
 
         if (dtos == null) {
@@ -163,7 +165,7 @@ public final class UserConverter {
         LOG.debug("************ mapListDTOToListEntity() ---> userDTOList = " + dtos);
 
         resultList = dtos.parallelStream()
-                .map(UserConverter::mapDTOToEntity)
+                .map(userDTO -> new UserConverter().mapDTOToEntity(userDTO))
                 .collect(Collectors.toList());
 
         LOG.debug("************ mapListDTOToListEntity() ---> resultList = " + resultList);

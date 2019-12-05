@@ -1,0 +1,8 @@
+.+http://localhost:8081/users/bankData/{bankDataId}+
+|===
+|Parameter|Description
+
+|`+bankDataId+`
+|Get bankData by this bankDataId
+
+|===

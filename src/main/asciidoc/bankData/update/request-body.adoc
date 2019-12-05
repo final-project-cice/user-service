@@ -1,0 +1,4 @@
+[source,options="nowrap"]
+----
+{"bankAccountNumber":"0123456789","dateOfExpiry":"01.01.2000","cvi":111}
+----
