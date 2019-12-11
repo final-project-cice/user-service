@@ -142,18 +142,18 @@
     "paged" : true,
     "unpaged" : false
   },
-  "totalPages" : 2,
   "totalElements" : 3,
   "last" : false,
+  "totalPages" : 2,
   "first" : true,
-  "size" : 2,
-  "number" : 0,
   "sort" : {
     "sorted" : false,
     "unsorted" : true,
     "empty" : true
   },
   "numberOfElements" : 2,
+  "size" : 2,
+  "number" : 0,
   "empty" : false
 }
 ----

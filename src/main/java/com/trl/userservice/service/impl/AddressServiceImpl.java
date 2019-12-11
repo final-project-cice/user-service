@@ -111,7 +111,7 @@ public class AddressServiceImpl implements AddressService {
         LOG.debug("************ getByAddressId() ---> " +
                 "addressFromRepositoryByAddressId = " + addressFromRepositoryByAddressId);
 
-        if (addressFromRepositoryByAddressId.isEmpty()) {
+        if (!addressFromRepositoryByAddressId.isPresent()) {
             LOG.debug("************ getByAddressId() ---> " +
                     format(EXCEPTION_MESSAGE_ADDRESS_BY_ADDRESS_ID_NOT_EXIST, addressId));
             throw new DataNotFoundException(

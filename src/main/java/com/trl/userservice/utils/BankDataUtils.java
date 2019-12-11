@@ -75,7 +75,7 @@ public class BankDataUtils {
 
         Optional<BankDataEntity> bankDataFromRepository = bankDataRepository.findById(bankDataId);
 
-        if (bankDataFromRepository.isEmpty()) {
+        if (!bankDataFromRepository.isPresent()) {
             LOG.debug("************ checkExistsBankData() ---> " + "BankData with this bankDataId = " + bankDataId + " not exist.");
             throw new BankDataNotExistException("BankData with this bankDataId = " + bankDataId + " not exist.");
         }

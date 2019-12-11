@@ -95,7 +95,7 @@ public class AddressUtils {
 
         Optional<AddressEntity> addressFromRepository = addressRepository.findById(addressId);
 
-        if (addressFromRepository.isEmpty()) {
+        if (!addressFromRepository.isPresent()) {
             LOG.debug("************ checkExistsAddressByAddressId() ---> " + "Address with this addressId = " + addressId + " not exist.");
             throw new AddressNotExistException("Address with this addressId = " + addressId + " not exist.");
         }

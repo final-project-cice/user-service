@@ -8,7 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.ArrayList;
 
 public class ConverterToJson {
 
@@ -72,9 +72,9 @@ public class ConverterToJson {
         userEntity.setEmail("tsyupryk.roman@gmail.com");
         userEntity.setPassword("strong password");
         initBankData();
-        userEntity.setBankData(List.of(bankDataEntity));
+        userEntity.setBankData(new ArrayList<BankDataEntity>());
         initAddress();
-        userEntity.setAddress(List.of(addressEntity));
+        userEntity.setAddress(new ArrayList<AddressEntity>());
         userEntity.setBirthday(LocalDate.of(1988, 6, 26));
 
     }

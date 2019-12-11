@@ -16,35 +16,15 @@ spring:
   application:
     name: user-service
 
-  #============================== Configuration Eureka Client
-  eureka:
-    client:
-      serviceUrl:
-        defaultZone: http://localhost:8761/eureka/
-
   #============================== Configuration PostgreSQL
   datasource:
     username: developer
-    password: 1,5Lht.nt!o0#
-    url: jdbc:postgresql://localhost/user_test
+    password: Nqa2GrwJ5dqu
+    url: jdbc:postgresql://ec2-15-188-76-238.eu-west-3.compute.amazonaws.com/user_service_test
+    driver-class-name: org.postgresql.Driver
 
   #============================== Configuration JPA
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: create
-#    database-platform: org.hibernate.dialect.H2Dialect
-
-#  #============================== Configuration H2
-#  h2:
-#    console:
-#      enabled: true
-#      path: /h2-console
-#      settings:
-#        web-allow-others: true
-#
-#  datasource:
-#    username: sa
-#    password:
-#    driver-class-name: org.h2.Driver
-#    url: jdbc:h2:mem:user-test

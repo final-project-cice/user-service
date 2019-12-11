@@ -111,7 +111,7 @@ public class BankDataServiceImpl implements BankDataService {
         LOG.debug("************ getByBankDataId() ---> " +
                 "bankDataFromRepositoryByBankDataId = " + bankDataFromRepositoryByBankDataId);
 
-        if (bankDataFromRepositoryByBankDataId.isEmpty()) {
+        if (!bankDataFromRepositoryByBankDataId.isPresent()) {
             LOG.debug("************ getByBankDataId() ---> " +
                     format(EXCEPTION_MESSAGE_BANK_DATA_BY_BANK_DATA_ID_NOT_EXIST, bankDataId));
             throw new DataNotFoundException(

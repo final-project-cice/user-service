@@ -141,7 +141,7 @@ public class UserServiceImpl implements UserService {
         LOG.debug("************ getById(() ---> " +
                 "userFromRepositoryByUserId = " + userFromRepositoryById);
 
-        if (userFromRepositoryById.isEmpty()) {
+        if (!userFromRepositoryById.isPresent()) {
             LOG.debug("************ getById(() ---> " +
                     format(EXCEPTION_MESSAGE_USER_BY_USER_ID_NOT_EXIST, userId));
             throw new DataNotFoundException(
