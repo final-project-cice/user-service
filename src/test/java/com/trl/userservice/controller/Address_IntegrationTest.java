@@ -30,9 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -135,8 +132,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = 0;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/0/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/0/addresses\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/addresses", USER_ID)
@@ -153,8 +149,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = -1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/-1/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/-1/addresses\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/addresses", USER_ID)
@@ -176,8 +171,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'country' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'country' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/addresses\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/addresses", USER_ID)
@@ -194,8 +188,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'country' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'country' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/addresses\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/addresses", USER_ID)
@@ -212,8 +205,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'city' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'city' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/addresses\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/addresses", USER_ID)
@@ -230,8 +222,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'city' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'city' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/addresses\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/addresses", USER_ID)
@@ -248,8 +239,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'street' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'street' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/addresses\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/addresses", USER_ID)
@@ -266,8 +256,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'street' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'street' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/addresses\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/addresses", USER_ID)
@@ -284,8 +273,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'houseNumber' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'houseNumber' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/addresses\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/addresses", USER_ID)
@@ -302,8 +290,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'houseNumber' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'houseNumber' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/addresses\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/addresses", USER_ID)
@@ -325,8 +312,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'postcode' must be greater that zero, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'postcode' must be greater that zero, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/addresses\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/addresses", USER_ID)
@@ -343,8 +329,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'postcode' must be greater that zero, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'postcode' must be greater that zero, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/addresses\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/addresses", USER_ID)
@@ -362,8 +347,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/addresses\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/addresses", USER_ID)
@@ -431,8 +415,7 @@ public class Address_IntegrationTest {
 
         final Integer ADDRESS_ID = 0;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/addresses/0\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/addresses/0\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/addresses/{addressId}", ADDRESS_ID))
@@ -447,8 +430,7 @@ public class Address_IntegrationTest {
 
         final Integer ADDRESS_ID = -1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/addresses/-1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/addresses/-1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/addresses/{addressId}", ADDRESS_ID))
@@ -464,8 +446,7 @@ public class Address_IntegrationTest {
 
         final Integer ADDRESS_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Address with this addressId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/addresses/1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Address with this addressId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/addresses/1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/addresses/{addressId}", ADDRESS_ID))
@@ -547,8 +528,7 @@ public class Address_IntegrationTest {
         final Integer START_PAGE = 0;
         final Integer PAGE_SIZE = 2;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/0/addresses/0/2\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/0/addresses/0/2\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/addresses/{startPage}/{pageSize}", USER_ID, START_PAGE, PAGE_SIZE))
@@ -565,8 +545,7 @@ public class Address_IntegrationTest {
         final Integer START_PAGE = 0;
         final Integer PAGE_SIZE = 2;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/-1/addresses/0/2\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/-1/addresses/0/2\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/addresses/{startPage}/{pageSize}", USER_ID, START_PAGE, PAGE_SIZE))
@@ -583,8 +562,7 @@ public class Address_IntegrationTest {
         final Integer START_PAGE = 0;
         final Integer PAGE_SIZE = 2;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/100/addresses/0/2\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/100/addresses/0/2\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/addresses/{startPage}/{pageSize}", USER_ID, START_PAGE, PAGE_SIZE))
@@ -603,8 +581,7 @@ public class Address_IntegrationTest {
         final Integer START_PAGE = 0;
         final Integer PAGE_SIZE = 2;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Addresses with this userId = 2 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/2/addresses/0/2\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Addresses with this userId = 2 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/2/addresses/0/2\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/addresses/{startPage}/{pageSize}", USER_ID, START_PAGE, PAGE_SIZE))
@@ -689,8 +666,7 @@ public class Address_IntegrationTest {
         final Integer PAGE_SIZE = 2;
         final String SORT_ORDER = "city";
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/0/addresses/0/2/city\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/0/addresses/0/2/city\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/addresses/{startPage}/{pageSize}/{sortOrder}", USER_ID, START_PAGE, PAGE_SIZE, SORT_ORDER))
@@ -708,8 +684,7 @@ public class Address_IntegrationTest {
         final Integer PAGE_SIZE = 2;
         final String SORT_ORDER = "city";
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/-1/addresses/0/2/city\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/-1/addresses/0/2/city\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/addresses/{startPage}/{pageSize}/{sortOrder}", USER_ID, START_PAGE, PAGE_SIZE, SORT_ORDER))
@@ -727,8 +702,7 @@ public class Address_IntegrationTest {
         final Integer PAGE_SIZE = 2;
         final String SORT_ORDER = "city";
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/100/addresses/0/2/city\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/100/addresses/0/2/city\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/addresses/{startPage}/{pageSize}/{sortOrder}", USER_ID, START_PAGE, PAGE_SIZE, SORT_ORDER))
@@ -748,8 +722,7 @@ public class Address_IntegrationTest {
         final Integer PAGE_SIZE = 2;
         final String SORT_ORDER = "city";
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Addresses with this userId = 2 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/2/addresses/0/2/city\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Addresses with this userId = 2 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/2/addresses/0/2/city\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/addresses/{startPage}/{pageSize}/{sortOrder}", USER_ID, START_PAGE, PAGE_SIZE, SORT_ORDER))
@@ -867,8 +840,7 @@ public class Address_IntegrationTest {
                         )
                 ));
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent_2 = "{\"errorMessage\":\"Address with this addressId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/addresses/1\"}";
+        final String responseBodyContent_2 = "{\"errorMessage\":\"Address with this addressId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/addresses/1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/addresses/{addressId}", ADDRESS_ID))
@@ -883,8 +855,7 @@ public class Address_IntegrationTest {
 
         final Integer ADDRESS_ID = 0;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/addresses/0\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/addresses/0\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/addresses/{addressId}", ADDRESS_ID))
@@ -899,8 +870,7 @@ public class Address_IntegrationTest {
 
         final Integer ADDRESS_ID = -1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/addresses/-1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/addresses/-1\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/addresses/{addressId}", ADDRESS_ID))
@@ -915,8 +885,7 @@ public class Address_IntegrationTest {
 
         final Integer ADDRESS_ID = 100;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Address with this addressId = 100 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/addresses/100\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Address with this addressId = 100 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/addresses/100\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/addresses/{addressId}", ADDRESS_ID))
@@ -965,8 +934,7 @@ public class Address_IntegrationTest {
         final Integer START_PAGE = 0;
         final Integer PAGE_SIZE = 10;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent_2 = "{\"errorMessage\":\"Addresses with this userId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/addresses/0/10\"}";
+        final String responseBodyContent_2 = "{\"errorMessage\":\"Addresses with this userId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/1/addresses/0/10\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/addresses/{startPage}/{pageSize}", USER_ID, START_PAGE, PAGE_SIZE))
@@ -981,8 +949,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = 0;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/0/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/0/addresses\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/{userId}/addresses", USER_ID))
@@ -997,8 +964,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = -1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/-1/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/-1/addresses\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/{userId}/addresses", USER_ID))
@@ -1013,8 +979,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = 100;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/100/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/100/addresses\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/{userId}/addresses", USER_ID))
@@ -1031,8 +996,7 @@ public class Address_IntegrationTest {
 
         final Integer USER_ID = 2;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Addresses with this userId = 2 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/2/addresses\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Addresses with this userId = 2 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/2/addresses\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/{userId}/addresses", USER_ID))

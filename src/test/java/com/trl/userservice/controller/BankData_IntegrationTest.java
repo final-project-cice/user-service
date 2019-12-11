@@ -30,9 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -133,8 +130,7 @@ public class BankData_IntegrationTest {
 
         final Integer USER_ID = 0;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/0/bankData\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/0/bankData\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/bankData", USER_ID)
@@ -151,8 +147,7 @@ public class BankData_IntegrationTest {
 
         final Integer USER_ID = -1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/-1/bankData\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/-1/bankData\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/bankData", USER_ID)
@@ -174,8 +169,7 @@ public class BankData_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'bankAccountNumber' not be equals to null, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/bankData\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'bankAccountNumber' not be equals to null, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/bankData\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/bankData", USER_ID)
@@ -192,8 +186,7 @@ public class BankData_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'bankAccountNumber' is empty, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/bankData\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'bankAccountNumber' is empty, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/bankData\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/bankData", USER_ID)
@@ -210,8 +203,7 @@ public class BankData_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'dateOfExpiry' not be equals to null, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/bankData\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'dateOfExpiry' not be equals to null, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/bankData\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/bankData", USER_ID)
@@ -228,8 +220,7 @@ public class BankData_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'cvi' not be equals to null, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/bankData\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'cvi' not be equals to null, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/bankData\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/bankData", USER_ID)
@@ -246,8 +237,7 @@ public class BankData_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'cvi' must be greater that zero, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/bankData\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'cvi' must be greater that zero, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/bankData\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/bankData", USER_ID)
@@ -264,8 +254,7 @@ public class BankData_IntegrationTest {
 
         final Integer USER_ID = 1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'cvi' must be greater that zero, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/bankData\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'cvi' must be greater that zero, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/1/bankData\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/bankData", USER_ID)
@@ -284,8 +273,7 @@ public class BankData_IntegrationTest {
 
         final Integer USER_ID = 100;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/100/bankData\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/100/bankData\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users/{userId}/bankData", USER_ID)
@@ -355,8 +343,7 @@ public class BankData_IntegrationTest {
 
         final Integer BANK_DATA_ID = 0;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/bankData/0\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/bankData/0\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/bankData/{bankDataId}", BANK_DATA_ID))
@@ -371,8 +358,7 @@ public class BankData_IntegrationTest {
 
         final Integer BANK_DATA_ID = -1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/bankData/-1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/bankData/-1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/bankData/{bankDataId}", BANK_DATA_ID))
@@ -389,8 +375,7 @@ public class BankData_IntegrationTest {
 
         final Integer BANK_DATA_ID = 33;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"BankData with this bankDataId = 33 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/bankData/33\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"BankData with this bankDataId = 33 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/bankData/33\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/bankData/{bankDataId}", BANK_DATA_ID))
@@ -475,8 +460,7 @@ public class BankData_IntegrationTest {
         final Integer START_PAGE = 0;
         final Integer PAGE_SIZE = 3;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/0/bankData/0/3\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/0/bankData/0/3\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/bankData/{startPage}/{pageSize}", USER_ID, START_PAGE, PAGE_SIZE))
@@ -493,8 +477,7 @@ public class BankData_IntegrationTest {
         final Integer START_PAGE = 0;
         final Integer PAGE_SIZE = 3;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/-1/bankData/0/3\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/-1/bankData/0/3\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/bankData/{startPage}/{pageSize}", USER_ID, START_PAGE, PAGE_SIZE))
@@ -513,8 +496,7 @@ public class BankData_IntegrationTest {
         final Integer START_PAGE = 0;
         final Integer PAGE_SIZE = 3;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/100/bankData/0/3\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/100/bankData/0/3\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/bankData/{startPage}/{pageSize}", USER_ID, START_PAGE, PAGE_SIZE))
@@ -533,8 +515,7 @@ public class BankData_IntegrationTest {
         final Integer START_PAGE = 0;
         final Integer PAGE_SIZE = 3;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"BankData with this userId = 2 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/2/bankData/0/3\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"BankData with this userId = 2 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/2/bankData/0/3\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/bankData/{startPage}/{pageSize}", USER_ID, START_PAGE, PAGE_SIZE))
@@ -622,8 +603,7 @@ public class BankData_IntegrationTest {
         final Integer PAGE_SIZE = 3;
         final String SORT_ORDER = "cvi";
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/0/bankData/0/3/cvi\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/0/bankData/0/3/cvi\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/bankData/{startPage}/{pageSize}/{sortOrder}", USER_ID, START_PAGE, PAGE_SIZE, SORT_ORDER))
@@ -641,8 +621,7 @@ public class BankData_IntegrationTest {
         final Integer PAGE_SIZE = 3;
         final String SORT_ORDER = "cvi";
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/-1/bankData/0/3/cvi\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/-1/bankData/0/3/cvi\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/bankData/{startPage}/{pageSize}/{orderSize}", USER_ID, START_PAGE, PAGE_SIZE, SORT_ORDER))
@@ -662,8 +641,7 @@ public class BankData_IntegrationTest {
         final Integer PAGE_SIZE = 3;
         final String SORT_ORDER = "cvi";
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/100/bankData/0/3/cvi\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/100/bankData/0/3/cvi\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/bankData/{startPage}/{pageSize}/{orderSize}", USER_ID, START_PAGE, PAGE_SIZE, SORT_ORDER))
@@ -683,8 +661,7 @@ public class BankData_IntegrationTest {
         final Integer PAGE_SIZE = 3;
         final String SORT_ORDER = "cvi";
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"BankData with this userId = 2 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/2/bankData/0/3/cvi\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"BankData with this userId = 2 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/2/bankData/0/3/cvi\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/bankData/{startPage}/{pageSize}/{orderSize}", USER_ID, START_PAGE, PAGE_SIZE, SORT_ORDER))
@@ -796,8 +773,7 @@ public class BankData_IntegrationTest {
                         )
                 ));
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent_2 = "{\"errorMessage\":\"BankData with this bankDataId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/bankData/1\"}";
+        final String responseBodyContent_2 = "{\"errorMessage\":\"BankData with this bankDataId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/bankData/1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/bankData/{bankDataId}", BANK_DATA_ID))
@@ -817,8 +793,7 @@ public class BankData_IntegrationTest {
 
         final Integer BANK_DATA_ID = 0;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/bankData/0\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/bankData/0\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/bankData/{bankDataId}", BANK_DATA_ID))
@@ -833,8 +808,7 @@ public class BankData_IntegrationTest {
 
         final Integer BANK_DATA_ID = -1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/bankData/-1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/bankData/-1\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/bankData/{bankDataId}", BANK_DATA_ID))
@@ -851,8 +825,7 @@ public class BankData_IntegrationTest {
 
         final Integer BANK_DATA_ID = 100;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"BankData with this bankDataId = 100 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/bankData/100\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"BankData with this bankDataId = 100 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/bankData/100\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/bankData/{bankDataId}", BANK_DATA_ID))
@@ -897,8 +870,7 @@ public class BankData_IntegrationTest {
                 ));
 
         // Check if subComments is deleted correctly.
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent_2 = "{\"errorMessage\":\"BankData with this userId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/1/bankData/0/10\"}";
+        final String responseBodyContent_2 = "{\"errorMessage\":\"BankData with this userId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/1/bankData/0/10\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}/bankData/{startPage}/{pageSize}", 1, 0, 10))
@@ -918,8 +890,7 @@ public class BankData_IntegrationTest {
 
         final Integer USER_ID = 0;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/0/bankData\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/0/bankData\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/{userId}/bankData", USER_ID))
@@ -934,8 +905,7 @@ public class BankData_IntegrationTest {
 
         final Integer USER_ID = -1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/-1/bankData\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/-1/bankData\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/{userId}/bankData", USER_ID))
@@ -952,8 +922,7 @@ public class BankData_IntegrationTest {
 
         final Integer USER_ID = 100;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/100/bankData\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/100/bankData\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/{userId}/bankData", USER_ID))
@@ -970,8 +939,7 @@ public class BankData_IntegrationTest {
 
         final Integer USER_ID = 2;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"BankData with this userId = 2 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/2/bankData\"";
+        final String responseBodyContent = "{\"errorMessage\":\"BankData with this userId = 2 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/2/bankData\"";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/{userId}/bankData", USER_ID))

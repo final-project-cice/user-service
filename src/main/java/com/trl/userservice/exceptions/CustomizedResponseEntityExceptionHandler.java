@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.time.LocalDateTime;
-
 @ControllerAdvice
 @RestController
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
@@ -21,7 +19,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
         errorDetails.setErrorMessage(ex.getMessage());
         errorDetails.setErrorCode(HttpStatus.BAD_REQUEST.value());
-        errorDetails.setTimestamp(LocalDateTime.now());
         errorDetails.setDescription(request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
@@ -31,7 +28,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
         errorDetails.setErrorMessage(ex.getMessage());
         errorDetails.setErrorCode(HttpStatus.BAD_REQUEST.value());
-        errorDetails.setTimestamp(LocalDateTime.now());
         errorDetails.setDescription(request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
@@ -41,7 +37,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
         errorDetails.setErrorMessage(ex.getMessage());
         errorDetails.setErrorCode(HttpStatus.BAD_REQUEST.value());
-        errorDetails.setTimestamp(LocalDateTime.now());
         errorDetails.setDescription(request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
@@ -51,7 +46,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
         errorDetails.setErrorMessage(ex.getMessage());
         errorDetails.setErrorCode(HttpStatus.NOT_FOUND.value());
-        errorDetails.setTimestamp(LocalDateTime.now());
         errorDetails.setDescription(request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
@@ -61,7 +55,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
         errorDetails.setErrorMessage(ex.getMessage());
         errorDetails.setErrorCode(HttpStatus.NOT_FOUND.value());
-        errorDetails.setTimestamp(LocalDateTime.now());
         errorDetails.setDescription(request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
@@ -71,7 +64,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
         errorDetails.setErrorMessage(ex.getMessage());
         errorDetails.setErrorCode(HttpStatus.NOT_FOUND.value());
-        errorDetails.setTimestamp(LocalDateTime.now());
         errorDetails.setDescription(request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }

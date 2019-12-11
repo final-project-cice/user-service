@@ -1,8 +1,5 @@
 package com.trl.userservice.controller.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -15,9 +12,6 @@ public class ErrorDetailsDTO {
     private String errorMessage;
     private Integer errorCode;
     private String documentation;
-
-    @JsonFormat(pattern = "dd.MM.yyyy hh:mm")
-    private LocalDateTime timestamp;
 
     private String description;
 
@@ -48,13 +42,6 @@ public class ErrorDetailsDTO {
         this.documentation = documentation;
     }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
 
     public String getDescription() {
         return description;
@@ -72,13 +59,12 @@ public class ErrorDetailsDTO {
         return Objects.equals(errorMessage, that.errorMessage) &&
                 Objects.equals(errorCode, that.errorCode) &&
                 Objects.equals(documentation, that.documentation) &&
-                Objects.equals(timestamp, that.timestamp) &&
                 Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(errorMessage, errorCode, documentation, timestamp, description);
+        return Objects.hash(errorMessage, errorCode, documentation, description);
     }
 
     @Override
@@ -87,7 +73,6 @@ public class ErrorDetailsDTO {
                 "errorMessage='" + errorMessage + '\'' +
                 ", errorCode=" + errorCode +
                 ", documentation='" + documentation + '\'' +
-                ", timestamp=" + timestamp +
                 ", description='" + description + '\'' +
                 '}';
     }

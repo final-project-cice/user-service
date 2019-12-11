@@ -30,9 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -189,8 +186,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterFirstName_NullValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'firstName' not be equals to null, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'firstName' not be equals to null, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -205,8 +201,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterFirstName_EmptyValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'firstName' is empty, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'firstName' is empty, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -221,8 +216,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterLastName_NullValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'lastName' not be equals to null, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'lastName' not be equals to null, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -237,8 +231,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterLastName_EmptyValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'lastName' is empty, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'lastName' is empty, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -253,8 +246,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterUserName_NullValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'userName' not be equals to null, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'userName' not be equals to null, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -269,8 +261,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterUserName_EmptyValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'userName' is empty, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'userName' is empty, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -285,8 +276,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterEmail_NullValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'email' not be equals to null, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'email' not be equals to null, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -301,8 +291,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterEmail_EmptyValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'email' is empty, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'email' is empty, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -317,8 +306,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterPassword_NullValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'password' not be equals to null, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'password' not be equals to null, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -333,8 +321,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterPassword_EmptyValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'password' is empty, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'password' is empty, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -366,8 +353,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterBankAccountNumber_NullValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'bankAccountNumber' not be equals to null, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'bankAccountNumber' not be equals to null, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -382,8 +368,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterBankAccountNumber_EmptyValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'bankAccountNumber' is empty, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'bankAccountNumber' is empty, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -398,8 +383,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterDataOfExpiry_NullValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'dateOfExpiry' not be equals to null, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'dateOfExpiry' not be equals to null, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -414,8 +398,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterCVI_NullValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'cvi' not be equals to null, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'cvi' not be equals to null, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -430,8 +413,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterCVI_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'cvi' must be greater that zero, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'cvi' must be greater that zero, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -446,8 +428,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterCVI_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'cvi' must be greater that zero, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'cvi' must be greater that zero, check the field that it has the 'bankData' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -479,8 +460,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterCounty_NullValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'country' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'country' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -495,8 +475,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterCountry_EmptyValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'country' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'country' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -511,8 +490,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterCity_NullValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'city' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'city' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -527,8 +505,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterCity_EmptyValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'city' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'city' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -543,8 +520,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterStreet_NullValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'street' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'street' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -559,8 +535,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterStreet_EmptyValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'street' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'street' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -575,8 +550,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterHouseNumber_NullValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'houseNumber' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'houseNumber' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -591,8 +565,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterHouseNumber_EmptyValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'houseNumber' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'houseNumber' is empty, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -607,8 +580,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterPostcode_NullValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'postcode' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'postcode' not be equals to null, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -623,8 +595,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterPostcode_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'postcode' must be greater that zero, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'postcode' must be greater that zero, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -639,8 +610,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterPostcode_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'postcode' must be greater that zero, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'postcode' must be greater that zero, check the field that it has the 'address' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -655,8 +625,7 @@ public class User_IntegrationTest {
     @Test
     public void add_ParameterBirthday_NullValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'birthday' not be equals to null, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'birthday' not be equals to null, check the field that it has the 'user' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/users")
@@ -775,8 +744,7 @@ public class User_IntegrationTest {
 
         final Integer USER_ID = 0;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/0\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/0\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}", USER_ID))
@@ -791,8 +759,7 @@ public class User_IntegrationTest {
 
         final Integer USER_ID = -1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/-1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/-1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}", USER_ID))
@@ -809,8 +776,7 @@ public class User_IntegrationTest {
 
         final Integer USER_ID = 100;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"User with this userId = 100 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/100\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"User with this userId = 100 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/100\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{userId}", USER_ID))
@@ -905,8 +871,7 @@ public class User_IntegrationTest {
         final Integer START_PAGE = 0;
         final Integer PAGE_SIZE = 10;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Users not exists.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/0/10\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Users not exists.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/0/10\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{startPage}/{pageSize}", START_PAGE, PAGE_SIZE))
@@ -1004,8 +969,7 @@ public class User_IntegrationTest {
         final Integer PAGE_SIZE = 10;
         final String SORT_ORDER = "firstName";
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Users not exists.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/0/10/firstName\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Users not exists.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/users/0/10/firstName\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/users/{startPage}/{pageSize}/{sortOrder}", START_PAGE, PAGE_SIZE, SORT_ORDER))
@@ -1142,8 +1106,7 @@ public class User_IntegrationTest {
 
         final Integer USER_ID = 0;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/0\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/0\"}";
 
         this.mockMvc.perform(
                 patch(BASE_URL + "/users/{userId}", USER_ID)
@@ -1160,8 +1123,7 @@ public class User_IntegrationTest {
 
         final Integer USER_ID = -1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/-1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/-1\"}";
 
         this.mockMvc.perform(
                 patch(BASE_URL + "/users/{userId}", USER_ID)
@@ -1185,8 +1147,7 @@ public class User_IntegrationTest {
 
         final Integer USER_ID = 100;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/100\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/100\"}";
 
         this.mockMvc.perform(
                 patch(BASE_URL + "/users/{userId}", USER_ID)
@@ -1305,8 +1266,7 @@ public class User_IntegrationTest {
 
         final Integer USER_ID = 0;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/0\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/0\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/{userId}", USER_ID))
@@ -1321,9 +1281,7 @@ public class User_IntegrationTest {
 
         final Integer USER_ID = -1;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/-1\"}";
-
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/-1\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/{userId}", USER_ID))
@@ -1340,9 +1298,7 @@ public class User_IntegrationTest {
 
         final Integer USER_ID = 100;
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/users/100\"}";
-
+        final String responseBodyContent = "{\"errorMessage\":\"User with this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/users/100\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/users/{userId}", USER_ID))
