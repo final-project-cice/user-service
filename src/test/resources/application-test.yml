@@ -1,6 +1,6 @@
 #============================== Configuration Apache TomCat
 server:
-  port: 8081
+  port: 5000
 #============================== Configuration Logging
 logging:
   file: /tmp/log/user-service_test.log
