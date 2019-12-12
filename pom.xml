@@ -14,7 +14,7 @@
     <groupId>com.trl</groupId>
     <artifactId>user-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>user-service</name>
     <description>This micro service is one part of one project library. This micro service performs users</description>
