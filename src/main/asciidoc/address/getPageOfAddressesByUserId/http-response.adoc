@@ -140,24 +140,24 @@ Content-Length: 3979
       "unsorted" : true,
       "empty" : true
     },
-    "pageNumber" : 0,
-    "pageSize" : 2,
     "offset" : 0,
+    "pageSize" : 2,
+    "pageNumber" : 0,
     "paged" : true,
     "unpaged" : false
   },
   "totalPages" : 2,
   "totalElements" : 3,
   "last" : false,
-  "first" : true,
+  "number" : 0,
   "sort" : {
     "sorted" : false,
     "unsorted" : true,
     "empty" : true
   },
-  "numberOfElements" : 2,
   "size" : 2,
-  "number" : 0,
+  "first" : true,
+  "numberOfElements" : 2,
   "empty" : false
 }
 ----

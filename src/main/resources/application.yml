@@ -16,15 +16,17 @@ spring:
   application:
     name: user-service
 
-  #============================== Configuration PostgreSQL
+  #============================== Configuration Oracle DB
   datasource:
-    username: developer
-    password: Nqa2GrwJ5dqu
-    url: jdbc:postgresql://ec2-15-188-76-238.eu-west-3.compute.amazonaws.com/user_service
-    driver-class-name: org.postgresql.Driver
+    username: USR_MS
+    password: 6.EU2:onSlpo
+    url: jdbc:oracle:thin:@35.180.156.70:1521:libprod
+    driver-class-name: oracle.jdbc.OracleDriver
 
   #============================== Configuration JPA
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+    open-in-view: false

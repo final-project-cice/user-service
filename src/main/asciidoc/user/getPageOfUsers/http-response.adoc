@@ -2,7 +2,7 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 11073
+Content-Length: 11076
 
 {
   "content" : [ {
@@ -222,7 +222,7 @@ Content-Length: 11073
     "userId" : 2,
     "firstName" : "AAAAAAAA",
     "lastName" : "AAAAAAA",
-    "userName" : "",
+    "userName" : "AAA",
     "email" : "aaaaaaaaa@mail.com",
     "password" : "strong_password",
     "bankData" : [ ],
@@ -396,24 +396,24 @@ Content-Length: 11073
       "unsorted" : true,
       "empty" : true
     },
-    "pageNumber" : 0,
-    "pageSize" : 10,
     "offset" : 0,
+    "pageSize" : 10,
+    "pageNumber" : 0,
     "paged" : true,
     "unpaged" : false
   },
   "totalPages" : 1,
   "totalElements" : 2,
   "last" : true,
-  "first" : true,
+  "number" : 0,
   "sort" : {
     "sorted" : false,
     "unsorted" : true,
     "empty" : true
   },
-  "numberOfElements" : 2,
   "size" : 10,
-  "number" : 0,
+  "first" : true,
+  "numberOfElements" : 2,
   "empty" : false
 }
 ----

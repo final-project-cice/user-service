@@ -1,12 +1,17 @@
-DELETE FROM address_user;
-DELETE FROM bank_data_user;
-DELETE FROM usr;
+DELETE
+FROM address_user;
+DELETE
+FROM bank_data_user;
+DELETE
+FROM usr;
 
-INSERT INTO usr (id, first_name, last_name, user_name,  email, password, birthday)
-VALUES (1, 'Tsyupryk', 'Roman', 'TRL', 'tsyupryk.roman@gmail.com', 'strong_password', TO_DATE('26-JUN-1988', 'DD-MON-YYYY'));
+INSERT INTO usr (id, first_name, last_name, user_name, email, password, birthday)
+VALUES (1, 'Tsyupryk', 'Roman', 'TRL', 'tsyupryk.roman@gmail.com', 'strong_password',
+        TO_DATE('26-JUN-1988', 'DD-MON-YYYY'));
 
-INSERT INTO usr (id, first_name, last_name, user_name,  email, password, birthday)
-VALUES (2, 'AAAAAAAA', 'AAAAAAA', '', 'aaaaaaaaa@mail.com', 'strong_password', TO_DATE('01-JAN-2000', 'DD-MON-YYYY'));
+INSERT INTO usr (id, first_name, last_name, user_name, email, password, birthday)
+VALUES (2, 'AAAAAAAA', 'AAAAAAA', 'AAA', 'aaaaaaaaa@mail.com', 'strong_password',
+        TO_DATE('01-JAN-2000', 'DD-MON-YYYY'));
 
 
 

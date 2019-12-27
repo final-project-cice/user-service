@@ -1,6 +1,8 @@
 package com.trl.userservice.repository.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,7 +18,7 @@ import java.util.Objects;
 public class BankDataEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
@@ -30,6 +32,7 @@ public class BankDataEntity {
     private Integer cvi;
 
     @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usr_id")
     private UserEntity user;
