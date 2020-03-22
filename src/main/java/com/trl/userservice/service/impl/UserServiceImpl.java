@@ -268,6 +268,7 @@ public class UserServiceImpl implements UserService {
 
         userResult = userConverter.mapEntityToDTO(userRepository.findById(userId).get());
 
+        // TODO: Check this. Is maybe bug.
         addressRepository.deleteById(userId);
 
         LOG.debug("************ deleteById() ---> " + "Deleted user = " + userResult);
